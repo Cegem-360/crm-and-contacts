@@ -4,10 +4,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
             <div class="text-center">
                 <h1 class="text-4xl sm:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-                    Modern CRM & Contact Management
+                    Sales and Customer Relationship System
                 </h1>
                 <p class="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto">
-                    Streamline your connections, manage your customers, and grow your business with one powerful platform
+                    Manage your customers, orders, and relationships through one powerful platform
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="{{ route('filament.admin.pages.dashboard') }}"
@@ -83,7 +83,7 @@
                 </p>
             </div>
 
-            {{-- Feature 3: AI Chat Support --}}
+            {{-- Feature 3: Live Support Chat --}}
             <div class="group bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700">
                 <div class="w-14 h-14 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                     <svg class="w-7 h-7 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -91,10 +91,10 @@
                     </svg>
                 </div>
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-                    AI Chat Support
+                    Live Support Chat
                 </h3>
                 <p class="text-gray-600 dark:text-gray-400">
-                    Intelligent chatbot for instant customer service support and handling frequently asked questions.
+                    Real-time customer support chat for instant assistance and quick response to customer inquiries.
                 </p>
             </div>
 

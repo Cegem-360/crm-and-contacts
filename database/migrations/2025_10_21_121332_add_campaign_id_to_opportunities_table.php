@@ -15,7 +15,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('opportunities', function (Blueprint $table): void {
-            $table->foreignIdFor(Campaign::class)->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('campaign_id')->nullable()->constrained('campaigns')->nullOnDelete();
         });
     }
 
@@ -25,8 +25,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('opportunities', function (Blueprint $table): void {
-            $table->dropForeignIdFor(Campaign::class);
-
+            $table->dropForeign(['campaign_id']);
+            $table->dropColumn('campaign_id');
         });
     }
 };

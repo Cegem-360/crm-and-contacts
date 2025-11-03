@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Enums\OpportunityStage;
+use App\Models\Campaign;
 use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -19,6 +20,7 @@ return new class extends Migration
         Schema::create('opportunities', function (Blueprint $table): void {
             $table->id();
             $table->foreignIdFor(Customer::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Campaign::class)->nullable()->constrained()->nullOnDelete();
             $table->string('title');
             $table->text('description')->nullable();
             $table->decimal('value', 12, 2)->nullable();

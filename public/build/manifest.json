@@ -7,6 +7,14 @@
       "app.css"
     ]
   },
+  "resources/images/logo.png": {
+    "file": "assets/logo-BdDtjedL.png",
+    "src": "resources/images/logo.png"
+  },
+  "resources/images/logo.svg": {
+    "file": "assets/logo-DanLznZQ.svg",
+    "src": "resources/images/logo.svg"
+  },
   "resources/js/app.js": {
     "file": "assets/app-Dpwfvt0r.js",
     "name": "app",

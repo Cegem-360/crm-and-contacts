@@ -21,7 +21,7 @@ final class OrderItemFactory extends Factory
      */
     public function definition(): array
     {
-        $quantity = fake()->randomFloat(2, 1, 50);
+        $quantity = fake()->numberBetween(1, 50);
         $unitPrice = fake()->randomFloat(2, 10, 1000);
         $discountAmount = fake()->randomFloat(2, 0, $unitPrice * $quantity * 0.2);
         $taxRate = fake()->randomFloat(2, 0, 25);

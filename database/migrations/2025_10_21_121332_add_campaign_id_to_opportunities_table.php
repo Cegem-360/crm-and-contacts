@@ -15,7 +15,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('opportunities', function (Blueprint $table): void {
-            $table->foreignIdFor(Campaign::class)->nullable()->after('customer_id')->constrained()->nullOnDelete();
+            $table->foreignIdFor(Campaign::class)->nullable()->constrained()->nullOnDelete();
         });
     }
 

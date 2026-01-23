@@ -10,9 +10,22 @@
         <link rel="icon" href="/favicon.ico" sizes="any">
         <title>{{ config('app.name') }}</title>
 
+        <!-- Fonts (load first) -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700|poppins:400,500,600,700" rel="stylesheet" />
+
+        <!-- Vite Assets (CSS + JS) -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <!-- CRITICAL: Filament styles provide CSS color variables -->
+        @filamentStyles
+
         <style>
             [x-cloak] {
                 display: none !important;
+            }
+            .font-heading {
+                font-family: 'Poppins', sans-serif;
             }
         </style>
         <script>
@@ -34,9 +47,6 @@
                 }
             })();
         </script>
-        @filamentStyles
-
-        @vite('resources/js/app.js')
 
     </head>
 

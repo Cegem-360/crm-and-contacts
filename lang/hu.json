@@ -260,5 +260,37 @@
     "New Opportunity": "Új lehetőség",
     "New Customer": "Új ügyfél",
     "New Quote": "Új árajánlat",
-    "New Order": "Új megrendelés"
+    "New Order": "Új megrendelés",
+
+    "Leads": "Érdeklődők",
+    "Qualified": "Minősített",
+    "Proposals": "Ajánlatok",
+    "Negotiations": "Tárgyalások",
+    "Sent Quotations": "Kiküldött ajánlatok",
+    "Lost Quotations": "Elveszett ajánlatok",
+
+    "Support": "Támogatás",
+    "Bug Reports": "Hibajelentések",
+    "Chat Messages": "Chat üzenetek",
+    "Complaints": "Reklamációk",
+    "Tasks": "Feladatok",
+    "Chat Sessions": "Chat munkamenetek",
+
+    "Invoices": "Számlák",
+    "Shipments": "Szállítmányok",
+
+    "Products": "Termékek",
+    "Discounts": "Kedvezmények",
+    "Product Categories": "Termékkategóriák",
+
+    "Marketing": "Marketing",
+    "Campaigns": "Kampányok",
+    "Interactions": "Interakciók",
+
+    "System": "Rendszer",
+    "Communications": "Kommunikáció",
+    "Users": "Felhasználók",
+    "Activity Log": "Tevékenységnapló",
+
+    "Admin Panel": "Admin Panel"
 }

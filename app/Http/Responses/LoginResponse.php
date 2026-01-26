@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Http\Responses;
 
-use Filament\Auth\Http\Responses\LoginResponse as BaseLoginResponse;
+use Filament\Auth\Http\Responses\Contracts\LoginResponse as LoginResponseContract;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Redirect;
+use Livewire\Features\SupportRedirects\Redirector;
 
-final class LoginResponse extends BaseLoginResponse
+final class LoginResponse implements LoginResponseContract
 {
-    public function toResponse($request): RedirectResponse
+    public function toResponse($request): RedirectResponse|Redirector
     {
-        return Redirect::to(route('filament.admin.pages.dashboard'));
+        return redirect()->to(route('dashboard'));
     }
 }

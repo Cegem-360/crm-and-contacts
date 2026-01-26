@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Resources\LeadOpportunities\Tables;
 
 use App\Enums\OpportunityStage;
+use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -50,5 +51,40 @@ final class LeadOpportunitiesTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ]);
+    }
+
+    public static function configureDashboard(Table $table): Table
+    {
+        return $table
+            ->columns([
+                TextColumn::make('customer.name')
+                    ->label(__('Customer'))
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('title')
+                    ->label(__('Title'))
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('status')
+                    ->label(__('Status'))
+                    ->badge(),
+                TextColumn::make('probability')
+                    ->label(__('Probability'))
+                    ->suffix('%')
+                    ->sortable(),
+                TextColumn::make('expected_close_date')
+                    ->label(__('Expected Close'))
+                    ->date()
+                    ->sortable(),
+                TextColumn::make('assignedUser.name')
+                    ->label(__('Assigned To'))
+                    ->sortable(),
+            ])
+            ->recordActions([
+                EditAction::make()
+                    ->url(fn ($record): string => route('filament.admin.resources.lead-opportunities.edit', $record)),
+            ])
+            ->defaultSort('created_at', 'desc')
+            ->paginated([10, 25, 50, 100]);
     }
 }

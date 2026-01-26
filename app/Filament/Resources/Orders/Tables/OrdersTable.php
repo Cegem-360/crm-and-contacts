@@ -69,4 +69,36 @@ final class OrdersTable
                 ]),
             ]);
     }
+
+    public static function configureDashboard(Table $table): Table
+    {
+        return $table
+            ->columns([
+                TextColumn::make('order_number')
+                    ->label(__('Order #'))
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('customer.name')
+                    ->label(__('Customer'))
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('order_date')
+                    ->label(__('Order Date'))
+                    ->date()
+                    ->sortable(),
+                TextColumn::make('status')
+                    ->label(__('Status'))
+                    ->badge(),
+                TextColumn::make('total')
+                    ->label(__('Total'))
+                    ->money('HUF')
+                    ->sortable(),
+            ])
+            ->recordActions([
+                EditAction::make()
+                    ->url(fn ($record): string => route('filament.admin.resources.orders.edit', $record)),
+            ])
+            ->defaultSort('order_date', 'desc')
+            ->paginated([10, 25, 50, 100]);
+    }
 }

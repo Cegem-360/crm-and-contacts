@@ -72,4 +72,40 @@ final class QuotesTable
                 ]),
             ]);
     }
+
+    public static function configureDashboard(Table $table): Table
+    {
+        return $table
+            ->columns([
+                TextColumn::make('quote_number')
+                    ->label(__('Quote #'))
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('customer.name')
+                    ->label(__('Customer'))
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('issue_date')
+                    ->label(__('Issue Date'))
+                    ->date()
+                    ->sortable(),
+                TextColumn::make('valid_until')
+                    ->label(__('Valid Until'))
+                    ->date()
+                    ->sortable(),
+                TextColumn::make('status')
+                    ->label(__('Status'))
+                    ->badge(),
+                TextColumn::make('total')
+                    ->label(__('Total'))
+                    ->money('HUF')
+                    ->sortable(),
+            ])
+            ->recordActions([
+                EditAction::make()
+                    ->url(fn ($record): string => route('filament.admin.resources.quotes.edit', $record)),
+            ])
+            ->defaultSort('issue_date', 'desc')
+            ->paginated([10, 25, 50, 100]);
+    }
 }

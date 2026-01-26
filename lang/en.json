@@ -222,5 +222,31 @@
     "Quotes this month": "Quotes this month",
     "Pending": "Pending",
     "Quote accepted": "Quote accepted",
-    "Revenue today": "Revenue today"
+    "Revenue today": "Revenue today",
+
+    "Welcome": "Welcome",
+    "Here is an overview of your sales activities.": "Here is an overview of your sales activities.",
+    "Customers": "Customers",
+    "Opportunities": "Opportunities",
+    "Open opportunities": "Open opportunities",
+    "Won opportunities": "Won opportunities",
+    "Quick actions": "Quick actions",
+    "New opportunity": "New opportunity",
+    "Create a new opportunity": "Create a new opportunity",
+    "New customer": "New customer",
+    "Add a new customer": "Add a new customer",
+    "View opportunities": "View opportunities",
+    "See all opportunities": "See all opportunities",
+    "Admin panel": "Admin panel",
+    "Go to admin panel": "Go to admin panel",
+
+    "Navigation": "Navigation",
+    "Home": "Home",
+    "Reports": "Reports",
+    "Quick Links": "Quick Links",
+    "Account Settings": "Account Settings",
+    "Search...": "Search...",
+    "My Profile": "My Profile",
+    "Log out": "Log out",
+    "Log in": "Log in"
 }

@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 use App\Http\Controllers\ChatDemoController;
 use App\Livewire\ComplaintSubmission;
+use App\Livewire\Dashboard;
+use App\Livewire\Pages\Customers\ListCustomers;
+use App\Livewire\Pages\Opportunities\ListOpportunities;
+use App\Livewire\Pages\Orders\ListOrders;
+use App\Livewire\Pages\Quotes\ListQuotes;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -16,6 +21,17 @@ Route::get('/', fn (): Factory|View => view('home'))->name('home');
 Route::middleware(['guest'])->group(function (): void {
     Route::get('/login', fn (): Redirector|RedirectResponse => to_route('filament.admin.auth.login'))->name('login');
     Route::get('/register', fn (): Redirector|RedirectResponse => to_route('filament.admin.auth.register'))->name('register');
+});
+
+// User Dashboard routes
+Route::middleware(['auth', 'verified'])->group(function (): void {
+    Route::get('/dashboard', Dashboard::class)->name('dashboard');
+
+    // Sales pages
+    Route::get('/dashboard/opportunities', ListOpportunities::class)->name('dashboard.opportunities');
+    Route::get('/dashboard/customers', ListCustomers::class)->name('dashboard.customers');
+    Route::get('/dashboard/quotes', ListQuotes::class)->name('dashboard.quotes');
+    Route::get('/dashboard/orders', ListOrders::class)->name('dashboard.orders');
 });
 
 // Language switch route

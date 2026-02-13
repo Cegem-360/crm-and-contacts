@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Livewire;
 
+use App\Enums\OpportunityStage;
 use App\Models\Customer;
 use App\Models\Opportunity;
 use Illuminate\Contracts\View\View;
@@ -19,14 +20,14 @@ final class Dashboard extends Component
 
     public int $openOpportunities = 0;
 
-    public int $wonOpportunities = 0;
+    public int $closedOpportunities = 0;
 
     public function mount(): void
     {
         $this->totalCustomers = Customer::count();
         $this->totalOpportunities = Opportunity::count();
-        $this->openOpportunities = Opportunity::whereIn('status', ['new', 'contacted', 'qualified', 'proposal', 'negotiation'])->count();
-        $this->wonOpportunities = Opportunity::where('status', 'won')->count();
+        $this->openOpportunities = Opportunity::whereIn('stage', OpportunityStage::getActiveStages())->count();
+        $this->closedOpportunities = Opportunity::whereIn('stage', OpportunityStage::getClosedStages())->count();
     }
 
     public function render(): View

@@ -56,7 +56,7 @@
             </div>
         </div>
 
-        {{-- Won Opportunities --}}
+        {{-- Closed Opportunities --}}
         <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
             <div class="flex items-center gap-4">
                 <div class="w-12 h-12 rounded-xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
@@ -65,8 +65,8 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="text-2xl font-bold text-gray-900 dark:text-white">{{ number_format($wonOpportunities) }}</p>
-                    <p class="text-sm text-gray-500 dark:text-gray-400">{{ __('Won opportunities') }}</p>
+                    <p class="text-2xl font-bold text-gray-900 dark:text-white">{{ number_format($closedOpportunities) }}</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">{{ __('Closed opportunities') }}</p>
                 </div>
             </div>
         </div>

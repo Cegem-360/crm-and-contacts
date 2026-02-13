@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "faa9daf273d04b7192927f695b7d6d1b",
+    "content-hash": "5a3511a01e2fbd8868dae8e90ee8c8bc",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -3878,6 +3878,71 @@
                 }
             ],
             "time": "2026-01-23T05:41:38+00:00"
+        },
+        {
+            "name": "madbox-99/laravel-user-team-sync",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MadBox-99/laravel-user-team-sync.git",
+                "reference": "d5fb2f52ed1a8c32b76ac1fd7b25a0e36935dfd7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MadBox-99/laravel-user-team-sync/zipball/d5fb2f52ed1a8c32b76ac1fd7b25a0e36935dfd7",
+                "reference": "d5fb2f52ed1a8c32b76ac1fd7b25a0e36935dfd7",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^11.0 || ^12.0",
+                "php": "^8.3"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "orchestra/testbench": "^9.0 || ^10.0",
+                "pestphp/pest": "^3.0 || ^4.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "UserTeamSync": "Madbox99\\UserTeamSync\\Facades\\UserTeamSync"
+                    },
+                    "providers": [
+                        "Madbox99\\UserTeamSync\\UserTeamSyncServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Madbox99\\UserTeamSync\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Zoltán Tamás Szabó",
+                    "email": "zoli.szabok@gmail.com"
+                }
+            ],
+            "description": "User and team synchronization between a subscriber hub and secondary Laravel apps",
+            "keywords": [
+                "Microservice",
+                "Team",
+                "laravel",
+                "sync",
+                "user",
+                "webhook"
+            ],
+            "support": {
+                "issues": "https://github.com/MadBox-99/laravel-user-team-sync/issues",
+                "source": "https://github.com/MadBox-99/laravel-user-team-sync/tree/main"
+            },
+            "time": "2026-02-12T11:42:30+00:00"
         },
         {
             "name": "masterminds/html5",
@@ -16174,6 +16239,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "madbox-99/laravel-user-team-sync": 20,
         "nunomaduro/essentials": 20
     },
     "prefer-stable": true,

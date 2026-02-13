@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Models\Shipment;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +18,7 @@ return new class extends Migration
             $table->id();
 
             // Relationship
-            $table->foreignIdFor(App\Models\Shipment::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Shipment::class)->constrained()->cascadeOnDelete();
 
             // Event details
             $table->string('status_code'); // PICKED_UP, IN_TRANSIT, OUT_FOR_DELIVERY, DELIVERED, etc.

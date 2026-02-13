@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Models\OrderItem;
+use App\Models\Shipment;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,8 +19,8 @@ return new class extends Migration
             $table->id();
 
             // Relationships
-            $table->foreignIdFor(App\Models\Shipment::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(App\Models\OrderItem::class)->nullable()->constrained()->nullOnDelete();
+            $table->foreignIdFor(Shipment::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(OrderItem::class)->nullable()->constrained()->nullOnDelete();
 
             // External reference (if order_item doesn't exist in CRM)
             $table->string('external_product_id')->nullable()->index();

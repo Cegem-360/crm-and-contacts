@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Models\Customer;
+use App\Models\Order;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,8 +19,8 @@ return new class extends Migration
             $table->id();
 
             // Internal references (NULLABLE - might not exist in CRM yet)
-            $table->foreignIdFor(App\Models\Customer::class)->nullable()->constrained()->nullOnDelete();
-            $table->foreignIdFor(App\Models\Order::class)->nullable()->constrained()->nullOnDelete();
+            $table->foreignIdFor(Customer::class)->nullable()->constrained()->nullOnDelete();
+            $table->foreignIdFor(Order::class)->nullable()->constrained()->nullOnDelete();
 
             // External system references (from external warehouse/logistics system)
             $table->string('external_customer_id')->nullable()->index();

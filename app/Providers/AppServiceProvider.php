@@ -29,6 +29,8 @@ use Filament\Auth\Http\Responses\Contracts\RegistrationResponse as RegistrationR
 use Filament\Commands\FileGenerators\Resources\ResourceClassGenerator as BaseResourceClassGenerator;
 use Filament\Forms\Components\Field;
 use Filament\Infolists\Components\Entry;
+use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Schemas\Components\Wizard\Step;
 use Filament\Support\Facades\FilamentTimezone;
 use Filament\Tables\Columns\Column;
 use Filament\Tables\Filters\BaseFilter;
@@ -58,6 +60,8 @@ final class AppServiceProvider extends ServiceProvider
         Entry::configureUsing(static fn (Entry $entry): Entry => $entry->translateLabel());
         Action::configureUsing(static fn (Action $action): Action => $action->translateLabel());
         BaseFilter::configureUsing(static fn (BaseFilter $filter): BaseFilter => $filter->translateLabel());
+        Tab::configureUsing(static fn (Tab $tab): Tab => $tab->translateLabel());
+        Step::configureUsing(static fn (Step $step): Step => $step->translateLabel());
 
         $this->app->bind(BaseResourceClassGenerator::class, ResourceClassGenerator::class);
         Relation::enforceMorphMap([

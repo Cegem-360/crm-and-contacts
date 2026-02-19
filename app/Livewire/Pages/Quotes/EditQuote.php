@@ -34,9 +34,15 @@ final class EditQuote extends Component implements HasSchemas
 
     public function form(Schema $schema): Schema
     {
-        return QuoteForm::configure($schema)
+        if ($this->quote?->exists) {
+            return QuoteForm::configure($schema)
+                ->statePath('data')
+                ->model($this->quote);
+        }
+
+        return QuoteForm::configureWizard($schema)
             ->statePath('data')
-            ->model($this->quote ?? Quote::class);
+            ->model(Quote::class);
     }
 
     public function save(): void

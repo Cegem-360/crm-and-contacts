@@ -4,12 +4,17 @@ declare(strict_types=1);
 
 namespace App\Livewire\Pages\Customers;
 
+use App\Filament\Exports\CustomerExporter;
+use App\Filament\Imports\CustomerImporter;
 use App\Filament\Resources\Customers\Tables\CustomersTable;
 use App\Livewire\Concerns\HasCurrentTeam;
 use App\Models\Customer;
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
+use Filament\Actions\ExportAction;
+use Filament\Actions\Exports\Enums\ExportFormat;
+use Filament\Actions\ImportAction;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Support\Icons\Heroicon;
@@ -40,6 +45,16 @@ final class ListCustomers extends Component implements HasActions, HasSchemas, H
                 Action::make('edit')
                     ->url(fn (Customer $record): string => route('dashboard.customers.edit', ['team' => $this->team, 'customer' => $record]))
                     ->icon(Heroicon::PencilSquare),
+            ])
+            ->headerActions([
+                ImportAction::make('importCustomers')
+                    ->importer(CustomerImporter::class),
+                ExportAction::make('exportCustomers')
+                    ->exporter(CustomerExporter::class)
+                    ->formats([
+                        ExportFormat::Xlsx,
+                        ExportFormat::Csv,
+                    ]),
             ]);
     }
 

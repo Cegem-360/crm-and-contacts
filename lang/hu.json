@@ -417,5 +417,40 @@
     "Ended At": "Befejezés ideje",
     "Last Message": "Utolsó üzenet",
     "Unread Messages": "Olvasatlan üzenetek",
-    "Internal Notes": "Belső megjegyzések"
+    "Internal Notes": "Belső megjegyzések",
+
+    "Parent": "Szülő",
+    "Contacts": "Kapcsolattartók",
+    "Addresses": "Címek",
+    "Attributes": "Tulajdonságok",
+
+    "Country": "Ország",
+    "Postal code": "Irányítószám",
+    "City": "Város",
+    "Street": "Utca",
+    "Building number": "Házszám",
+    "Floor": "Emelet",
+    "Door": "Ajtó",
+    "Is default": "Alapértelmezett",
+    "Billing": "Számlázási",
+    "Shipping": "Szállítási",
+
+    "Position": "Beosztás",
+    "Is primary": "Elsődleges",
+    "Attribute key": "Tulajdonság kulcs",
+    "Attribute value": "Tulajdonság érték",
+
+    "Created at": "Létrehozva",
+    "Updated at": "Módosítva",
+
+    "Quote details": "Árajánlat adatok",
+    "Line items": "Tételek",
+    "Summary": "Összesítés",
+    "Create Quote": "Árajánlat létrehozása",
+    "Create a new quote": "Új árajánlat létrehozása",
+    "Edit Quote": "Árajánlat szerkesztése",
+    "Quote created successfully.": "Árajánlat sikeresen létrehozva.",
+    "Quote updated successfully.": "Árajánlat sikeresen módosítva.",
+    "Quantity": "Mennyiség",
+    "Discount percent": "Kedvezmény %"
 }

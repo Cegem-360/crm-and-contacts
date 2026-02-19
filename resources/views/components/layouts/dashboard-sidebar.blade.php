@@ -6,12 +6,12 @@
         'lg:translate-x-0': sidebarOpen,
         '-translate-x-full': !mobileMenuOpen,
         'translate-x-0': mobileMenuOpen
-    }"
->
+    }">
     {{-- Logo area --}}
     <div class="h-16 flex items-center px-4 border-b border-white/10">
         <a href="{{ route('dashboard', ['team' => $currentTeam]) }}" class="flex items-center gap-2">
-            <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="{{ config('app.name') }}" class="h-8 brightness-0 invert">
+            <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="{{ config('app.name') }}"
+                class="h-8 brightness-0 invert">
             <span class="text-sm font-semibold text-red-400">{{ __('Sales') }}</span>
         </a>
     </div>
@@ -19,7 +19,8 @@
     {{-- Navigation --}}
     <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-6">
         <x-sidebar-section title="Navigation">
-            <x-sidebar-item route="dashboard" icon="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+            <x-sidebar-item route="dashboard"
+                icon="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                 active-pattern="dashboard" active-exclude="dashboard.*">
                 {{ __('Home') }}
             </x-sidebar-item>
@@ -49,8 +50,7 @@
                 icon="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z">
                 {{ __('Invoices') }}
             </x-sidebar-item>
-            <x-sidebar-item route="dashboard.shipments" icon-color="text-blue-400"
-                icon="M8 16l-4-4m0 0l4-4m-4 4h18">
+            <x-sidebar-item route="dashboard.shipments" icon-color="text-blue-400" icon="M8 16l-4-4m0 0l4-4m-4 4h18">
                 {{ __('Shipments') }}
             </x-sidebar-item>
         </x-sidebar-section>
@@ -105,7 +105,8 @@
         <div class="border-t border-white/10 p-4">
             <a href="{{ route('filament.admin.auth.profile') }}"
                 class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition">
-                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-red-500 to-rose-600 flex items-center justify-center text-white font-semibold text-sm">
+                <div
+                    class="w-8 h-8 rounded-full bg-gradient-to-br from-red-500 to-rose-600 flex items-center justify-center text-white font-semibold text-sm">
                     {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                 </div>
                 <div class="flex-1 min-w-0">

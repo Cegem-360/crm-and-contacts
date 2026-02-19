@@ -96,7 +96,7 @@ final class OrdersTable
             ])
             ->recordActions([
                 EditAction::make()
-                    ->url(fn ($record): string => route('filament.admin.resources.orders.edit', $record)),
+                    ->url(fn ($record): string => route('dashboard.orders.edit', ['team' => app('current_team'), 'order' => $record])),
             ])
             ->defaultSort('order_date', 'desc')
             ->paginated([10, 25, 50, 100]);

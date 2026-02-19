@@ -15,7 +15,6 @@ use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Builder;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -29,9 +28,9 @@ final class ListShipments extends Component implements HasActions, HasSchemas, H
 
     public function table(Table $table): Table
     {
-        return ShipmentsTable::configure($table)
-            ->query(Shipment::query())
-            ->modifyQueryUsing(fn (Builder $query): Builder => $query->with(['order']));
+        return ShipmentsTable::configureDashboard(
+            $table->query(Shipment::query()->with(['order']))
+        );
     }
 
     public function render(): View

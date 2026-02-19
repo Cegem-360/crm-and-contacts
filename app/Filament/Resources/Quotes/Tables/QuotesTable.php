@@ -103,7 +103,7 @@ final class QuotesTable
             ])
             ->recordActions([
                 EditAction::make()
-                    ->url(fn ($record): string => route('filament.admin.resources.quotes.edit', $record)),
+                    ->url(fn ($record): string => route('dashboard.quotes.edit', ['team' => app('current_team'), 'quote' => $record])),
             ])
             ->defaultSort('issue_date', 'desc')
             ->paginated([10, 25, 50, 100]);

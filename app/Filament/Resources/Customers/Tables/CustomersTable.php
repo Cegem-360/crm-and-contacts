@@ -106,7 +106,7 @@ final class CustomersTable
             ])
             ->recordActions([
                 EditAction::make()
-                    ->url(fn ($record): string => route('filament.admin.resources.customers.edit', $record)),
+                    ->url(fn ($record): string => route('dashboard.customers.edit', ['team' => app('current_team'), 'customer' => $record])),
             ])
             ->defaultSort('name', 'asc')
             ->paginated([10, 25, 50, 100]);

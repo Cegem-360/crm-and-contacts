@@ -37,12 +37,13 @@
 
                 @guest
                     {{-- Log in --}}
-                    <a href="/admin/login" class="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                    <a href="{{ route('filament.admin.auth.login') }}"
+                        class="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
                         {{ __('Login') }}
                     </a>
 
                     {{-- Get Started (filled) --}}
-                    <a href="/admin/register"
+                    <a href="https://cegem360.eu/admin/register" target="_blank"
                         class="inline-flex items-center gap-1 px-5 py-2 text-sm font-medium text-white bg-red-600 rounded-full hover:bg-red-700 transition-colors">
                         {{ __('Free trial') }}
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -53,11 +54,14 @@
                 @endguest
 
                 @auth
-                    {{-- Dashboard link --}}
-                    <a href="{{ route('filament.admin.pages.dashboard') }}"
-                        class="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
-                        {{ __('Dashboard') }}
-                    </a>
+                    @php($tenant = auth()->user()->teams->first())
+                    @if ($tenant)
+                        {{-- Dashboard link --}}
+                        <a href="{{ route('dashboard', ['team' => $tenant]) }}"
+                            class="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                            {{ __('Dashboard') }}
+                        </a>
+                    @endif
 
                     {{-- User dropdown --}}
                     <div class="relative" @mouseenter="openDropdown = 'user'" @mouseleave="openDropdown = null">
@@ -76,9 +80,11 @@
                             x-transition:leave="transition ease-in duration-75"
                             x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
                             class="absolute right-0 top-full mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
-                            <a href="{{ route('filament.admin.pages.dashboard') }}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">{{ __('Dashboard') }}</a>
-                            <hr class="my-1 border-gray-200">
+                            @if ($tenant)
+                                <a href="{{ route('filament.admin.pages.dashboard', ['tenant' => $tenant]) }}"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">{{ __('Dashboard') }}</a>
+                                <hr class="my-1 border-gray-200">
+                            @endif
                             <form method="POST" action="{{ route('filament.admin.auth.logout') }}">
                                 @csrf
                                 <button type="submit"
@@ -134,7 +140,11 @@
             @endguest
 
             @auth
-                <a href="{{ route('filament.admin.pages.dashboard') }}" class="block py-2 text-sm font-medium text-gray-700">{{ __('Dashboard') }}</a>
+                @php($mobileTenant = auth()->user()->teams->first())
+                @if ($mobileTenant)
+                    <a href="{{ route('filament.admin.pages.dashboard', ['tenant' => $mobileTenant]) }}"
+                        class="block py-2 text-sm font-medium text-gray-700">{{ __('Dashboard') }}</a>
+                @endif
                 <form method="POST" action="{{ route('filament.admin.auth.logout') }}">
                     @csrf
                     <button type="submit" class="block w-full text-left py-2 text-sm font-medium text-red-600">

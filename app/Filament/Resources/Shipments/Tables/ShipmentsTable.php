@@ -126,4 +126,49 @@ final class ShipmentsTable
             ])
             ->defaultSort('created_at', 'desc');
     }
+
+    public static function configureDashboard(Table $table): Table
+    {
+        return $table
+            ->columns([
+                TextColumn::make('shipment_number')
+                    ->label(__('Shipment #'))
+                    ->searchable()
+                    ->sortable()
+                    ->copyable(),
+                TextColumn::make('customer.name')
+                    ->label(__('Customer'))
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('order.order_number')
+                    ->label(__('Order'))
+                    ->searchable()
+                    ->sortable()
+                    ->url(fn ($record) => $record->order ? route('dashboard.orders.view', ['team' => app('current_team'), 'order' => $record->order]) : null),
+                TextColumn::make('carrier')
+                    ->label(__('Carrier'))
+                    ->searchable()
+                    ->sortable()
+                    ->badge()
+                    ->color('gray'),
+                TextColumn::make('tracking_number')
+                    ->label(__('Tracking'))
+                    ->searchable()
+                    ->copyable(),
+                TextColumn::make('status')
+                    ->label(__('Status'))
+                    ->badge()
+                    ->sortable(),
+                TextColumn::make('shipped_at')
+                    ->label(__('Shipped'))
+                    ->dateTime('Y-m-d H:i')
+                    ->sortable(),
+                TextColumn::make('delivered_at')
+                    ->label(__('Delivered'))
+                    ->dateTime('Y-m-d H:i')
+                    ->sortable(),
+            ])
+            ->defaultSort('created_at', 'desc')
+            ->paginated([10, 25, 50, 100]);
+    }
 }

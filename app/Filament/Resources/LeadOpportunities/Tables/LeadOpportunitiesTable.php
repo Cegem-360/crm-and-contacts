@@ -82,7 +82,7 @@ final class LeadOpportunitiesTable
             ])
             ->recordActions([
                 EditAction::make()
-                    ->url(fn ($record): string => route('filament.admin.resources.lead-opportunities.edit', $record)),
+                    ->url(fn ($record): string => route('dashboard.opportunities.edit', ['team' => app('current_team'), 'opportunity' => $record])),
             ])
             ->defaultSort('created_at', 'desc')
             ->paginated([10, 25, 50, 100]);

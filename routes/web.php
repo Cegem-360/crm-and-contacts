@@ -24,6 +24,7 @@ use App\Livewire\Pages\Interactions\ViewInteraction;
 use App\Livewire\Pages\Invoices\EditInvoice;
 use App\Livewire\Pages\Invoices\ListInvoices;
 use App\Livewire\Pages\Invoices\ViewInvoice;
+use App\Livewire\Pages\Opportunities\EditOpportunity;
 use App\Livewire\Pages\Opportunities\ListOpportunities;
 use App\Livewire\Pages\Orders\EditOrder;
 use App\Livewire\Pages\Orders\ListOrders;
@@ -84,6 +85,8 @@ Route::middleware(['auth', 'verified', SetFrontendTenant::class])
 
         // Opportunities (pipeline)
         Route::get('/opportunities', ListOpportunities::class)->name('dashboard.opportunities');
+        Route::get('/opportunities/create', EditOpportunity::class)->name('dashboard.opportunities.create');
+        Route::get('/opportunities/{opportunity}/edit', EditOpportunity::class)->name('dashboard.opportunities.edit');
 
         // Quotes
         Route::get('/quotes', ListQuotes::class)->name('dashboard.quotes');

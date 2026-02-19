@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Livewire\Pages\Opportunities;
 
 use App\Filament\Resources\LeadOpportunities\Tables\LeadOpportunitiesTable;
+use App\Livewire\Concerns\HasCurrentTeam;
 use App\Models\Opportunity;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
@@ -20,6 +21,7 @@ use Livewire\Component;
 #[Layout('components.layouts.dashboard')]
 final class ListOpportunities extends Component implements HasActions, HasSchemas, HasTable
 {
+    use HasCurrentTeam;
     use InteractsWithActions;
     use InteractsWithSchemas;
     use InteractsWithTable;

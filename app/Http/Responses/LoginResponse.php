@@ -12,6 +12,13 @@ final class LoginResponse implements LoginResponseContract
 {
     public function toResponse($request): RedirectResponse|Redirector
     {
-        return redirect()->to(route('dashboard'));
+        $user = $request->user();
+        $team = $user?->teams()->first();
+
+        if ($team) {
+            return redirect()->route('dashboard', ['team' => $team]);
+        }
+
+        return redirect()->route('filament.admin.pages.dashboard');
     }
 }

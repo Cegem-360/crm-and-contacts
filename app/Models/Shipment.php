@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\ShipmentStatus;
+use App\Models\Concerns\BelongsToTeam;
 use Database\Factories\ShipmentFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,12 +15,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 final class Shipment extends Model
 {
+    use BelongsToTeam;
+
     /** @use HasFactory<ShipmentFactory> */
     use HasFactory;
 
     use SoftDeletes;
 
     protected $fillable = [
+        'team_id',
         'customer_id',
         'order_id',
         'external_customer_id',

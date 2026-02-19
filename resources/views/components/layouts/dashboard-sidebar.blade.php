@@ -35,12 +35,12 @@
             </ul>
         </div>
 
-        {{-- Customers section (Pipeline) - Red icons (module color) --}}
+        {{-- Customers section - Red icons --}}
         <div>
             <h3 class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">{{ __('Customers') }}</h3>
             <ul class="space-y-1">
                 <li>
-                    <a href="{{ route('dashboard.customers') }}"
+                    <a href="{{ route('dashboard.customers', ['team' => $currentTeam]) }}"
                         class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition
                             {{ request()->routeIs('dashboard.customers*') ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
                         <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -50,58 +50,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('dashboard.opportunities') }}"
+                    <a href="{{ route('dashboard.opportunities', ['team' => $currentTeam]) }}"
                         class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition
                             {{ request()->routeIs('dashboard.opportunities*') ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
                         <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                         </svg>
                         {{ __('Leads') }}
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('filament.admin.resources.qualified-opportunities.index') }}"
-                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition text-gray-300 hover:bg-white/5 hover:text-white">
-                        <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                        {{ __('Qualified') }}
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('filament.admin.resources.proposal-opportunities.index') }}"
-                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition text-gray-300 hover:bg-white/5 hover:text-white">
-                        <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                        </svg>
-                        {{ __('Proposals') }}
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('filament.admin.resources.negotiation-opportunities.index') }}"
-                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition text-gray-300 hover:bg-white/5 hover:text-white">
-                        <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
-                        </svg>
-                        {{ __('Negotiations') }}
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('filament.admin.resources.quotation-sended-opportunities.index') }}"
-                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition text-gray-300 hover:bg-white/5 hover:text-white">
-                        <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
-                        </svg>
-                        {{ __('Sent Quotations') }}
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('filament.admin.resources.lost-quotation-opportunities.index') }}"
-                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition text-gray-300 hover:bg-white/5 hover:text-white">
-                        <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                        {{ __('Lost Quotations') }}
                     </a>
                 </li>
             </ul>
@@ -112,7 +67,7 @@
             <h3 class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">{{ __('Sales') }}</h3>
             <ul class="space-y-1">
                 <li>
-                    <a href="{{ route('dashboard.quotes') }}"
+                    <a href="{{ route('dashboard.quotes', ['team' => $currentTeam]) }}"
                         class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition
                             {{ request()->routeIs('dashboard.quotes*') ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
                         <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -122,7 +77,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('dashboard.orders') }}"
+                    <a href="{{ route('dashboard.orders', ['team' => $currentTeam]) }}"
                         class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition
                             {{ request()->routeIs('dashboard.orders*') ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
                         <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -132,8 +87,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('filament.admin.resources.invoices.index') }}"
-                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition text-gray-300 hover:bg-white/5 hover:text-white">
+                    <a href="{{ route('dashboard.invoices', ['team' => $currentTeam]) }}"
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition
+                            {{ request()->routeIs('dashboard.invoices*') ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
                         <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"/>
                         </svg>
@@ -141,8 +97,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('filament.admin.resources.shipments.index') }}"
-                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition text-gray-300 hover:bg-white/5 hover:text-white">
+                    <a href="{{ route('dashboard.shipments', ['team' => $currentTeam]) }}"
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition
+                            {{ request()->routeIs('dashboard.shipments*') ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
                         <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16l-4-4m0 0l4-4m-4 4h18"/>
                         </svg>
@@ -157,8 +114,9 @@
             <h3 class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">{{ __('Products') }}</h3>
             <ul class="space-y-1">
                 <li>
-                    <a href="{{ route('filament.admin.resources.products.index') }}"
-                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition text-gray-300 hover:bg-white/5 hover:text-white">
+                    <a href="{{ route('dashboard.products', ['team' => $currentTeam]) }}"
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition
+                            {{ request()->routeIs('dashboard.products*') ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
                         <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
                         </svg>
@@ -166,8 +124,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('filament.admin.resources.product-categories.index') }}"
-                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition text-gray-300 hover:bg-white/5 hover:text-white">
+                    <a href="{{ route('dashboard.product-categories', ['team' => $currentTeam]) }}"
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition
+                            {{ request()->routeIs('dashboard.product-categories*') ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
                         <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
                         </svg>
@@ -175,12 +134,67 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('filament.admin.resources.discounts.index') }}"
-                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition text-gray-300 hover:bg-white/5 hover:text-white">
+                    <a href="{{ route('dashboard.discounts', ['team' => $currentTeam]) }}"
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition
+                            {{ request()->routeIs('dashboard.discounts*') ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
                         <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
                         </svg>
                         {{ __('Discounts') }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        {{-- Marketing section - Purple icons --}}
+        <div>
+            <h3 class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">{{ __('Marketing') }}</h3>
+            <ul class="space-y-1">
+                <li>
+                    <a href="{{ route('dashboard.campaigns', ['team' => $currentTeam]) }}"
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition
+                            {{ request()->routeIs('dashboard.campaigns*') ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
+                        <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
+                        </svg>
+                        {{ __('Campaigns') }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        {{-- Activities section - Cyan icons --}}
+        <div>
+            <h3 class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">{{ __('Activities') }}</h3>
+            <ul class="space-y-1">
+                <li>
+                    <a href="{{ route('dashboard.tasks', ['team' => $currentTeam]) }}"
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition
+                            {{ request()->routeIs('dashboard.tasks*') ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
+                        <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                        </svg>
+                        {{ __('Tasks') }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('dashboard.interactions', ['team' => $currentTeam]) }}"
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition
+                            {{ request()->routeIs('dashboard.interactions*') ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
+                        <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                        </svg>
+                        {{ __('Interactions') }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('dashboard.chat-sessions', ['team' => $currentTeam]) }}"
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition
+                            {{ request()->routeIs('dashboard.chat-sessions*') ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
+                        <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
+                        </svg>
+                        {{ __('Chat Sessions') }}
                     </a>
                 </li>
             </ul>
@@ -191,12 +205,13 @@
             <h3 class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">{{ __('Support') }}</h3>
             <ul class="space-y-1">
                 <li>
-                    <a href="{{ route('filament.admin.resources.tasks.index') }}"
-                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition text-gray-300 hover:bg-white/5 hover:text-white">
+                    <a href="{{ route('dashboard.complaints', ['team' => $currentTeam]) }}"
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition
+                            {{ request()->routeIs('dashboard.complaints*') ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
                         <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"/>
                         </svg>
-                        {{ __('Tasks') }}
+                        {{ __('Complaints') }}
                     </a>
                 </li>
             </ul>

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Models\Concerns\BelongsToTeam;
 use Database\Factories\CampaignConversionFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,12 +14,15 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 final class CampaignConversion extends Model
 {
+    use BelongsToTeam;
+
     /** @use HasFactory<CampaignConversionFactory> */
     use HasFactory;
 
     use LogsActivity;
 
     protected $fillable = [
+        'team_id',
         'campaign_id',
         'customer_id',
         'opportunity_id',

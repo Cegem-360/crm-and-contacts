@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Enums\CommunicationChannel;
 use App\Enums\CommunicationDirection;
 use App\Enums\CommunicationStatus;
+use App\Models\Concerns\BelongsToTeam;
 use Database\Factories\CommunicationFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,10 +15,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 final class Communication extends Model
 {
+    use BelongsToTeam;
+
     /** @use HasFactory<CommunicationFactory> */
     use HasFactory;
 
     protected $fillable = [
+        'team_id',
         'customer_id',
         'channel',
         'direction',

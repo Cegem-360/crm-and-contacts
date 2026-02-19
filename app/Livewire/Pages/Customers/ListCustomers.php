@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace App\Livewire\Pages\Customers;
 
 use App\Filament\Resources\Customers\Tables\CustomersTable;
+use App\Livewire\Concerns\HasCurrentTeam;
 use App\Models\Customer;
+use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
@@ -20,15 +23,24 @@ use Livewire\Component;
 #[Layout('components.layouts.dashboard')]
 final class ListCustomers extends Component implements HasActions, HasSchemas, HasTable
 {
+    use HasCurrentTeam;
     use InteractsWithActions;
     use InteractsWithSchemas;
     use InteractsWithTable;
 
     public function table(Table $table): Table
     {
-        return CustomersTable::configureDashboard(
-            $table->query(Customer::query())
-        );
+        return CustomersTable::configure($table)
+            ->query(Customer::query())
+            ->recordUrl(fn (Customer $record): string => route('dashboard.customers.view', ['team' => $this->team, 'customer' => $record]))
+            ->recordActions([
+                Action::make('view')
+                    ->url(fn (Customer $record): string => route('dashboard.customers.view', ['team' => $this->team, 'customer' => $record]))
+                    ->icon(Heroicon::Eye),
+                Action::make('edit')
+                    ->url(fn (Customer $record): string => route('dashboard.customers.edit', ['team' => $this->team, 'customer' => $record]))
+                    ->icon(Heroicon::PencilSquare),
+            ]);
     }
 
     public function render(): View

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Models\Concerns\BelongsToTeam;
 use Database\Factories\GoogleAdsReportFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,12 +13,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 final class GoogleAdsReport extends Model
 {
+    use BelongsToTeam;
+
     /** @use HasFactory<GoogleAdsReportFactory> */
     use HasFactory;
 
     use SoftDeletes;
 
     protected $fillable = [
+        'team_id',
         'campaign_id',
         'report_date',
         'metadata',

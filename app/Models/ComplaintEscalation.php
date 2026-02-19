@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Models\Concerns\BelongsToTeam;
 use Database\Factories\ComplaintEscalationFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,10 +12,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 final class ComplaintEscalation extends Model
 {
+    use BelongsToTeam;
+
     /** @use HasFactory<ComplaintEscalationFactory> */
     use HasFactory;
 
     protected $fillable = [
+        'team_id',
         'complaint_id',
         'escalated_to',
         'escalated_by',

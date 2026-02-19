@@ -12,6 +12,6 @@ final class RegistrationResponse extends BaseRegistrationResponse
 {
     public function toResponse($request): RedirectResponse
     {
-        return Redirect::to(route('filament.admin.pages.dashboard'));
+        return Redirect::to(route('filament.admin.tenant-registration'));
     }
 }

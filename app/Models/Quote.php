@@ -5,21 +5,28 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\QuoteStatus;
+use App\Models\Concerns\BelongsToTeam;
+use App\Observers\QuoteObserver;
 use Database\Factories\QuoteFactory;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+#[ObservedBy(QuoteObserver::class)]
 final class Quote extends Model
 {
+    use BelongsToTeam;
+
     /** @use HasFactory<QuoteFactory> */
     use HasFactory;
 
     use SoftDeletes;
 
     protected $fillable = [
+        'team_id',
         'customer_id',
         'opportunity_id',
         'quote_number',

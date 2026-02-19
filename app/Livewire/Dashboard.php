@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Livewire;
 
 use App\Enums\OpportunityStage;
+use App\Livewire\Concerns\HasCurrentTeam;
 use App\Models\Customer;
 use App\Models\Opportunity;
 use Illuminate\Contracts\View\View;
@@ -14,6 +15,8 @@ use Livewire\Component;
 #[Layout('components.layouts.dashboard')]
 final class Dashboard extends Component
 {
+    use HasCurrentTeam;
+
     public int $totalCustomers = 0;
 
     public int $totalOpportunities = 0;

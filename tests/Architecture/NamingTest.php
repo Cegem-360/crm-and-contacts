@@ -5,8 +5,9 @@ declare(strict_types=1);
 arch('models follow naming conventions')
     ->expect('App\Models')
     ->toHaveSuffix('')
-    ->toBeClasses()
-    ->not->toHaveSuffix('Model');
+    ->not->toHaveSuffix('Model')
+    ->ignoring('App\Models\Concerns')
+    ->ignoring('App\Models\Scopes');
 
 arch('factories follow naming conventions')
     ->expect('Database\Factories')

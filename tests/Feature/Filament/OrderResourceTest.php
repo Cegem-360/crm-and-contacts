@@ -6,13 +6,17 @@ use App\Filament\Resources\Orders\Pages\CreateOrder;
 use App\Filament\Resources\Orders\Pages\EditOrder;
 use App\Filament\Resources\Orders\Pages\ListOrders;
 use App\Models\Order;
+use App\Models\Team;
 use App\Models\User;
+use Filament\Facades\Filament;
 use Spatie\Permission\Models\Permission;
 
 use function Pest\Livewire\livewire;
 
 beforeEach(function (): void {
     $this->user = User::factory()->create();
+    $this->team = Team::factory()->create();
+    $this->user->teams()->attach($this->team);
 
     Permission::query()->firstOrCreate(['name' => 'view_any_order']);
     Permission::query()->firstOrCreate(['name' => 'view_order']);
@@ -29,6 +33,9 @@ beforeEach(function (): void {
     ]);
 
     $this->actingAs($this->user);
+
+    Filament::setTenant($this->team);
+    Filament::bootCurrentPanel();
 });
 
 it('can render order list page', function (): void {
@@ -37,7 +44,7 @@ it('can render order list page', function (): void {
 });
 
 it('can list orders', function (): void {
-    $orders = Order::factory()->count(3)->create();
+    $orders = Order::factory()->count(3)->create(['team_id' => $this->team->id]);
 
     livewire(ListOrders::class)
         ->assertCanSeeTableRecords($orders);
@@ -49,7 +56,7 @@ it('can render create order page', function (): void {
 });
 
 it('can render edit order page', function (): void {
-    $order = Order::factory()->create();
+    $order = Order::factory()->create(['team_id' => $this->team->id]);
 
     livewire(EditOrder::class, ['record' => $order->id])
         ->assertSuccessful();
@@ -57,6 +64,7 @@ it('can render edit order page', function (): void {
 
 it('cannot access list page without permission', function (): void {
     $user = User::factory()->create();
+    $user->teams()->attach($this->team);
     $this->actingAs($user);
 
     livewire(ListOrders::class)
@@ -65,6 +73,7 @@ it('cannot access list page without permission', function (): void {
 
 it('cannot access create page without permission', function (): void {
     $user = User::factory()->create();
+    $user->teams()->attach($this->team);
     $this->actingAs($user);
 
     livewire(CreateOrder::class)
@@ -72,8 +81,9 @@ it('cannot access create page without permission', function (): void {
 });
 
 it('cannot access edit page without permission', function (): void {
-    $order = Order::factory()->create();
+    $order = Order::factory()->create(['team_id' => $this->team->id]);
     $user = User::factory()->create();
+    $user->teams()->attach($this->team);
     $this->actingAs($user);
 
     livewire(EditOrder::class, ['record' => $order->id])

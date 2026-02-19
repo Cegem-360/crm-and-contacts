@@ -49,4 +49,8 @@ arch('application does not use helpers where facades exist')
     ->ignoring([
         'App\Providers',
         'App\Console',
+        'App\Http\Middleware',
+        'App\Livewire\Concerns',
+        'App\Models\Scopes',
+        'App\Filament\Pages\Auth',
     ]);

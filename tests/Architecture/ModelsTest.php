@@ -14,25 +14,36 @@ arch()
 
 arch('models are final')
     ->expect('App\Models')
-    ->toBeFinal();
+    ->toBeFinal()
+    ->ignoring('App\Models\Concerns')
+    ->ignoring('App\Models\Scopes');
 
 arch('models use HasFactory trait')
     ->expect('App\Models')
-    ->toUse(HasFactory::class);
+    ->toUse(HasFactory::class)
+    ->ignoring('App\Models\Concerns')
+    ->ignoring('App\Models\Scopes');
 
 arch('models extend Model')
     ->expect('App\Models')
     ->toExtend(Model::class)
-    ->ignoring(User::class);
+    ->ignoring(User::class)
+    ->ignoring('App\Models\Concerns')
+    ->ignoring('App\Models\Scopes');
 
 arch('User model extends Authenticatable')
     ->expect(User::class)
-    ->toExtend(Illuminate\Foundation\Auth\User::class)
-    ->toImp;
+    ->toExtend(Illuminate\Foundation\Auth\User::class);
 
 arch('models have proper namespace')
     ->expect('App\Models')
-    ->toBeClasses();
+    ->toBeClasses()
+    ->ignoring('App\Models\Concerns')
+    ->ignoring('App\Models\Scopes');
+
+arch('model concerns are traits')
+    ->expect('App\Models\Concerns')
+    ->toBeTraits();
 
 arch('models do not use dump or dd')
     ->expect('App\Models')

@@ -76,7 +76,7 @@
     <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
         <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{{ __('Quick actions') }}</h2>
         <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <a href="{{ route('filament.admin.resources.lead-opportunities.create') }}"
+            <a href="{{ route('dashboard.opportunities', ['team' => $currentTeam]) }}"
                 class="flex items-center gap-3 p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition">
                 <div class="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
                     <svg class="w-5 h-5 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -89,7 +89,7 @@
                 </div>
             </a>
 
-            <a href="{{ route('filament.admin.resources.customers.create') }}"
+            <a href="{{ route('dashboard.customers.create', ['team' => $currentTeam]) }}"
                 class="flex items-center gap-3 p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition">
                 <div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
                     <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -102,7 +102,7 @@
                 </div>
             </a>
 
-            <a href="{{ route('dashboard.opportunities') }}"
+            <a href="{{ route('dashboard.opportunities', ['team' => $currentTeam]) }}"
                 class="flex items-center gap-3 p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition">
                 <div class="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
                     <svg class="w-5 h-5 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -115,7 +115,7 @@
                 </div>
             </a>
 
-            <a href="{{ route('filament.admin.pages.dashboard') }}"
+            <a href="{{ route('dashboard.customers', ['team' => $currentTeam]) }}"
                 class="flex items-center gap-3 p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition">
                 <div class="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
                     <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -123,8 +123,8 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="text-sm font-medium text-gray-900 dark:text-white">{{ __('Admin panel') }}</p>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">{{ __('Go to admin panel') }}</p>
+                    <p class="text-sm font-medium text-gray-900 dark:text-white">{{ __('Customers') }}</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">{{ __('View all customers') }}</p>
                 </div>
             </a>
         </div>

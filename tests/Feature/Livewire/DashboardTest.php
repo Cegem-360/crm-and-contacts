@@ -6,22 +6,27 @@ use App\Enums\OpportunityStage;
 use App\Livewire\Dashboard;
 use App\Models\Customer;
 use App\Models\Opportunity;
+use App\Models\Team;
 use App\Models\User;
 use Livewire\Livewire;
 
 it('displays correct stats on the dashboard', function () {
     $user = User::factory()->create();
+    $team = Team::factory()->create();
+    $user->teams()->attach($team);
     $this->actingAs($user);
 
-    $customer = Customer::factory()->create();
+    app()->instance('current_team', $team);
 
-    Opportunity::factory()->for($customer)->create(['stage' => OpportunityStage::Lead]);
-    Opportunity::factory()->for($customer)->create(['stage' => OpportunityStage::Qualified]);
-    Opportunity::factory()->for($customer)->create(['stage' => OpportunityStage::Proposal]);
-    Opportunity::factory()->for($customer)->create(['stage' => OpportunityStage::SendedQuotation]);
-    Opportunity::factory()->for($customer)->create(['stage' => OpportunityStage::LostQuotation]);
+    $customer = Customer::factory()->create(['team_id' => $team->id]);
 
-    Livewire::test(Dashboard::class)
+    Opportunity::factory()->for($customer)->create(['stage' => OpportunityStage::Lead, 'team_id' => $team->id]);
+    Opportunity::factory()->for($customer)->create(['stage' => OpportunityStage::Qualified, 'team_id' => $team->id]);
+    Opportunity::factory()->for($customer)->create(['stage' => OpportunityStage::Proposal, 'team_id' => $team->id]);
+    Opportunity::factory()->for($customer)->create(['stage' => OpportunityStage::SendedQuotation, 'team_id' => $team->id]);
+    Opportunity::factory()->for($customer)->create(['stage' => OpportunityStage::LostQuotation, 'team_id' => $team->id]);
+
+    Livewire::test(Dashboard::class, ['team' => $team])
         ->assertSet('totalCustomers', 1)
         ->assertSet('totalOpportunities', 5)
         ->assertSet('openOpportunities', 3)

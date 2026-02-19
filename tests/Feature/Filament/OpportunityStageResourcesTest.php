@@ -11,18 +11,25 @@ use App\Filament\Resources\QualifiedOpportunities\Pages\ManageQualifiedOpportuni
 use App\Filament\Resources\QuotationSendedOpportunities\Pages\ManageQuotationSendedOpportunities;
 use App\Models\Customer;
 use App\Models\Opportunity;
+use App\Models\Team;
 use App\Models\User;
+use Filament\Facades\Filament;
 use Spatie\Permission\Models\Permission;
 
 use function Pest\Livewire\livewire;
 
 beforeEach(function (): void {
     $this->user = User::factory()->create();
+    $this->team = Team::factory()->create();
+    $this->user->teams()->attach($this->team);
 
     Permission::query()->firstOrCreate(['name' => 'view_any_opportunity']);
     $this->user->givePermissionTo('view_any_opportunity');
 
     $this->actingAs($this->user);
+
+    Filament::setTenant($this->team);
+    Filament::bootCurrentPanel();
 });
 
 it('can render lead opportunities page', function (): void {

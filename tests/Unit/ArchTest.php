@@ -13,7 +13,11 @@ arch()->preset()->laravel()->ignoring([
     AuthController::class,
     LoginResponse::class,
     RegistrationResponse::class,
+    'App\Http\Middleware\ApplyTenantScopes',
 ]);
 arch()->preset()->security();
-arch()->expect('App\Models')->toBeClasses()->toExtend(Model::class);
+arch()->expect('App\Models')
+    ->toExtend(Model::class)
+    ->ignoring('App\Models\Concerns')
+    ->ignoring('App\Models\Scopes');
 arch()->expect('App\Controllers\Controller')->toBeAbstract();

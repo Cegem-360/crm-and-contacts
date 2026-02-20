@@ -42,6 +42,21 @@ pest()->extend(TestCase::class)
 
 // expect()->extend('toBeOne', fn () => $this->toBe(1));
 
+/**
+ * Ensure the screenshot subdirectory exists and return the filename.
+ */
+function screenshotPath(string $filename): string
+{
+    $screenshotDir = base_path('tests/Browser/Screenshots');
+    $dir = dirname($screenshotDir.'/'.$filename);
+
+    if (! is_dir($dir)) {
+        mkdir($dir, 0755, true);
+    }
+
+    return $filename;
+}
+
 /*
 |--------------------------------------------------------------------------
 | Functions

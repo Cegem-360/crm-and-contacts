@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\QuoteTemplates\Schemas;
 
-use Filament\Forms\Components\Textarea;
+use App\Filament\Forms\Components\HtmlCodeEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
@@ -23,7 +23,7 @@ final class QuoteTemplateForm
                 Toggle::make('is_active')
                     ->label('Active')
                     ->default(true),
-                Textarea::make('body')
+                HtmlCodeEditor::make('body')
                     ->label('Blade template')
                     ->required()
                     ->rows(30)

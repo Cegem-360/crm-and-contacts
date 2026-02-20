@@ -16,7 +16,7 @@ final class LoginResponse implements LoginResponseContract
         $team = $user?->teams()->first();
 
         if ($team) {
-            return redirect()->route('filament.admin.pages.dashboard', ['tenant' => $team->slug]);
+            return redirect()->route('dashboard', ['team' => $team]);
         }
 
         return redirect()->route('filament.admin.tenant-registration');

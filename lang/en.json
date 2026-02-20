@@ -437,5 +437,18 @@
     "Team Profile": "Team Profile",
     "Team Slug": "Team Slug",
     "Register Team": "Register Team",
-    "This will be used in the URL: /admin/{slug}/...": "This will be used in the URL: /admin/{slug}/..."
+    "This will be used in the URL: /admin/{slug}/...": "This will be used in the URL: /admin/{slug}/...",
+    "view": "view",
+    "delete": "delete",
+    "Create": "Create",
+    "Update": "Update",
+    "Delete": "Delete",
+    "Are you sure?": "Are you sure?",
+    "Quote Templates": "Quote Templates",
+    "Manage your quote templates": "Manage your quote templates",
+    "New Quote Template": "New Quote Template",
+    "Edit Quote Template": "Edit Quote Template",
+    "Create a new quote template": "Create a new quote template",
+    "Quote template updated successfully.": "Quote template updated successfully.",
+    "Quote template created successfully.": "Quote template created successfully."
 }

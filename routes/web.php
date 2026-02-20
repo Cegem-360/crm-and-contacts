@@ -39,6 +39,8 @@ use App\Livewire\Pages\Products\ViewProduct;
 use App\Livewire\Pages\Quotes\EditQuote;
 use App\Livewire\Pages\Quotes\ListQuotes;
 use App\Livewire\Pages\Quotes\ViewQuote;
+use App\Livewire\Pages\QuoteTemplates\EditQuoteTemplate;
+use App\Livewire\Pages\QuoteTemplates\ListQuoteTemplates;
 use App\Livewire\Pages\Shipments\ListShipments;
 use App\Livewire\Pages\Tasks\EditTask;
 use App\Livewire\Pages\Tasks\ListTasks;
@@ -98,6 +100,11 @@ Route::middleware(['auth', 'verified', SetFrontendTenant::class])
         Route::livewire('/quotes/create', EditQuote::class)->name('dashboard.quotes.create');
         Route::livewire('/quotes/{quote}', ViewQuote::class)->name('dashboard.quotes.view');
         Route::livewire('/quotes/{quote}/edit', EditQuote::class)->name('dashboard.quotes.edit');
+
+        // Quote Templates
+        Route::livewire('/quote-templates', ListQuoteTemplates::class)->name('dashboard.quote-templates');
+        Route::livewire('/quote-templates/create', EditQuoteTemplate::class)->name('dashboard.quote-templates.create');
+        Route::livewire('/quote-templates/{quoteTemplate}/edit', EditQuoteTemplate::class)->name('dashboard.quote-templates.edit');
 
         // Orders
         Route::livewire('/orders', ListOrders::class)->name('dashboard.orders');

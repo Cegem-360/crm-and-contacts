@@ -23,8 +23,9 @@ it('can sign in the user', function () {
         ->submit()
         ->wait(2)
         ->assertPathIs('/dashboard/'.$team->slug)
-        ->assertSee('Welcome')
-        ->assertNoJavaScriptErrors();
+        ->assertSee($user->name)
+        ->assertNoJavaScriptErrors()
+        ->screenshot(filename: screenshotPath('auth/login-success'), fullPage: true);
 
     $this->assertAuthenticated();
 });
@@ -47,7 +48,8 @@ it('cannot sign in with invalid credentials', function () {
         ->wait(1)
         ->assertPathIs('/admin/login')
         ->assertSee('Sign in')
-        ->assertNoJavaScriptErrors();
+        ->assertNoJavaScriptErrors()
+        ->screenshot(filename: screenshotPath('auth/login-failed'), fullPage: true);
 
     $this->assertGuest();
 });

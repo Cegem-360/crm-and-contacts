@@ -612,5 +612,19 @@
     "Team Profile": "Csapat profil",
     "Team Slug": "Csapat azonosító",
     "Register Team": "Csapat regisztrálása",
-    "This will be used in the URL: /admin/{slug}/...": "Ez lesz használva az URL-ben: /admin/{slug}/..."
+    "This will be used in the URL: /admin/{slug}/...": "Ez lesz használva az URL-ben: /admin/{slug}/...",
+    "view": "megtekintés",
+    "delete": "törlés",
+    "Create": "Létrehozás",
+    "Update": "Frissítés",
+    "Delete": "Törlés",
+    "Are you sure?": "Biztos benne?",
+    "View": "Megtekintés",
+    "Quote Templates": "Árajánlat sablonok",
+    "Manage your quote templates": "Árajánlat sablonok kezelése",
+    "New Quote Template": "Új árajánlat sablon",
+    "Edit Quote Template": "Árajánlat sablon szerkesztése",
+    "Create a new quote template": "Új árajánlat sablon létrehozása",
+    "Quote template updated successfully.": "Árajánlat sablon sikeresen frissítve.",
+    "Quote template created successfully.": "Árajánlat sablon sikeresen létrehozva."
 }

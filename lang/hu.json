@@ -626,5 +626,10 @@
     "Edit Quote Template": "Árajánlat sablon szerkesztése",
     "Create a new quote template": "Új árajánlat sablon létrehozása",
     "Quote template updated successfully.": "Árajánlat sablon sikeresen frissítve.",
-    "Quote template created successfully.": "Árajánlat sablon sikeresen létrehozva."
+    "Quote template created successfully.": "Árajánlat sablon sikeresen létrehozva.",
+    "Visual Editor": "Vizuális szerkesztő",
+    "Visual mode is for HTML layout editing. Switch off for Blade template syntax (@foreach, {{ }}, etc.).": "A vizuális mód HTML elrendezés szerkesztésre való. Kapcsold ki a Blade sablon szintaxishoz (@foreach, {{ }}, stb.).",
+    "Template body": "Sablon tartalma",
+    "Blade template": "Blade sablon",
+    "Available variables: $quote, $customer, $items. Use standard Blade syntax (@foreach, {{ }}, etc.).": "Elérhető változók: $quote, $customer, $items. Használj standard Blade szintaxist (@foreach, {{ }}, stb.)."
 }

@@ -450,5 +450,10 @@
     "Edit Quote Template": "Edit Quote Template",
     "Create a new quote template": "Create a new quote template",
     "Quote template updated successfully.": "Quote template updated successfully.",
-    "Quote template created successfully.": "Quote template created successfully."
+    "Quote template created successfully.": "Quote template created successfully.",
+    "Visual Editor": "Visual Editor",
+    "Visual mode is for HTML layout editing. Switch off for Blade template syntax (@foreach, {{ }}, etc.).": "Visual mode is for HTML layout editing. Switch off for Blade template syntax (@foreach, {{ }}, etc.).",
+    "Template body": "Template body",
+    "Blade template": "Blade template",
+    "Available variables: $quote, $customer, $items. Use standard Blade syntax (@foreach, {{ }}, etc.).": "Available variables: $quote, $customer, $items. Use standard Blade syntax (@foreach, {{ }}, etc.)."
 }

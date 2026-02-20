@@ -10,28 +10,28 @@
     "license": "MIT",
     "require": {
         "php": "^8.3",
-        "barryvdh/laravel-dompdf": "^3.1",
-        "filament/filament": "^4.7.1",
+        "barryvdh/laravel-dompdf": "^3.1.1",
+        "filament/filament": "^5.2.1",
         "google/apiclient": "^2.19.0",
         "laravel/framework": "^12.52.0",
         "laravel/reverb": "^1.7.1",
         "laravel/sanctum": "^4.3.1",
         "laravel/tinker": "^2.11.1",
-        "livewire/livewire": ">=3.7.10",
+        "livewire/livewire": "^4.1.4",
         "madbox-99/laravel-user-team-sync": "dev-main",
         "nunomaduro/essentials": "@dev",
         "spatie/laravel-activitylog": "^4.11.0",
         "spatie/laravel-permission": "^6.24.1",
-        "typesense/typesense-php": "^5.2"
+        "typesense/typesense-php": "^5.2",
+        "webklex/laravel-imap": "^6.2"
     },
     "require-dev": {
         "ace-of-aces/intellipest": "^0.2.0",
         "barryvdh/laravel-ide-helper": "^3.6.1",
         "driftingly/rector-laravel": "^2.1.9",
         "fakerphp/faker": "^1.24.1",
-        "filament/blueprint": ">=1.1",
-        "filament/upgrade": "^4.7.1",
-        "laravel/boost": ">=2.1.7",
+        "filament/blueprint": ">=2.1",
+        "laravel/boost": ">=2.1.8",
         "laravel/pail": "^1.2.6",
         "laravel/pint": "^1.27.1",
         "laravel/sail": "^1.53",
@@ -42,7 +42,7 @@
         "pestphp/pest-plugin-faker": ">=4",
         "pestphp/pest-plugin-laravel": ">=4",
         "pestphp/pest-plugin-livewire": ">=4.1.0",
-        "rector/rector": ">=2.3.6"
+        "rector/rector": ">=2.3.7"
     },
     "autoload": {
         "psr-4": {

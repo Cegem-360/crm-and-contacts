@@ -36,6 +36,12 @@ final class QuoteInfolist
                 TextEntry::make('notes')
                     ->placeholder('-')
                     ->columnSpanFull(),
+                TextEntry::make('sent_at')
+                    ->dateTime()
+                    ->placeholder('-'),
+                TextEntry::make('viewed_at')
+                    ->dateTime()
+                    ->placeholder('-'),
                 TextEntry::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),

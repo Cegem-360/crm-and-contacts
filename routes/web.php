@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\ChatDemoController;
+use App\Http\Controllers\QuoteViewController;
 use App\Http\Middleware\SetFrontendTenant;
 use App\Livewire\ComplaintSubmission;
 use App\Livewire\Dashboard;
@@ -168,6 +169,9 @@ Route::get('/language/{locale}', function (string $locale) {
 
 // Chat demo route
 Route::get('/chat-demo', [ChatDemoController::class, 'index'])->name('chat.demo');
+
+// Public quote viewing route (no auth required)
+Route::get('/quotes/view/{token}', QuoteViewController::class)->name('quotes.public-view');
 
 // Complaint submission route (public - no team required)
 Route::get('/complaints/submit', ComplaintSubmission::class)->name('complaints.submit');

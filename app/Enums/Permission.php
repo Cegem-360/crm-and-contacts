@@ -87,6 +87,15 @@ enum Permission: string
     case RestoreComplaint = 'restore_complaint';
     case ForceDeleteComplaint = 'force_delete_complaint';
 
+    // Quote Template permissions
+    case ViewAnyQuoteTemplate = 'view_any_quote_template';
+    case ViewQuoteTemplate = 'view_quote_template';
+    case CreateQuoteTemplate = 'create_quote_template';
+    case UpdateQuoteTemplate = 'update_quote_template';
+    case DeleteQuoteTemplate = 'delete_quote_template';
+    case RestoreQuoteTemplate = 'restore_quote_template';
+    case ForceDeleteQuoteTemplate = 'force_delete_quote_template';
+
     // Interaction permissions
     case ViewAnyInteraction = 'view_any_interaction';
     case ViewInteraction = 'view_interaction';
@@ -278,6 +287,24 @@ enum Permission: string
             self::DeleteComplaint,
             self::RestoreComplaint,
             self::ForceDeleteComplaint,
+        ];
+    }
+
+    /**
+     * Get all quote template permissions.
+     *
+     * @return array<self>
+     */
+    public static function quoteTemplates(): array
+    {
+        return [
+            self::ViewAnyQuoteTemplate,
+            self::ViewQuoteTemplate,
+            self::CreateQuoteTemplate,
+            self::UpdateQuoteTemplate,
+            self::DeleteQuoteTemplate,
+            self::RestoreQuoteTemplate,
+            self::ForceDeleteQuoteTemplate,
         ];
     }
 

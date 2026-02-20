@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Enums\QuoteStatus;
 use App\Models\Customer;
 use App\Models\Opportunity;
 use App\Models\Quote;
@@ -42,5 +43,31 @@ final class QuoteFactory extends Factory
             'total' => $total,
             'notes' => fake()->boolean(40) ? fake()->sentence() : null,
         ];
+    }
+
+    public function sent(): static
+    {
+        return $this->state(fn (array $attributes): array => [
+            'status' => QuoteStatus::Sent->value,
+            'sent_at' => now(),
+            'view_token' => fake()->uuid(),
+        ]);
+    }
+
+    public function viewed(): static
+    {
+        return $this->state(fn (array $attributes): array => [
+            'status' => QuoteStatus::Viewed->value,
+            'sent_at' => now()->subDay(),
+            'viewed_at' => now(),
+            'view_token' => fake()->uuid(),
+        ]);
+    }
+
+    public function draft(): static
+    {
+        return $this->state(fn (array $attributes): array => [
+            'status' => QuoteStatus::Draft->value,
+        ]);
     }
 }

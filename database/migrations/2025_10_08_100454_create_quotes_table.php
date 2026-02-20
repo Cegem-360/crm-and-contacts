@@ -29,6 +29,9 @@ return new class extends Migration
             $table->decimal('tax_amount', 12, 2)->default(0);
             $table->decimal('total', 12, 2)->default(0);
             $table->text('notes')->nullable();
+            $table->string('view_token')->nullable()->unique();
+            $table->timestamp('sent_at')->nullable();
+            $table->timestamp('viewed_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

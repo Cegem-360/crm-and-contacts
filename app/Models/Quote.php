@@ -38,6 +38,9 @@ final class Quote extends Model
         'tax_amount',
         'total',
         'notes',
+        'view_token',
+        'sent_at',
+        'viewed_at',
     ];
 
     public function customer(): BelongsTo
@@ -60,6 +63,11 @@ final class Quote extends Model
         return $this->hasMany(Order::class);
     }
 
+    public function versions(): HasMany
+    {
+        return $this->hasMany(QuoteVersion::class);
+    }
+
     protected function casts(): array
     {
         return [
@@ -70,6 +78,8 @@ final class Quote extends Model
             'tax_amount' => 'decimal:2',
             'total' => 'decimal:2',
             'status' => QuoteStatus::class,
+            'sent_at' => 'datetime',
+            'viewed_at' => 'datetime',
         ];
     }
 }

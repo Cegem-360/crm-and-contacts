@@ -10,6 +10,7 @@ use App\Filament\Resources\Quotes\Pages\EditQuote;
 use App\Filament\Resources\Quotes\Pages\ListQuotes;
 use App\Filament\Resources\Quotes\RelationManagers\ItemsRelationManager;
 use App\Filament\Resources\Quotes\RelationManagers\OrdersRelationManager;
+use App\Filament\Resources\Quotes\RelationManagers\VersionsRelationManager;
 use App\Filament\Resources\Quotes\Schemas\QuoteForm;
 use App\Filament\Resources\Quotes\Tables\QuotesTable;
 use App\Models\Quote;
@@ -41,6 +42,7 @@ final class QuoteResource extends Resource
         return [
             ItemsRelationManager::class,
             OrdersRelationManager::class,
+            VersionsRelationManager::class,
         ];
     }
 

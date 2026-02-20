@@ -63,7 +63,7 @@ final class KanbanBoard extends Component
     {
         $opportunity = Opportunity::query()->find($opportunityId);
 
-        if (! $opportunity) {
+        if (! $opportunity || $opportunity->team_id !== $this->team?->id) {
             return;
         }
 

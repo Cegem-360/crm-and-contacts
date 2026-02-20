@@ -12,7 +12,6 @@ use App\Models\Complaint;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Quote;
-use App\Models\Scopes\TeamScope;
 use Illuminate\Support\Facades\Date;
 
 final class SalesDashboardService
@@ -83,8 +82,8 @@ final class SalesDashboardService
     public function getCampaignRoiData(): array
     {
         return Campaign::query()
-            ->withCount(['conversions' => fn ($q) => $q->withoutGlobalScope(TeamScope::class)])
-            ->withSum(['conversions' => fn ($q) => $q->withoutGlobalScope(TeamScope::class)], 'conversion_value')
+            ->withCount('conversions')
+            ->withSum('conversions', 'conversion_value')
             ->get()
             ->map(fn (Campaign $campaign): array => [
                 'name' => $campaign->name,

@@ -15,6 +15,12 @@
                 </p>
             </div>
         </div>
+        @if($quote?->exists)
+            <div class="flex items-center gap-2">
+                {{ $this->generatePdfAction }}
+                {{ $this->sendQuoteAction }}
+            </div>
+        @endif
     </div>
     <form wire:submit="save" class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div class="p-6">{{ $this->form }}</div>

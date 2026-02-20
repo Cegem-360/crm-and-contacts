@@ -1,4 +1,6 @@
 <div>
+    <x-breadcrumb :items="[['label' => __('Quotes'), 'url' => route('dashboard.quotes', ['team' => $currentTeam])]]" />
+
     <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
             <h1 class="text-2xl font-bold text-gray-900 dark:text-white font-heading">{{ __('Quotes') }}</h1>

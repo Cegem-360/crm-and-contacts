@@ -1,4 +1,6 @@
 <div>
+    <x-breadcrumb :items="[['label' => __('Campaigns'), 'url' => route('dashboard.campaigns', ['team' => $currentTeam])]]" />
+
     <div class="mb-6">
         <h1 class="text-2xl font-bold text-gray-900 dark:text-white font-heading">{{ __('Campaigns') }}</h1>
         <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ __('Manage marketing campaigns') }}</p>

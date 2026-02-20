@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Contracts\SalesIntegrationInterface;
 use App\Filament\Commands\FileGenerators\Resources\ResourceClassGenerator;
 use App\Http\Responses\LoginResponse;
 use App\Http\Responses\RegistrationResponse;
@@ -23,6 +24,7 @@ use App\Models\Product;
 use App\Models\Quote;
 use App\Models\Task;
 use App\Models\User;
+use App\Services\SalesIntegrationService;
 use Filament\Actions\Action;
 use Filament\Auth\Http\Responses\Contracts\LoginResponse as LoginResponseContract;
 use Filament\Auth\Http\Responses\Contracts\RegistrationResponse as RegistrationResponseContract;
@@ -46,6 +48,7 @@ final class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(LoginResponseContract::class, LoginResponse::class);
         $this->app->singleton(RegistrationResponseContract::class, RegistrationResponse::class);
+        $this->app->bind(SalesIntegrationInterface::class, SalesIntegrationService::class);
     }
 
     /**

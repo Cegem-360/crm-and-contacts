@@ -1,4 +1,9 @@
 <div>
+    <x-breadcrumb :items="[
+        ['label' => __('Customers'), 'url' => route('dashboard.customers', ['team' => $currentTeam])],
+        ['label' => $customer->name],
+    ]" />
+
     <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div class="flex items-center gap-4">
             <a href="{{ route('dashboard.customers', ['team' => $currentTeam]) }}" class="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition" wire:navigate>

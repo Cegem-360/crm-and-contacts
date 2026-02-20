@@ -29,7 +29,7 @@ final class EditQuote extends EditRecord
                 ->label('Generate PDF')
                 ->icon('heroicon-o-document-arrow-down')
                 ->color('success')
-                ->form([
+                ->schema([
                     Select::make('template_id')
                         ->label('Template')
                         ->options(
@@ -56,7 +56,7 @@ final class EditQuote extends EditRecord
                 ->label('Send Quote')
                 ->icon('heroicon-o-paper-airplane')
                 ->color('primary')
-                ->form([
+                ->schema([
                     TextInput::make('recipient_email')
                         ->email()
                         ->required()

@@ -455,5 +455,8 @@
     "Visual mode is for HTML layout editing. Switch off for Blade template syntax (@foreach, {{ }}, etc.).": "Visual mode is for HTML layout editing. Switch off for Blade template syntax (@foreach, {{ }}, etc.).",
     "Template body": "Template body",
     "Blade template": "Blade template",
-    "Available variables: $quote, $customer, $items. Use standard Blade syntax (@foreach, {{ }}, etc.).": "Available variables: $quote, $customer, $items. Use standard Blade syntax (@foreach, {{ }}, etc.)."
+    "Available variables: $quote, $customer, $items. Use standard Blade syntax (@foreach, {{ }}, etc.).": "Available variables: $quote, $customer, $items. Use standard Blade syntax (@foreach, {{ }}, etc.).",
+    "Visual mode edits HTML directly. Blade syntax shown as badges is preserved.": "Visual mode edits HTML directly. Blade syntax shown as badges is preserved.",
+    "Variables": "Variables",
+    "Helpers": "Helpers"
 }

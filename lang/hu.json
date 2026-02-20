@@ -631,5 +631,8 @@
     "Visual mode is for HTML layout editing. Switch off for Blade template syntax (@foreach, {{ }}, etc.).": "A vizuális mód HTML elrendezés szerkesztésre való. Kapcsold ki a Blade sablon szintaxishoz (@foreach, {{ }}, stb.).",
     "Template body": "Sablon tartalma",
     "Blade template": "Blade sablon",
-    "Available variables: $quote, $customer, $items. Use standard Blade syntax (@foreach, {{ }}, etc.).": "Elérhető változók: $quote, $customer, $items. Használj standard Blade szintaxist (@foreach, {{ }}, stb.)."
+    "Available variables: $quote, $customer, $items. Use standard Blade syntax (@foreach, {{ }}, etc.).": "Elérhető változók: $quote, $customer, $items. Használj standard Blade szintaxist (@foreach, {{ }}, stb.).",
+    "Visual mode edits HTML directly. Blade syntax shown as badges is preserved.": "A vizuális mód közvetlenül HTML-t szerkeszt. A jelvényként megjelenő Blade szintaxis megmarad.",
+    "Variables": "Változók",
+    "Helpers": "Segédfüggvények"
 }

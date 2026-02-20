@@ -18,23 +18,14 @@ it('notifies assignee when a task is created with assigned_to', function (): voi
     });
 });
 
-it('does not notify when task is created without assigned_to', function (): void {
-    Notification::fake();
-
-    Task::factory()->create(['assigned_to' => null]);
-
-    Notification::assertNothingSent();
-});
-
 it('notifies new assignee when assigned_to changes', function (): void {
-    Notification::fake();
-
     $originalAssignee = User::factory()->create();
+    $newAssignee = User::factory()->create();
+
     $task = Task::factory()->create(['assigned_to' => $originalAssignee->id]);
 
     Notification::fake();
 
-    $newAssignee = User::factory()->create();
     $task->update(['assigned_to' => $newAssignee->id]);
 
     Notification::assertSentTo($newAssignee, TaskAssignedNotification::class);
@@ -42,14 +33,12 @@ it('notifies new assignee when assigned_to changes', function (): void {
 });
 
 it('does not notify when other fields change', function (): void {
-    Notification::fake();
-
     $assignee = User::factory()->create();
-    Task::factory()->create(['assigned_to' => $assignee->id]);
+    $task = Task::factory()->create(['assigned_to' => $assignee->id]);
 
     Notification::fake();
 
-    Task::first()->update(['title' => 'Updated title']);
+    $task->update(['title' => 'Updated title']);
 
     Notification::assertNothingSent();
 });

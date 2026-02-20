@@ -23,12 +23,6 @@ final class TaskNotificationObserver
 
     private function notifyAssignee(Task $task): void
     {
-        $assignedUser = $task->assignedUser;
-
-        if (! $assignedUser) {
-            return;
-        }
-
-        $assignedUser->notify(new TaskAssignedNotification($task));
+        $task->assignedUser()->first()?->notify(new TaskAssignedNotification($task));
     }
 }

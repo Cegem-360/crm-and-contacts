@@ -107,11 +107,11 @@
                 class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition">
                 <div
                     class="w-8 h-8 rounded-full bg-gradient-to-br from-red-500 to-rose-600 flex items-center justify-center text-white font-semibold text-sm">
-                    {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                    {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                 </div>
                 <div class="flex-1 min-w-0">
-                    <p class="truncate font-medium">{{ auth()->user()->name }}</p>
-                    <p class="truncate text-xs text-gray-400">{{ auth()->user()->email }}</p>
+                    <p class="truncate font-medium">{{ Auth::user()->name }}</p>
+                    <p class="truncate text-xs text-gray-400">{{ Auth::user()->email }}</p>
                 </div>
             </a>
         </div>

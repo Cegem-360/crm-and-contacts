@@ -33,6 +33,8 @@ final class Order extends Model
         'tax_amount',
         'total',
         'notes',
+        'shipping_address_id',
+        'billing_address_id',
     ];
 
     public function customer(): BelongsTo
@@ -58,6 +60,16 @@ final class Order extends Model
     public function shipments(): HasMany
     {
         return $this->hasMany(Shipment::class);
+    }
+
+    public function shippingAddress(): BelongsTo
+    {
+        return $this->belongsTo(CustomerAddress::class, 'shipping_address_id');
+    }
+
+    public function billingAddress(): BelongsTo
+    {
+        return $this->belongsTo(CustomerAddress::class, 'billing_address_id');
     }
 
     public function calculateTotals(): void

@@ -26,10 +26,14 @@ final class Customer extends Model
         'name',
         'type',
         'tax_number',
+        'eu_tax_number',
+        'industry',
+        'website',
         'registration_number',
         'email',
         'phone',
         'notes',
+        'custom_fields',
         'is_active',
     ];
 
@@ -138,6 +142,7 @@ final class Customer extends Model
         return [
             'is_active' => 'boolean',
             'type' => CustomerType::class,
+            'custom_fields' => 'array',
         ];
     }
 }

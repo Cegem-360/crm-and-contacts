@@ -36,6 +36,8 @@ final class OrderFactory extends Factory
             'tax_amount' => $taxAmount,
             'total' => $total,
             'notes' => fake()->optional()->paragraph(),
+            'shipping_address_id' => null,
+            'billing_address_id' => null,
         ];
     }
 }

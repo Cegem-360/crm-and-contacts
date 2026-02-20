@@ -31,6 +31,9 @@ final class CustomerFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->phoneNumber(),
             'notes' => fake()->optional()->paragraph(),
+            'eu_tax_number' => $type === CustomerType::Company ? 'HU'.fake()->numerify('########') : null,
+            'industry' => fake()->optional()->randomElement(['IT', 'Manufacturing', 'Retail', 'Finance', 'Healthcare', 'Education']),
+            'website' => fake()->optional()->url(),
             'is_active' => fake()->boolean(90),
         ];
     }
@@ -41,6 +44,7 @@ final class CustomerFactory extends Factory
             'type' => CustomerType::Company,
             'name' => fake()->company(),
             'tax_number' => fake()->numerify('########-#-##'),
+            'eu_tax_number' => 'HU'.fake()->numerify('########'),
             'registration_number' => fake()->numerify('##-##-######'),
         ]);
     }

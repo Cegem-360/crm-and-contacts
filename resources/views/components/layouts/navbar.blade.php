@@ -54,7 +54,7 @@
                 @endguest
 
                 @auth
-                    @php($tenant = auth()->user()->teams->first())
+                    @php($tenant = Auth::user()->teams->first())
                     @if ($tenant)
                         {{-- Dashboard link --}}
                         <a href="{{ route('dashboard', ['team' => $tenant]) }}"
@@ -69,7 +69,7 @@
                             class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
                             <div
                                 class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-600 font-semibold text-sm">
-                                {{ substr(auth()->user()->name ?? auth()->user()->email, 0, 1) }}
+                                {{ substr(Auth::user()->name ?? Auth::user()->email, 0, 1) }}
                             </div>
                             <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -140,7 +140,7 @@
             @endguest
 
             @auth
-                @php($mobileTenant = auth()->user()->teams->first())
+                @php($mobileTenant = Auth::user()->teams->first())
                 @if ($mobileTenant)
                     <a href="{{ route('filament.admin.pages.dashboard', ['tenant' => $mobileTenant]) }}"
                         class="block py-2 text-sm font-medium text-gray-700">{{ __('Dashboard') }}</a>

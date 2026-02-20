@@ -3,9 +3,14 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\ComplaintController;
 use App\Http\Controllers\Api\V1\CustomerController;
+use App\Http\Controllers\Api\V1\GenerateInvoicePdfController;
+use App\Http\Controllers\Api\V1\InvoiceController;
+use App\Http\Controllers\Api\V1\OrderController;
 use App\Http\Controllers\Api\V1\ShipmentController;
 use App\Http\Controllers\Api\V1\StoreShipmentTrackingEventController;
+use App\Http\Controllers\Api\V1\TransitionOrderStatusController;
 use App\Http\Controllers\Api\V1\UpdateShipmentStatusController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +27,17 @@ Route::prefix('v1')->name('api.v1.')->group(function (): void {
 
         // Customer routes
         Route::apiResource('customers', CustomerController::class);
+
+        // Order routes
+        Route::apiResource('orders', OrderController::class);
+        Route::put('/orders/{order}/status', TransitionOrderStatusController::class)->name('orders.transitionStatus');
+
+        // Invoice routes
+        Route::apiResource('invoices', InvoiceController::class);
+        Route::get('/invoices/{invoice}/pdf', GenerateInvoicePdfController::class)->name('invoices.pdf');
+
+        // Complaint routes
+        Route::apiResource('complaints', ComplaintController::class);
 
         // Shipment routes
         Route::post('/shipments', [ShipmentController::class, 'store'])->name('shipments.store');

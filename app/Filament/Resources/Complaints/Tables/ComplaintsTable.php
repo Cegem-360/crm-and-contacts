@@ -16,33 +16,46 @@ final class ComplaintsTable
     {
         return $table
             ->columns([
+                TextColumn::make('complaint_number')
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('customer.name')
                     ->searchable(),
-                TextColumn::make('order.order_number')
-                    ->searchable(),
-                TextColumn::make('reporter.name')
-                    ->numeric()
+                TextColumn::make('type')
+                    ->badge()
+                    ->sortable(),
+                TextColumn::make('subject')
+                    ->searchable()
+                    ->limit(30)
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('title')
+                    ->searchable()
+                    ->limit(30),
+                TextColumn::make('severity')
+                    ->badge()
+                    ->sortable(),
+                TextColumn::make('status')
+                    ->badge()
                     ->sortable(),
                 TextColumn::make('assignedUser.name')
-                    ->numeric()
+                    ->label('Assigned To')
                     ->sortable(),
-                TextColumn::make('title')
-                    ->searchable(),
-                TextColumn::make('severity')
-                    ->searchable(),
-                TextColumn::make('status')
-                    ->searchable(),
+                TextColumn::make('escalation_level')
+                    ->label('Level')
+                    ->sortable(),
+                TextColumn::make('sla_deadline_at')
+                    ->label('SLA Deadline')
+                    ->dateTime()
+                    ->sortable()
+                    ->color(fn ($record) => $record->sla_deadline_at && $record->sla_deadline_at->isPast() && ! in_array($record->status->value, ['resolved', 'closed']) ? 'danger' : null),
                 TextColumn::make('reported_at')
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('resolved_at')
                     ->dateTime()
-                    ->sortable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
+                TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

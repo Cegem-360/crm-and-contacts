@@ -65,7 +65,7 @@ final class LeadOpportunitiesTable
                     ->label(__('Title'))
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('status')
+                TextColumn::make('stage')
                     ->label(__('Status'))
                     ->badge(),
                 TextColumn::make('probability')

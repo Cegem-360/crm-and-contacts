@@ -9,11 +9,16 @@ use Filament\Widgets\ChartWidget;
 
 final class PipelineChartWidget extends ChartWidget
 {
-    protected ?string $heading = 'Pipeline Overview';
+    protected ?string $heading = null;
 
     protected static ?int $sort = 2;
 
     protected ?string $pollingInterval = '30s';
+
+    public function getHeading(): string
+    {
+        return __('Pipeline Overview');
+    }
 
     protected function getData(): array
     {
@@ -25,7 +30,7 @@ final class PipelineChartWidget extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Pipeline Value',
+                    'label' => __('Pipeline Value'),
                     'data' => array_map(fn (array $stage): float => $stage['value'], $stages),
                     'backgroundColor' => [
                         'rgba(239, 68, 68, 0.7)',

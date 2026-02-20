@@ -48,6 +48,7 @@ final class LeadOpportunityForm
                     ->fillTrack()
                     ->pips(PipsMode::Steps, 5),
                 Select::make('stage')
+                    ->label(__('Status'))
                     ->options(OpportunityStage::class)
                     ->default(OpportunityStage::Lead)
                     ->required(),

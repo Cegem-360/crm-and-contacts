@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\CampaignResponseType;
 use App\Enums\CampaignType;
 use App\Models\Concerns\BelongsToTeam;
 use Database\Factories\CampaignFactory;
@@ -171,6 +172,27 @@ final class Campaign extends Model
     public function getConversionCount(): int
     {
         return $this->conversions()->count();
+    }
+
+    /**
+     * @return array{total: int, by_type: array<string, int>, response_rate: float}
+     */
+    public function getResponseAnalysis(): array
+    {
+        $responses = $this->responses()->get();
+        $total = $responses->count();
+        $audienceCount = $this->targetAudience()->count();
+
+        $byType = [];
+        foreach (CampaignResponseType::cases() as $type) {
+            $byType[$type->value] = $responses->where('response_type', $type)->count();
+        }
+
+        return [
+            'total' => $total,
+            'by_type' => $byType,
+            'response_rate' => $audienceCount > 0 ? round(($total / $audienceCount) * 100, 2) : 0.0,
+        ];
     }
 
     public function getActivitylogOptions(): LogOptions

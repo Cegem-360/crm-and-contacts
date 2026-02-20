@@ -19,7 +19,6 @@ final class EmailTemplateFactory extends Factory
     public function definition(): array
     {
         return [
-            'team_id' => Team::factory(),
             'name' => fake()->words(3, true),
             'subject' => fake()->sentence(),
             'body' => '<p>'.fake()->paragraph().'</p>',
@@ -53,8 +52,6 @@ final class EmailTemplateFactory extends Factory
 
     public function forTeam(Team $team): static
     {
-        return $this->state(fn (): array => [
-            'team_id' => $team->id,
-        ]);
+        return $this;
     }
 }

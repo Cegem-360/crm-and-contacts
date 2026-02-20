@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dfeb712d0021e2e14aaaa1f73c04af17",
+    "content-hash": "1c0af70f8167e74393c25c985179df4d",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -11070,6 +11070,57 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "ace-of-aces/intellipest",
+            "version": "v0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ace-of-aces/intellipest.git",
+                "reference": "5af17c0a9c3a57e8e0ab8eb120f7fa41c3312094"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ace-of-aces/intellipest/zipball/5af17c0a9c3a57e8e0ab8eb120f7fa41c3312094",
+                "reference": "5af17c0a9c3a57e8e0ab8eb120f7fa41c3312094",
+                "shasum": ""
+            },
+            "require": {
+                "nikic/php-parser": "^5.7",
+                "php": "^8.3",
+                "react/event-loop": "^1.6",
+                "symfony/console": "^7.4"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.27",
+                "pestphp/pest": "^4.3",
+                "phpstan/phpstan": "^2.1"
+            },
+            "bin": [
+                "bin/intellipest"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AceOfAces\\IntelliPest\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Julian Schramm",
+                    "email": "hi@julian.center"
+                }
+            ],
+            "description": "Generate IDE helpers to assist development with PestPHP",
+            "support": {
+                "issues": "https://github.com/ace-of-aces/intellipest/issues",
+                "source": "https://github.com/ace-of-aces/intellipest/tree/v0.2.0"
+            },
+            "time": "2026-02-17T19:53:18+00:00"
+        },
         {
             "name": "amphp/amp",
             "version": "v3.1.1",

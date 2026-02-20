@@ -41,6 +41,7 @@ use App\Livewire\Pages\Shipments\ListShipments;
 use App\Livewire\Pages\Tasks\EditTask;
 use App\Livewire\Pages\Tasks\ListTasks;
 use App\Livewire\Pages\Tasks\ViewTask;
+use App\Livewire\SalesDashboard;
 use App\Models\Team;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -76,6 +77,7 @@ Route::middleware(['auth', 'verified', SetFrontendTenant::class])
     ->prefix('/dashboard/{team:slug}')
     ->group(function (): void {
         Route::get('/', Dashboard::class)->name('dashboard');
+        Route::get('/sales-dashboard', SalesDashboard::class)->name('dashboard.sales-dashboard');
 
         // CRM
         Route::get('/customers', ListCustomers::class)->name('dashboard.customers');

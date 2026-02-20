@@ -30,7 +30,7 @@ final class CrmReportingService
             'opportunities' => [
                 'active' => Opportunity::query()->whereIn('stage', OpportunityStage::getActiveStages())->count(),
                 'pipeline_value' => (float) Opportunity::query()->whereIn('stage', OpportunityStage::getActiveStages())->sum('value'),
-                'won_value' => (float) Opportunity::query()->where('stage', OpportunityStage::SentQuotation)->sum('value'),
+                'won_value' => (float) Opportunity::query()->where('stage', OpportunityStage::SendedQuotation)->sum('value'),
             ],
             'quotes' => [
                 'total' => Quote::query()->count(),
@@ -45,7 +45,10 @@ final class CrmReportingService
             'invoices' => [
                 'total' => Invoice::query()->count(),
                 'paid' => Invoice::query()->where('status', InvoiceStatus::Paid)->count(),
-                'overdue' => Invoice::query()->where('status', InvoiceStatus::Overdue)->count(),
+                'overdue' => Invoice::query()
+                    ->where('status', InvoiceStatus::Active)
+                    ->where('due_date', '<', Date::today())
+                    ->count(),
                 'outstanding_amount' => (float) Invoice::query()
                     ->whereNotIn('status', [InvoiceStatus::Paid, InvoiceStatus::Cancelled])
                     ->sum('total'),

@@ -2,14 +2,17 @@
 
 declare(strict_types=1);
 
+use App\Models\Team;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 it('can sign in the user', function () {
-    User::factory()->create([
+    $team = Team::factory()->create();
+    $user = User::factory()->create([
         'email' => 'test@example.com',
         'password' => Hash::make('password'),
     ]);
+    $user->teams()->attach($team);
 
     $page = visit('/admin/login');
 
@@ -19,18 +22,20 @@ it('can sign in the user', function () {
         ->type('#form\\.password', 'password')
         ->submit()
         ->wait(2)
-        ->assertPathIs('/admin')
-        ->assertSee('Dashboard')
+        ->assertPathIs('/dashboard/'.$team->slug)
+        ->assertSee('Welcome')
         ->assertNoJavaScriptErrors();
 
     $this->assertAuthenticated();
 });
 
 it('cannot sign in with invalid credentials', function () {
-    User::factory()->create([
+    $team = Team::factory()->create();
+    $user = User::factory()->create([
         'email' => 'test@example.com',
         'password' => Hash::make('password'),
     ]);
+    $user->teams()->attach($team);
 
     $page = visit('/admin/login');
 

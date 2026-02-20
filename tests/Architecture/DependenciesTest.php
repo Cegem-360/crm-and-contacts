@@ -53,4 +53,5 @@ arch('application does not use helpers where facades exist')
         'App\Livewire\Concerns',
         'App\Models\Scopes',
         'App\Filament\Pages\Auth',
+        'App\Filament\Resources',
     ]);

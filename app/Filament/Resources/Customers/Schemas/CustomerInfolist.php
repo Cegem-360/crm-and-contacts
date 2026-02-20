@@ -6,6 +6,7 @@ namespace App\Filament\Resources\Customers\Schemas;
 
 use App\Models\Customer;
 use Filament\Infolists\Components\IconEntry;
+use Filament\Infolists\Components\KeyValueEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
 
@@ -22,12 +23,24 @@ final class CustomerInfolist
                     ->placeholder('-'),
                 TextEntry::make('registration_number')
                     ->placeholder('-'),
+                TextEntry::make('eu_tax_number')
+                    ->label('EU Tax Number')
+                    ->placeholder('-'),
+                TextEntry::make('industry')
+                    ->placeholder('-'),
+                TextEntry::make('website')
+                    ->url(fn (Customer $record): ?string => $record->website)
+                    ->openUrlInNewTab()
+                    ->placeholder('-'),
                 TextEntry::make('email')
                     ->label('Email address')
                     ->placeholder('-'),
                 TextEntry::make('phone')
                     ->placeholder('-'),
                 TextEntry::make('notes')
+                    ->placeholder('-')
+                    ->columnSpanFull(),
+                KeyValueEntry::make('custom_fields')
                     ->placeholder('-')
                     ->columnSpanFull(),
                 IconEntry::make('is_active')

@@ -126,6 +126,54 @@ final class CampaignInfolist
                             ]),
                     ]),
 
+                Section::make('Response Analysis')
+                    ->schema([
+                        Grid::make(3)
+                            ->schema([
+                                TextEntry::make('response_total')
+                                    ->label('Total Responses')
+                                    ->formatStateUsing(fn (Campaign $record): int => $record->getResponseAnalysis()['total'])
+                                    ->icon('heroicon-o-chat-bubble-left-right'),
+                                TextEntry::make('response_rate')
+                                    ->label('Response Rate')
+                                    ->formatStateUsing(fn (Campaign $record): string => $record->getResponseAnalysis()['response_rate'].'%')
+                                    ->badge()
+                                    ->color(fn (Campaign $record): string => match (true) {
+                                        $record->getResponseAnalysis()['response_rate'] >= 50 => 'success',
+                                        $record->getResponseAnalysis()['response_rate'] >= 20 => 'warning',
+                                        default => 'danger',
+                                    })
+                                    ->icon('heroicon-o-chart-pie'),
+                                TextEntry::make('interested_responses')
+                                    ->label('Interested')
+                                    ->formatStateUsing(fn (Campaign $record): int => $record->getResponseAnalysis()['by_type']['interested'] ?? 0)
+                                    ->badge()
+                                    ->color('success')
+                                    ->icon('heroicon-o-hand-thumb-up'),
+                            ]),
+                        Grid::make(3)
+                            ->schema([
+                                TextEntry::make('not_interested_responses')
+                                    ->label('Not Interested')
+                                    ->formatStateUsing(fn (Campaign $record): int => $record->getResponseAnalysis()['by_type']['not_interested'] ?? 0)
+                                    ->badge()
+                                    ->color('danger')
+                                    ->icon('heroicon-o-hand-thumb-down'),
+                                TextEntry::make('callback_responses')
+                                    ->label('Callback Requested')
+                                    ->formatStateUsing(fn (Campaign $record): int => $record->getResponseAnalysis()['by_type']['callback'] ?? 0)
+                                    ->badge()
+                                    ->color('warning')
+                                    ->icon('heroicon-o-phone'),
+                                TextEntry::make('no_response_count')
+                                    ->label('No Response')
+                                    ->formatStateUsing(fn (Campaign $record): int => $record->getResponseAnalysis()['by_type']['no_response'] ?? 0)
+                                    ->badge()
+                                    ->color('gray')
+                                    ->icon('heroicon-o-minus-circle'),
+                            ]),
+                    ]),
+
                 Section::make('Google Ads Integration')
                     ->schema([
                         TextEntry::make('google_ads_campaign_id')

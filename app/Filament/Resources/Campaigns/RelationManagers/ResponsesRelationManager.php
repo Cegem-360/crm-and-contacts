@@ -12,13 +12,17 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ImportAction;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 final class ResponsesRelationManager extends RelationManager
 {
@@ -72,7 +76,20 @@ final class ResponsesRelationManager extends RelationManager
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('response_type')
+                    ->options(CampaignResponseType::class),
+                Filter::make('date_range')
+                    ->form([
+                        DatePicker::make('from')
+                            ->label('From'),
+                        DatePicker::make('until')
+                            ->label('Until'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when($data['from'], fn (Builder $query, $date): Builder => $query->where('responded_at', '>=', $date))
+                            ->when($data['until'], fn (Builder $query, $date): Builder => $query->where('responded_at', '<=', $date));
+                    }),
             ])
             ->headerActions([
                 ImportAction::make('Import Responses')->importer(CampaignResponseImporter::class),

@@ -12,6 +12,7 @@ use Filament\Actions\DetachAction;
 use Filament\Actions\DetachBulkAction;
 use Filament\Actions\ExportAction;
 use Filament\Actions\ExportBulkAction;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -123,6 +124,39 @@ final class TargetAudienceRelationManager extends RelationManager
                             fn (Builder $query, $city): Builder => $query->whereHas(
                                 'addresses',
                                 fn (Builder $query) => $query->where('city', $city)
+                            )
+                        );
+                    }),
+                Filter::make('industry')
+                    ->form([
+                        Select::make('industry')
+                            ->label('Industry')
+                            ->searchable()
+                            ->options(function (): array {
+                                return \App\Models\Customer::query()
+                                    ->whereNotNull('industry')
+                                    ->distinct()
+                                    ->pluck('industry', 'industry')
+                                    ->toArray();
+                            }),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query->when(
+                            $data['industry'],
+                            fn (Builder $query, $industry): Builder => $query->where('industry', $industry)
+                        );
+                    }),
+                Filter::make('last_purchase')
+                    ->form([
+                        DatePicker::make('purchased_since')
+                            ->label('Purchased since'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query->when(
+                            $data['purchased_since'],
+                            fn (Builder $query, $date): Builder => $query->whereHas(
+                                'orders',
+                                fn (Builder $query) => $query->where('order_date', '>=', $date)
                             )
                         );
                     }),

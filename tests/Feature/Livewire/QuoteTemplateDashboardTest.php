@@ -7,6 +7,7 @@ use App\Livewire\Pages\QuoteTemplates\ListQuoteTemplates;
 use App\Models\QuoteTemplate;
 use App\Models\Team;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Livewire;
 
 beforeEach(function (): void {
@@ -94,7 +95,7 @@ it('updates an existing quote template', function (): void {
 });
 
 it('requires authentication to view quote templates', function (): void {
-    auth()->logout();
+    Auth::logout();
 
     $this->get('/dashboard/'.$this->team->slug.'/quote-templates')
         ->assertRedirect();

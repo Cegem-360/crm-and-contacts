@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Livewire\SalesDashboard;
 use App\Models\Team;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Livewire;
 
 beforeEach(function (): void {
@@ -33,7 +34,7 @@ it('updates data when period changes', function (): void {
 });
 
 it('requires authentication', function (): void {
-    auth()->logout();
+    Auth::logout();
 
     $this->get(route('dashboard.sales-dashboard', ['team' => $this->team]))
         ->assertRedirect();

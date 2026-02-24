@@ -11,10 +11,12 @@ use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Facades\Filament;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 final class ShipmentsRelationManager extends RelationManager
 {
@@ -37,7 +39,7 @@ final class ShipmentsRelationManager extends RelationManager
                     ->searchable()
                     ->sortable()
                     ->copyable()
-                    ->url(fn ($record) => ShipmentResource::getUrl('edit', ['record' => $record], tenant: $this->ownerRecord->team)),
+                    ->url(fn ($record) => $this->getShipmentEditUrl($record)),
 
                 TextColumn::make('carrier')
                     ->badge()
@@ -79,6 +81,7 @@ final class ShipmentsRelationManager extends RelationManager
                     ->mutateDataUsing(function (array $data, $livewire): array {
                         $data['customer_id'] = $livewire->ownerRecord->customer_id;
                         $data['order_id'] = $livewire->ownerRecord->id;
+                        $data['team_id'] = Filament::getTenant()?->getKey();
                         $data['shipment_number'] = Shipment::generateShipmentNumber();
 
                         return $data;
@@ -86,7 +89,7 @@ final class ShipmentsRelationManager extends RelationManager
             ])
             ->recordActions([
                 ViewAction::make()
-                    ->url(fn ($record) => ShipmentResource::getUrl('edit', ['record' => $record], tenant: $this->ownerRecord->team)),
+                    ->url(fn ($record) => $this->getShipmentEditUrl($record)),
                 EditAction::make(),
             ])
             ->toolbarActions([
@@ -95,5 +98,16 @@ final class ShipmentsRelationManager extends RelationManager
                 ]),
             ])
             ->defaultSort('created_at', 'desc');
+    }
+
+    private function getShipmentEditUrl(Model $record): ?string
+    {
+        $tenant = Filament::getTenant() ?? $this->ownerRecord->team;
+
+        if (! $tenant) {
+            return null;
+        }
+
+        return ShipmentResource::getUrl('edit', ['record' => $record], tenant: $tenant);
     }
 }

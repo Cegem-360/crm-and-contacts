@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
@@ -11,6 +13,7 @@ use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
  * @property \App\Models\Product $product
  * @property \App\Models\Quote $quote
  * @property \App\Models\QuoteTemplate $template
+ * @property \App\Models\Order $order
  * @property string $token
  * @property string $pdfPath
  * @property object $service

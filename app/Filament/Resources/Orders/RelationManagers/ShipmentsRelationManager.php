@@ -37,7 +37,7 @@ final class ShipmentsRelationManager extends RelationManager
                     ->searchable()
                     ->sortable()
                     ->copyable()
-                    ->url(fn ($record) => ShipmentResource::getUrl('edit', ['record' => $record])),
+                    ->url(fn ($record) => ShipmentResource::getUrl('edit', ['record' => $record], tenant: $this->ownerRecord->team)),
 
                 TextColumn::make('carrier')
                     ->badge()
@@ -86,7 +86,7 @@ final class ShipmentsRelationManager extends RelationManager
             ])
             ->recordActions([
                 ViewAction::make()
-                    ->url(fn ($record) => ShipmentResource::getUrl('edit', ['record' => $record])),
+                    ->url(fn ($record) => ShipmentResource::getUrl('edit', ['record' => $record], tenant: $this->ownerRecord->team)),
                 EditAction::make(),
             ])
             ->toolbarActions([

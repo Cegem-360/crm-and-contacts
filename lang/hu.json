@@ -634,5 +634,8 @@
     "Available variables: $quote, $customer, $items. Use standard Blade syntax (@foreach, {{ }}, etc.).": "Elérhető változók: $quote, $customer, $items. Használj standard Blade szintaxist (@foreach, {{ }}, stb.).",
     "Visual mode edits HTML directly. Blade syntax shown as badges is preserved.": "A vizuális mód közvetlenül HTML-t szerkeszt. A jelvényként megjelenő Blade szintaxis megmarad.",
     "Variables": "Változók",
-    "Helpers": "Segédfüggvények"
+    "Helpers": "Segédfüggvények",
+    "Get started": "Vágjunk bele",
+    "Book appointment": "Időpontot foglalok",
+    "Discover how Cégem360 helps your business grow. No long-term commitment.": "Fedezze fel, hogyan segíti a Cégem360 a cége növekedését. Nincs hosszú távú elkötelezettség."
 }

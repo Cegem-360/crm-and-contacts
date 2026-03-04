@@ -672,6 +672,7 @@
     @endif
 
     {{-- Pricing Section --}}
+    @if(false)
     <section id="arak" class="py-16 lg:py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
@@ -804,6 +805,7 @@
             </div>
         </div>
     </section>
+    @endif
 
     {{-- Related Modules Section --}}
     <section class="py-16 lg:py-24 bg-gray-50">

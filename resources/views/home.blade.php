@@ -31,7 +31,7 @@
                         </svg>
                     </a>
                     <a href="https://cegem360.eu/kapcsolat" class="inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold text-red-700 bg-white border-2 border-red-200 rounded-full hover:bg-red-50 transition-colors">
-                        {{ __('Book appointment') }}
+                        {{ __('Request a demo') }}
                     </a>
                     <a href="/login" class="inline-flex items-center justify-center gap-1 px-8 py-4 text-base font-semibold text-gray-600 hover:text-gray-900 transition-colors">
                         {{ __('Log in') }}
@@ -996,7 +996,7 @@
                     </svg>
                 </a>
                 <a href="https://cegem360.eu/kapcsolat" class="inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold text-white border-2 border-white/30 rounded-full hover:bg-white/10 transition-colors">
-                    {{ __('Book appointment') }}
+                    {{ __('Request a demo') }}
                 </a>
                 <a href="/login" class="inline-flex items-center justify-center gap-1 px-8 py-4 text-base font-semibold text-white/80 hover:text-white transition-colors">
                     {{ __('Log in') }}

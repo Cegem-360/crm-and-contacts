@@ -19,10 +19,16 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 final class ContactsRelationManager extends RelationManager
 {
     protected static string $relationship = 'contacts';
+
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
+    {
+        return __('Contacts');
+    }
 
     public function form(Schema $schema): Schema
     {
@@ -31,7 +37,7 @@ final class ContactsRelationManager extends RelationManager
                 TextInput::make('name')
                     ->required(),
                 TextInput::make('email')
-                    ->label('Email address')
+                    ->label(__('Email address'))
                     ->email(),
                 TextInput::make('phone')
                     ->tel(),
@@ -49,7 +55,7 @@ final class ContactsRelationManager extends RelationManager
                 TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('email')
-                    ->label('Email address')
+                    ->label(__('Email address'))
                     ->searchable(),
                 TextColumn::make('phone')
                     ->searchable(),

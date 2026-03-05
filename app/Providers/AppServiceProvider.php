@@ -7,7 +7,6 @@ namespace App\Providers;
 use App\Contracts\SalesIntegrationInterface;
 use App\Filament\Commands\FileGenerators\Resources\ResourceClassGenerator;
 use App\Http\Responses\LoginResponse;
-use App\Http\Responses\RegistrationResponse;
 use App\Models\BugReport;
 use App\Models\Campaign;
 use App\Models\Complaint;
@@ -27,7 +26,6 @@ use App\Models\User;
 use App\Services\SalesIntegrationService;
 use Filament\Actions\Action;
 use Filament\Auth\Http\Responses\Contracts\LoginResponse as LoginResponseContract;
-use Filament\Auth\Http\Responses\Contracts\RegistrationResponse as RegistrationResponseContract;
 use Filament\Commands\FileGenerators\Resources\ResourceClassGenerator as BaseResourceClassGenerator;
 use Filament\Forms\Components\Field;
 use Filament\Infolists\Components\Entry;
@@ -47,7 +45,6 @@ final class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(LoginResponseContract::class, LoginResponse::class);
-        $this->app->singleton(RegistrationResponseContract::class, RegistrationResponse::class);
         $this->app->bind(SalesIntegrationInterface::class, SalesIntegrationService::class);
     }
 

@@ -22,12 +22,12 @@ final class QuoteTemplatesTable
                     ->sortable(),
                 IconColumn::make('is_default')
                     ->boolean()
-                    ->label('Default'),
+                    ->label(__('Default')),
                 IconColumn::make('is_active')
                     ->boolean()
-                    ->label('Active'),
+                    ->label(__('Active')),
                 TextColumn::make('createdBy.name')
-                    ->label('Created by')
+                    ->label(__('Created by'))
                     ->placeholder('-'),
                 TextColumn::make('created_at')
                     ->dateTime()

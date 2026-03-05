@@ -20,20 +20,20 @@ final class SalesKpiWidget extends StatsOverviewWidget
         $kpis = $service->getKpis(1);
 
         return [
-            Stat::make('Monthly Revenue', number_format($kpis['monthly_revenue'], 0).' Ft')
-                ->description('Current month')
+            Stat::make(__('Revenue'), number_format($kpis['monthly_revenue'], 0).' Ft')
+                ->description(__('Last 1 month'))
                 ->icon('heroicon-o-currency-dollar')
                 ->color('success'),
-            Stat::make('Active Quotes', (string) $kpis['active_quotes'])
-                ->description('Draft quotes')
+            Stat::make(__('Active Quotes'), (string) $kpis['active_quotes'])
+                ->description(__('Draft'))
                 ->icon('heroicon-o-document-text')
                 ->color('info'),
-            Stat::make('Conversion Rate', $kpis['conversion_rate'].'%')
-                ->description('Quotes to orders')
+            Stat::make(__('Conversion Rate'), $kpis['conversion_rate'].'%')
+                ->description(__('Quotes').' → '.__('Orders'))
                 ->icon('heroicon-o-arrow-trending-up')
                 ->color('warning'),
-            Stat::make('Avg Deal Size', number_format($kpis['avg_deal_size'], 0).' Ft')
-                ->description('Average order value')
+            Stat::make(__('Avg Deal Size'), number_format($kpis['avg_deal_size'], 0).' Ft')
+                ->description(__('Orders'))
                 ->icon('heroicon-o-banknotes')
                 ->color('danger'),
         ];

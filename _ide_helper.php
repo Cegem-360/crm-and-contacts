@@ -18137,6 +18137,18 @@ namespace Illuminate\Support\Facades {
             return $instance->tap($callback);
         }
 
+        /**
+         * @see \Livewire\Mechanisms\HandleRouting\HandleRouting::register()
+         * @param mixed $uri
+         * @param mixed $component
+         * @return \Illuminate\Routing\Route
+         * @static
+         */
+        public static function livewire($uri, $component)
+        {
+            return \Illuminate\Routing\Router::livewire($uri, $component);
+        }
+
             }
     /**
      * @method static \Illuminate\Console\Scheduling\PendingEventAttributes withoutOverlapping(int $expiresAt = 1440)
@@ -23803,6 +23815,33 @@ namespace Livewire {
         /**
          * @static
          */
+        public static function addComponent($name, $viewPath = null, $class = null)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->addComponent($name, $viewPath, $class);
+        }
+
+        /**
+         * @static
+         */
+        public static function addLocation($viewPath = null, $classNamespace = null)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->addLocation($viewPath, $classNamespace);
+        }
+
+        /**
+         * @static
+         */
+        public static function addNamespace($namespace, $viewPath = null, $classNamespace = null, $classPath = null, $classViewPath = null)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->addNamespace($namespace, $viewPath, $classNamespace, $classPath, $classViewPath);
+        }
+
+        /**
+         * @static
+         */
         public static function componentHook($hook)
         {
             /** @var \Livewire\LivewireManager $instance */
@@ -23839,6 +23878,15 @@ namespace Livewire {
         /**
          * @static
          */
+        public static function prepareViewsForCompilationUsing($callback)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->prepareViewsForCompilationUsing($callback);
+        }
+
+        /**
+         * @static
+         */
         public static function new($name, $id = null)
         {
             /** @var \Livewire\LivewireManager $instance */
@@ -23846,12 +23894,22 @@ namespace Livewire {
         }
 
         /**
+         * @deprecated This method will be removed in a future version. Use exists() instead.
          * @static
          */
         public static function isDiscoverable($componentNameOrClass)
         {
             /** @var \Livewire\LivewireManager $instance */
             return $instance->isDiscoverable($componentNameOrClass);
+        }
+
+        /**
+         * @static
+         */
+        public static function exists($componentNameOrClass)
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->exists($componentNameOrClass);
         }
 
         /**
@@ -23866,10 +23924,10 @@ namespace Livewire {
         /**
          * @static
          */
-        public static function mount($name, $params = [], $key = null)
+        public static function mount($name, $params = [], $key = null, $slots = [])
         {
             /** @var \Livewire\LivewireManager $instance */
-            return $instance->mount($name, $params, $key);
+            return $instance->mount($name, $params, $key, $slots);
         }
 
         /**
@@ -23974,6 +24032,15 @@ namespace Livewire {
         /**
          * @static
          */
+        public static function getUriPrefix()
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->getUriPrefix();
+        }
+
+        /**
+         * @static
+         */
         public static function getUpdateUri()
         {
             /** @var \Livewire\LivewireManager $instance */
@@ -24053,6 +24120,10 @@ namespace Livewire {
         }
 
         /**
+         * @template TComponent of \Livewire\Component
+         * @param class-string<TComponent>|TComponent|string|array<array-key, \Livewire\Component> $name
+         * @param array $params
+         * @return Testable<TComponent>
          * @static
          */
         public static function test($name, $params = [])
@@ -24064,10 +24135,10 @@ namespace Livewire {
         /**
          * @static
          */
-        public static function visit($name)
+        public static function visit($name, $args = [])
         {
             /** @var \Livewire\LivewireManager $instance */
-            return $instance->visit($name);
+            return $instance->visit($name, $args);
         }
 
         /**
@@ -24118,6 +24189,15 @@ namespace Livewire {
         /**
          * @static
          */
+        public static function zap()
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->zap();
+        }
+
+        /**
+         * @static
+         */
         public static function flushState()
         {
             /** @var \Livewire\LivewireManager $instance */
@@ -24149,6 +24229,15 @@ namespace Livewire {
         {
             /** @var \Livewire\LivewireManager $instance */
             return $instance->originalMethod();
+        }
+
+        /**
+         * @static
+         */
+        public static function isCspSafe()
+        {
+            /** @var \Livewire\LivewireManager $instance */
+            return $instance->isCspSafe();
         }
 
             }
@@ -24266,6 +24355,73 @@ namespace Madbox99\UserTeamSync\Facades {
             }
     }
 
+namespace Webklex\IMAP\Facades {
+    /**
+     * Class Client
+     *
+     * @package Webklex\IMAP\Facades
+     */
+    class Client {
+        /**
+         * Safely create a new client instance which is not listed in accounts
+         *
+         * @param array $config
+         * @return \Client
+         * @throws Exceptions\MaskNotFoundException
+         * @static
+         */
+        public static function make($config)
+        {
+            /** @var \Webklex\PHPIMAP\ClientManager $instance */
+            return $instance->make($config);
+        }
+
+        /**
+         * Resolve a account instance.
+         *
+         * @param string|null $name
+         * @return \Client
+         * @throws Exceptions\MaskNotFoundException
+         * @static
+         */
+        public static function account($name = null)
+        {
+            /** @var \Webklex\PHPIMAP\ClientManager $instance */
+            return $instance->account($name);
+        }
+
+        /**
+         * Merge the vendor settings with the local config
+         * 
+         * The default account identifier will be used as default for any missing account parameters.
+         * If however the default account is missing a parameter the package default account parameter will be used.
+         * This can be disabled by setting imap.default in your config file to 'false'
+         *
+         * @param array|string|\Config $config
+         * @return \Webklex\PHPIMAP\ClientManager
+         * @static
+         */
+        public static function setConfig($config)
+        {
+            /** @var \Webklex\PHPIMAP\ClientManager $instance */
+            return $instance->setConfig($config);
+        }
+
+        /**
+         * Get the config instance
+         *
+         * @return \Config
+         * @static
+         */
+        public static function getConfig()
+        {
+            /** @var \Webklex\PHPIMAP\ClientManager $instance */
+            return $instance->getConfig();
+        }
+
+            }
+    }
+
 namespace Illuminate\Support {
     /**
      */
@@ -24363,6 +24519,80 @@ namespace Illuminate\Http {
         public static function hasValidRelativeSignatureWhileIgnoring($ignoreQuery = [])
         {
             return \Illuminate\Http\Request::hasValidRelativeSignatureWhileIgnoring($ignoreQuery);
+        }
+
+            }
+    }
+
+namespace Illuminate\Routing {
+    /**
+     * @mixin \Illuminate\Routing\RouteRegistrar
+     */
+    class Router {
+        /**
+         * @see \Livewire\Mechanisms\HandleRouting\HandleRouting::register()
+         * @param mixed $uri
+         * @param mixed $component
+         * @return \Illuminate\Routing\Route
+         * @static
+         */
+        public static function livewire($uri, $component)
+        {
+            return \Illuminate\Routing\Router::livewire($uri, $component);
+        }
+
+            }
+    /**
+     */
+    class Route {
+        /**
+         * @see \Livewire\Features\SupportLazyLoading\SupportLazyLoading::registerRouteMacro()
+         * @param mixed $enabled
+         * @static
+         */
+        public static function lazy($enabled = true)
+        {
+            return \Illuminate\Routing\Route::lazy($enabled);
+        }
+
+        /**
+         * @see \Livewire\Features\SupportLazyLoading\SupportLazyLoading::registerRouteMacro()
+         * @param mixed $enabled
+         * @static
+         */
+        public static function defer($enabled = true)
+        {
+            return \Illuminate\Routing\Route::defer($enabled);
+        }
+
+        /**
+         * @see \Spatie\Permission\PermissionServiceProvider::registerMacroHelpers()
+         * @param mixed $roles
+         * @static
+         */
+        public static function role($roles = [])
+        {
+            return \Illuminate\Routing\Route::role($roles);
+        }
+
+        /**
+         * @see \Spatie\Permission\PermissionServiceProvider::registerMacroHelpers()
+         * @param mixed $permissions
+         * @static
+         */
+        public static function permission($permissions = [])
+        {
+            return \Illuminate\Routing\Route::permission($permissions);
+        }
+
+        /**
+         * @see \Spatie\Permission\PermissionServiceProvider::registerMacroHelpers()
+         * @param mixed $rolesOrPermissions
+         * @static
+         */
+        public static function roleOrPermission($rolesOrPermissions = [])
+        {
+            return \Illuminate\Routing\Route::roleOrPermission($rolesOrPermissions);
         }
 
             }
@@ -24634,55 +24864,9 @@ namespace Illuminate\Database\Eloquent\Relations {
             }
     }
 
-namespace Illuminate\Routing {
-    /**
-     */
-    class Route {
-        /**
-         * @see \Livewire\Features\SupportLazyLoading\SupportLazyLoading::registerRouteMacro()
-         * @param mixed $enabled
-         * @static
-         */
-        public static function lazy($enabled = true)
-        {
-            return \Illuminate\Routing\Route::lazy($enabled);
-        }
-
-        /**
-         * @see \Spatie\Permission\PermissionServiceProvider::registerMacroHelpers()
-         * @param mixed $roles
-         * @static
-         */
-        public static function role($roles = [])
-        {
-            return \Illuminate\Routing\Route::role($roles);
-        }
-
-        /**
-         * @see \Spatie\Permission\PermissionServiceProvider::registerMacroHelpers()
-         * @param mixed $permissions
-         * @static
-         */
-        public static function permission($permissions = [])
-        {
-            return \Illuminate\Routing\Route::permission($permissions);
-        }
-
-        /**
-         * @see \Spatie\Permission\PermissionServiceProvider::registerMacroHelpers()
-         * @param mixed $rolesOrPermissions
-         * @static
-         */
-        public static function roleOrPermission($rolesOrPermissions = [])
-        {
-            return \Illuminate\Routing\Route::roleOrPermission($rolesOrPermissions);
-        }
-
-            }
-    }
-
 namespace Livewire\Features\SupportTesting {
     /**
+     * @template TComponent of \Livewire\Component
      * @mixin \Illuminate\Testing\TestResponse
      */
     class Testable {
@@ -32926,14 +33110,10 @@ namespace  {
     class Pdf extends \Barryvdh\DomPDF\Facade\Pdf {}
     class Livewire extends \Livewire\Livewire {}
     class UserTeamSync extends \Madbox99\UserTeamSync\Facades\UserTeamSync {}
+    class Client extends \Webklex\IMAP\Facades\Client {}
 }
 
 
-namespace Facades\Livewire\Features\SupportFileUploads {
-    /**
-     * @mixin \Livewire\Features\SupportFileUploads\GenerateSignedUploadUrl     */
-    class GenerateSignedUploadUrl extends \Livewire\Features\SupportFileUploads\GenerateSignedUploadUrl {}
-}
 
 namespace {
     

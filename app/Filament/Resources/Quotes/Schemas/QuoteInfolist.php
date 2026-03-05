@@ -15,9 +15,9 @@ final class QuoteInfolist
         return $schema
             ->components([
                 TextEntry::make('customer.name')
-                    ->label('Customer'),
+                    ->label(__('Customer')),
                 TextEntry::make('opportunity.title')
-                    ->label('Opportunity')
+                    ->label(__('Opportunity'))
                     ->placeholder('-'),
                 TextEntry::make('quote_number'),
                 TextEntry::make('issue_date')

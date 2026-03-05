@@ -21,23 +21,28 @@ final class LeadOpportunityForm
         return $schema
             ->components([
                 Select::make('customer_id')
+                    ->label(__('Customer'))
                     ->relationship('customer', 'name')
                     ->searchable()
                     ->preload()
                     ->required(),
                 TextInput::make('title')
+                    ->label(__('Title'))
                     ->string()
                     ->required()
                     ->columnSpanFull(),
                 Textarea::make('description')
+                    ->label(__('Description'))
                     ->columnSpanFull()
                     ->rows(3),
                 TextInput::make('value')
+                    ->label(__('Value'))
                     ->visible(false)
                     ->numeric()
                     ->prefix('HUF')
                     ->required(),
                 Slider::make('probability')
+                    ->label(__('Probability'))
                     ->required()
                     ->minValue(0)
                     ->maxValue(100)
@@ -48,14 +53,16 @@ final class LeadOpportunityForm
                     ->fillTrack()
                     ->pips(PipsMode::Steps, 5),
                 Select::make('stage')
-                    ->label(__('Status'))
+                    ->label(__('Stage'))
                     ->options(OpportunityStage::class)
                     ->default(OpportunityStage::Lead)
                     ->required(),
                 DatePicker::make('expected_close_date')
+                    ->label(__('Expected close date'))
                     ->native(false)
                     ->required(),
                 Select::make('assigned_to')
+                    ->label(__('Assigned User'))
                     ->relationship('assignedUser', 'name')
                     ->searchable()
                     ->preload()

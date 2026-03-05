@@ -25,6 +25,11 @@ final class ItemsRelationManager extends RelationManager
 {
     protected static string $relationship = 'orderItems';
 
+    public static function getTitle(mixed $ownerRecord, string $pageClass): string
+    {
+        return __('Order Items');
+    }
+
     public function form(Schema $schema): Schema
     {
         return $schema

@@ -36,7 +36,7 @@ final class CustomersTable
                 TextColumn::make('registration_number')
                     ->searchable(),
                 TextColumn::make('email')
-                    ->label('Email address')
+                    ->label(__('Email address'))
                     ->searchable(),
                 TextColumn::make('phone')
                     ->searchable(),
@@ -62,8 +62,11 @@ final class CustomersTable
                 EditAction::make(),
             ])
             ->headerActions([
-                ImportAction::make('Import Customers')->importer(CustomerImporter::class),
+                ImportAction::make('Import Customers')
+                    ->label(__('Customers import'))
+                    ->importer(CustomerImporter::class),
                 ExportAction::make('Export Customers')
+                    ->label(__('Customers export'))
                     ->exporter(CustomerExporter::class)
                     ->formats([
                         ExportFormat::Xlsx,

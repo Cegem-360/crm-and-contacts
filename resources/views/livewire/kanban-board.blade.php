@@ -97,7 +97,9 @@
                         >
                             <div class="flex items-start justify-between gap-2">
                                 <div class="min-w-0 flex-1">
-                                    <p class="text-sm font-semibold text-gray-900 dark:text-white truncate">{{ $opp['customer_name'] }}</p>
+                                    <a href="{{ route('dashboard.opportunities.edit', ['team' => $currentTeam, 'opportunity' => $opp['id']]) }}"
+                                       wire:navigate
+                                       class="text-sm font-semibold text-gray-900 dark:text-white truncate hover:text-blue-600 dark:hover:text-blue-400 transition-colors block">{{ $opp['customer_name'] }}</a>
                                     <p class="text-xs text-gray-500 dark:text-gray-400 truncate mt-0.5">{{ $opp['title'] }}</p>
                                 </div>
                                 <div class="shrink-0 w-7 h-7 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-xs font-bold"

@@ -139,7 +139,7 @@
                 </div>
                 <div class="text-center p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50 col-span-2">
                     <p class="text-2xl font-bold text-gray-900 dark:text-white">
-                        {{ $complaintStats['avg_resolution_hours'] ?? 0 }}h</p>
+                        {{ $complaintStats['avg_resolution_hours'] ?? 0 }} {{ __('hours_short') }}</p>
                     <p class="text-xs text-gray-500 dark:text-gray-400">{{ __('Avg Resolution Time') }}</p>
                 </div>
             </div>

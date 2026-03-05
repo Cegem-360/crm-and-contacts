@@ -57,7 +57,7 @@ final class CustomerImporter extends Importer
     {
         return [
             Checkbox::make('updateExisting')
-                ->label('Update existing records'),
+                ->label(__('Update existing records')),
         ];
     }
 

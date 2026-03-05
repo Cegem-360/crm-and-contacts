@@ -24,10 +24,16 @@ use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 final class InteractionsRelationManager extends RelationManager
 {
     protected static string $relationship = 'interactions';
+
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
+    {
+        return __('Interactions');
+    }
 
     public function form(Schema $schema): Schema
     {
@@ -86,17 +92,17 @@ final class InteractionsRelationManager extends RelationManager
             ->filters([
                 SelectFilter::make('type')
                     ->options([
-                        'note' => 'Note',
-                        'call' => 'Call',
-                        'meeting' => 'Meeting',
-                        'email' => 'Email',
+                        'note' => __('Note'),
+                        'call' => __('Call'),
+                        'meeting' => __('Meeting'),
+                        'email' => __('Email'),
                     ]),
                 Filter::make('date_range')
                     ->form([
                         DatePicker::make('from')
-                            ->label('From'),
+                            ->label(__('From')),
                         DatePicker::make('until')
-                            ->label('Until'),
+                            ->label(__('Until')),
                     ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query

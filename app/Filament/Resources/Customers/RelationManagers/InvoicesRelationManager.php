@@ -29,11 +29,17 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 final class InvoicesRelationManager extends RelationManager
 {
     protected static string $relationship = 'invoices';
+
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
+    {
+        return __('Invoices');
+    }
 
     public function form(Schema $schema): Schema
     {

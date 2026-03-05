@@ -17,23 +17,31 @@ final class ProductForm
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->label(__('Name'))
                     ->required(),
                 TextInput::make('sku')
-                    ->label('SKU')
+                    ->label(__('SKU'))
                     ->required(),
                 Textarea::make('description')
+                    ->label(__('Description'))
                     ->columnSpanFull(),
                 Select::make('category_id')
-                    ->relationship('category', 'name'),
+                    ->label(__('Category'))
+                    ->relationship('category', 'name')
+                    ->searchable()
+                    ->preload(),
                 TextInput::make('unit_price')
+                    ->label(__('Unit price'))
                     ->required()
                     ->numeric()
                     ->default(0),
                 TextInput::make('tax_rate')
+                    ->label(__('Tax rate'))
                     ->required()
                     ->numeric()
                     ->default(0),
                 Toggle::make('is_active')
+                    ->label(__('Is active'))
                     ->required(),
             ]);
     }

@@ -19,25 +19,38 @@ final class InteractionForm
         return $schema
             ->components([
                 Select::make('customer_id')
+                    ->label(__('Customer'))
                     ->relationship('customer', 'name')
+                    ->searchable()
+                    ->preload()
                     ->required(),
                 Select::make('user_id')
+                    ->label(__('User'))
                     ->relationship('user', 'name')
+                    ->searchable()
+                    ->preload()
                     ->required(),
                 Select::make('type')
+                    ->label(__('Type'))
                     ->options(InteractionType::class)
                     ->required()
                     ->default('note'),
                 TextInput::make('subject')
+                    ->label(__('Subject'))
                     ->required(),
                 Textarea::make('description')
+                    ->label(__('Description'))
                     ->columnSpanFull(),
                 DateTimePicker::make('interaction_date')
+                    ->label(__('Interaction date'))
                     ->required(),
                 TextInput::make('duration')
+                    ->label(__('Duration'))
                     ->numeric(),
-                TextInput::make('next_action'),
-                DatePicker::make('next_action_date'),
+                TextInput::make('next_action')
+                    ->label(__('Next action')),
+                DatePicker::make('next_action_date')
+                    ->label(__('Next action date')),
             ]);
     }
 }

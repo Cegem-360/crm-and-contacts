@@ -19,16 +19,17 @@ final class QuoteTemplateForm
                     ->required()
                     ->maxLength(255),
                 Toggle::make('is_default')
-                    ->label('Default template'),
+                    ->label(__('Default')),
                 Toggle::make('is_active')
-                    ->label('Active')
+                    ->label(__('Active'))
                     ->default(true),
                 HtmlCodeEditor::make('body')
-                    ->label('Blade template')
+                    ->label(__('Blade template'))
                     ->required()
                     ->rows(30)
                     ->columnSpanFull()
-                    ->helperText('Available variables: $quote, $customer, $items. Use standard Blade syntax (@foreach, {{ }}, etc.)'),
+                    ->default('')
+                    ->helperText(__('Available variables: $quote, $customer, $items. Use standard Blade syntax (@foreach, {{ }}, etc.).')),
             ]);
     }
 }

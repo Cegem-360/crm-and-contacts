@@ -28,12 +28,12 @@ final class EditOrder extends EditRecord
     {
         return [
             Action::make('transition_status')
-                ->label('Change Status')
+                ->label(__('Status'))
                 ->icon('heroicon-o-arrow-path')
                 ->color('warning')
                 ->schema(fn (Order $record): array => [
                     Select::make('status')
-                        ->label('New Status')
+                        ->label(__('New Status'))
                         ->options(
                             collect($record->status->allowedTransitions())
                                 ->mapWithKeys(fn (OrderStatus $status): array => [$status->value => $status->getLabel()])
@@ -56,13 +56,13 @@ final class EditOrder extends EditRecord
                 ->visible(fn (Order $record): bool => count($record->status->allowedTransitions()) > 0),
 
             Action::make('generate_invoice')
-                ->label('Generate Invoice')
+                ->label(__('Invoice'))
                 ->icon('heroicon-o-document-text')
                 ->color('success')
                 ->requiresConfirmation()
-                ->modalHeading('Generate Invoice from Order')
-                ->modalDescription('This will create a new invoice with all order items. Are you sure?')
-                ->modalSubmitActionLabel('Generate Invoice')
+                ->modalHeading(__('Invoice'))
+                ->modalDescription(__('This will create a new invoice with all order items. Are you sure?'))
+                ->modalSubmitActionLabel(__('Invoice'))
                 ->action(function (Order $record, InvoiceService $invoiceService): void {
                     if ($record->invoices()->exists()) {
                         Notification::make()
@@ -87,14 +87,14 @@ final class EditOrder extends EditRecord
                 ->visible(fn (Order $record): bool => ! $record->invoices()->exists()),
 
             Action::make('generate_shipment')
-                ->label('Create Shipment')
+                ->label(__('Shipments'))
                 ->icon('heroicon-o-truck')
                 ->color('info')
                 ->schema([
                     TextInput::make('carrier')
-                        ->label('Carrier')
+                        ->label(__('Carrier'))
                         ->required()
-                        ->placeholder('e.g. DPD, GLS, FoxPost'),
+                        ->placeholder('DPD, GLS, FoxPost...'),
                 ])
                 ->action(function (array $data, Order $record, ShipmentService $shipmentService): void {
                     $shipment = $shipmentService->createFromOrder($record, $data['carrier']);

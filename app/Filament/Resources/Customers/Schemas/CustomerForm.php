@@ -20,32 +20,42 @@ final class CustomerForm
         return $schema
             ->components([
                 TextInput::make('unique_identifier')
+                    ->label(__('Unique identifier'))
                     ->default(fn (): string => 'CUST-'.Str::upper(Str::random(8)))
-                    ->unique(ignoreRecord: true)
-                    ->required(),
+                    ->unique(ignoreRecord: true),
                 TextInput::make('name')
+                    ->label(__('Name'))
                     ->required(),
                 Select::make('type')
+                    ->label(__('Type'))
                     ->required()
                     ->options(CustomerType::class)
                     ->default(CustomerType::Individual),
-                TextInput::make('tax_number'),
-                TextInput::make('registration_number'),
+                TextInput::make('tax_number')
+                    ->label(__('Tax number')),
+                TextInput::make('registration_number')
+                    ->label(__('Registration number')),
                 TextInput::make('eu_tax_number')
-                    ->label('EU Tax Number'),
-                TextInput::make('industry'),
+                    ->label(__('EU Tax Number')),
+                TextInput::make('industry')
+                    ->label(__('Industry')),
                 TextInput::make('website')
+                    ->label(__('Website'))
                     ->url(),
                 TextInput::make('email')
-                    ->label('Email address')
+                    ->label(__('Email address'))
                     ->email(),
                 TextInput::make('phone')
+                    ->label(__('Phone'))
                     ->tel(),
                 Textarea::make('notes')
+                    ->label(__('Notes'))
                     ->columnSpanFull(),
                 KeyValue::make('custom_fields')
+                    ->label(__('Custom Fields'))
                     ->columnSpanFull(),
                 Toggle::make('is_active')
+                    ->label(__('Is active'))
                     ->required(),
             ]);
     }

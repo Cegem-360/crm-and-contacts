@@ -27,37 +27,51 @@ final class QuoteForm
         return $schema
             ->components([
                 Select::make('customer_id')
+                    ->label(__('Customer'))
                     ->relationship('customer', 'name')
+                    ->searchable()
+                    ->preload()
                     ->required(),
                 Select::make('opportunity_id')
-                    ->relationship('opportunity', 'title'),
+                    ->label(__('Opportunity'))
+                    ->relationship('opportunity', 'title')
+                    ->searchable()
+                    ->preload(),
                 TextInput::make('quote_number')
+                    ->label(__('Quote number'))
                     ->required(),
                 DatePicker::make('issue_date')
+                    ->label(__('Issue date'))
                     ->required(),
                 DatePicker::make('valid_until')
+                    ->label(__('Valid until'))
                     ->required(),
                 Select::make('status')
+                    ->label(__('Status'))
                     ->required()
                     ->default(QuoteStatus::Draft)
                     ->options(QuoteStatus::class),
                 TextInput::make('subtotal')
+                    ->label(__('Subtotal'))
                     ->required()
                     ->numeric()
                     ->default(0),
                 TextInput::make('discount_amount')
-                    ->required()
+                    ->label(__('Discount amount'))
                     ->numeric()
                     ->default(0),
                 TextInput::make('tax_amount')
+                    ->label(__('Tax amount'))
                     ->required()
                     ->numeric()
                     ->default(0),
                 TextInput::make('total')
+                    ->label(__('Total'))
                     ->required()
                     ->numeric()
                     ->default(0),
                 Textarea::make('notes')
+                    ->label(__('Notes'))
                     ->columnSpanFull(),
             ]);
     }
@@ -67,39 +81,48 @@ final class QuoteForm
         return $schema
             ->components([
                 Wizard::make([
-                    Step::make('Quote details')
+                    Step::make(__('Quote details'))
                         ->icon(Heroicon::DocumentText)
                         ->columns(2)
                         ->schema([
                             Select::make('customer_id')
+                                ->label(__('Customer'))
                                 ->relationship('customer', 'name')
                                 ->required()
                                 ->searchable()
                                 ->preload(),
                             Select::make('opportunity_id')
+                                ->label(__('Opportunity'))
                                 ->relationship('opportunity', 'title')
                                 ->searchable()
                                 ->preload(),
                             TextInput::make('quote_number')
+                                ->label(__('Quote number'))
                                 ->required(),
                             DatePicker::make('issue_date')
+                                ->label(__('Issue date'))
                                 ->required()
                                 ->default(now()),
                             DatePicker::make('valid_until')
+                                ->label(__('Valid until'))
                                 ->required(),
                             Textarea::make('notes')
+                                ->label(__('Notes'))
                                 ->columnSpanFull(),
                         ]),
-                    Step::make('Line items')
+                    Step::make(__('Items'))
                         ->icon(Heroicon::ListBullet)
                         ->afterValidation(function (Get $get, Set $set): void {
                             static::updateQuoteTotals($get, $set);
                         })
                         ->schema([
                             Repeater::make('items')
+                                ->label(__('Items'))
+                                ->addActionLabel(__('New Item'))
                                 ->relationship()
                                 ->schema([
                                     Select::make('product_id')
+                                        ->label(__('Product'))
                                         ->relationship('product', 'name')
                                         ->searchable()
                                         ->preload()
@@ -120,8 +143,9 @@ final class QuoteForm
                                             static::calculateItemTotals($get, $set);
                                         }),
                                     TextInput::make('description')
-                                        ->required(),
+                                        ->label(__('Description')),
                                     TextInput::make('quantity')
+                                        ->label(__('Quantity'))
                                         ->numeric()
                                         ->default(1)
                                         ->minValue(0.01)
@@ -171,7 +195,7 @@ final class QuoteForm
                                     return $data;
                                 }),
                         ]),
-                    Step::make('Summary')
+                    Step::make(__('Summary'))
                         ->icon(Heroicon::Calculator)
                         ->columns(2)
                         ->schema([

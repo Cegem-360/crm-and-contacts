@@ -9,6 +9,8 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 
 final class OrderForm
@@ -18,37 +20,66 @@ final class OrderForm
         return $schema
             ->components([
                 Select::make('customer_id')
+                    ->label(__('Customer'))
                     ->relationship('customer', 'name')
+                    ->searchable()
+                    ->preload()
                     ->required(),
                 Select::make('quote_id')
-                    ->relationship('quote', 'quote_number'),
+                    ->label(__('Quote'))
+                    ->relationship('quote', 'quote_number')
+                    ->searchable()
+                    ->preload(),
                 TextInput::make('order_number')
+                    ->label(__('Order number'))
                     ->unique(ignoreRecord: true)
                     ->required(),
                 DatePicker::make('order_date')
+                    ->label(__('Order Date'))
                     ->required(),
                 Select::make('status')
+                    ->label(__('Status'))
                     ->required()
                     ->default(OrderStatus::Pending->value)
                     ->options(OrderStatus::class),
                 TextInput::make('subtotal')
+                    ->label(__('Subtotal'))
                     ->required()
                     ->numeric()
-                    ->default(0),
+                    ->default(0)
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(fn (Get $get, Set $set) => self::recalculate($get, $set)),
                 TextInput::make('discount_amount')
-                    ->required()
+                    ->label(__('Discount amount'))
                     ->numeric()
-                    ->default(0),
+                    ->default(0)
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(fn (Get $get, Set $set) => self::recalculate($get, $set)),
                 TextInput::make('tax_amount')
+                    ->label(__('Tax amount'))
                     ->required()
                     ->numeric()
-                    ->default(0),
+                    ->default(0)
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(fn (Get $get, Set $set) => self::recalculate($get, $set)),
                 TextInput::make('total')
+                    ->label(__('Total'))
                     ->required()
                     ->numeric()
-                    ->default(0),
+                    ->default(0)
+                    ->readOnly(),
                 Textarea::make('notes')
+                    ->label(__('Notes'))
                     ->columnSpanFull(),
             ]);
+    }
+
+    private static function recalculate(Get $get, Set $set): void
+    {
+        $subtotal = (float) ($get('subtotal') ?? 0);
+        $discount = (float) ($get('discount_amount') ?? 0);
+        $tax = (float) ($get('tax_amount') ?? 0);
+
+        $set('total', number_format($subtotal - $discount + $tax, 2, '.', ''));
     }
 }

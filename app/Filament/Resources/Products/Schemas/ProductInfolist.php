@@ -17,12 +17,13 @@ final class ProductInfolist
             ->components([
                 TextEntry::make('name'),
                 TextEntry::make('sku')
-                    ->label('SKU'),
+                    ->label(__('SKU')),
                 TextEntry::make('description')
+                    ->label(__('Description'))
                     ->placeholder('-')
                     ->columnSpanFull(),
                 TextEntry::make('category.name')
-                    ->label('Category')
+                    ->label(__('Category'))
                     ->placeholder('-'),
                 TextEntry::make('unit_price')
                     ->numeric(),

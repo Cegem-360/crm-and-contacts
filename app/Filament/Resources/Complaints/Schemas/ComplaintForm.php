@@ -24,31 +24,49 @@ final class ComplaintForm
                     ->dehydrated(false)
                     ->visibleOn('edit'),
                 Select::make('customer_id')
+                    ->label(__('Customer'))
                     ->relationship('customer', 'name')
+                    ->searchable()
+                    ->preload()
                     ->required(),
                 Select::make('order_id')
-                    ->relationship('order', 'order_number'),
+                    ->label(__('Order'))
+                    ->relationship('order', 'order_number')
+                    ->searchable()
+                    ->preload(),
                 Select::make('type')
+                    ->label(__('Type'))
                     ->options(ComplaintType::class)
                     ->enum(ComplaintType::class),
-                TextInput::make('subject'),
+                TextInput::make('subject')
+                    ->label(__('Subject')),
                 Select::make('reported_by')
+                    ->label(__('Reporter'))
                     ->relationship('reporter', 'name')
+                    ->searchable()
+                    ->preload()
                     ->nullable(),
                 Select::make('assigned_to')
+                    ->label(__('Assigned User'))
                     ->relationship('assignedUser', 'name')
+                    ->searchable()
+                    ->preload()
                     ->nullable(),
                 TextInput::make('title')
+                    ->label(__('Title'))
                     ->required(),
                 Textarea::make('description')
+                    ->label(__('Description'))
                     ->required()
                     ->columnSpanFull(),
                 Select::make('severity')
+                    ->label(__('Severity'))
                     ->options(ComplaintSeverity::class)
                     ->enum(ComplaintSeverity::class)
                     ->required()
                     ->default(ComplaintSeverity::Medium),
                 Select::make('status')
+                    ->label(__('Status'))
                     ->options(ComplaintStatus::class)
                     ->enum(ComplaintStatus::class)
                     ->required()
@@ -59,15 +77,18 @@ final class ComplaintForm
                     ->dehydrated(false)
                     ->visibleOn('edit'),
                 Textarea::make('resolution')
+                    ->label(__('Resolution'))
                     ->columnSpanFull(),
                 DateTimePicker::make('reported_at')
+                    ->label(__('Reported at'))
                     ->required(),
                 DateTimePicker::make('sla_deadline_at')
-                    ->label('SLA Deadline')
+                    ->label(__('SLA Deadline'))
                     ->disabled()
                     ->dehydrated(false)
                     ->visibleOn('edit'),
-                DateTimePicker::make('resolved_at'),
+                DateTimePicker::make('resolved_at')
+                    ->label(__('Resolved at')),
             ]);
     }
 }

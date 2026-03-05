@@ -20,88 +20,85 @@ final class ShipmentForm
     {
         return $schema
             ->components([
-                Section::make('Shipment Information')
+                Section::make(__('Shipment Information'))
                     ->schema([
                         Grid::make(2)
                             ->schema([
                                 Select::make('customer_id')
+                                    ->label(__('Customer'))
                                     ->relationship('customer', 'name')
                                     ->searchable()
                                     ->preload(),
 
                                 Select::make('order_id')
+                                    ->label(__('Order'))
                                     ->relationship('order', 'order_number')
                                     ->searchable()
                                     ->preload(),
 
                                 TextInput::make('external_customer_id')
-                                    ->label('External Customer ID')
-                                    ->helperText('ID from external warehouse system'),
+                                    ->label(__('External Customer ID')),
 
                                 TextInput::make('external_order_id')
-                                    ->label('External Order ID')
-                                    ->helperText('ID from external warehouse system'),
+                                    ->label(__('External Order ID')),
 
                                 TextInput::make('shipment_number')
-                                    ->label('Shipment Number')
+                                    ->label(__('Shipment number'))
                                     ->disabled()
-                                    ->dehydrated()
-                                    ->helperText('Auto-generated'),
+                                    ->dehydrated(),
 
                                 TextInput::make('carrier')
-                                    ->label('Carrier')
+                                    ->label(__('Carrier'))
                                     ->placeholder('GLS, DPD, FoxPost...')
                                     ->maxLength(255),
 
                                 TextInput::make('tracking_number')
-                                    ->label('Tracking Number')
+                                    ->label(__('Tracking'))
                                     ->unique(ignoreRecord: true)
                                     ->maxLength(255),
 
                                 Select::make('status')
+                                    ->label(__('Status'))
                                     ->options(ShipmentStatus::class)
                                     ->default(ShipmentStatus::Pending->value)
                                     ->required(),
                             ]),
                     ]),
 
-                Section::make('Shipping Address')
+                Section::make(__('Shipping Address'))
                     ->schema([
                         KeyValue::make('shipping_address')
                             ->label('')
-                            ->keyLabel('Field')
-                            ->valueLabel('Value')
                             ->reorderable(false)
                             ->columnSpanFull(),
                     ])
                     ->collapsible(),
 
-                Section::make('Dates & Timeline')
+                Section::make(__('Dates & Timeline'))
                     ->schema([
                         Grid::make(3)
                             ->schema([
                                 DateTimePicker::make('shipped_at')
-                                    ->label('Shipped At'),
+                                    ->label(__('Shipped at')),
 
                                 DateTimePicker::make('estimated_delivery_at')
-                                    ->label('Estimated Delivery'),
+                                    ->label(__('Estimated Delivery')),
 
                                 DateTimePicker::make('delivered_at')
-                                    ->label('Delivered At'),
+                                    ->label(__('Delivered at')),
                             ]),
                     ])
                     ->collapsible(),
 
-                Section::make('Additional Information')
+                Section::make(__('Additional Information'))
                     ->schema([
                         Textarea::make('notes')
+                            ->label(__('Notes'))
                             ->rows(3)
                             ->columnSpanFull(),
 
                         KeyValue::make('documents')
-                            ->label('Documents & Attachments')
-                            ->keyLabel('Type')
-                            ->valueLabel('URL')
+                            ->label(__('Documents & Attachments'))
                             ->reorderable(false)
                             ->columnSpanFull(),
                     ])

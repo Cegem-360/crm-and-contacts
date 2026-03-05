@@ -24,16 +24,18 @@ final class CustomerInfolist
                 TextEntry::make('registration_number')
                     ->placeholder('-'),
                 TextEntry::make('eu_tax_number')
-                    ->label('EU Tax Number')
+                    ->label(__('EU Tax Number'))
                     ->placeholder('-'),
                 TextEntry::make('industry')
+                    ->label(__('Industry'))
                     ->placeholder('-'),
                 TextEntry::make('website')
+                    ->label(__('Website'))
                     ->url(fn (Customer $record): ?string => $record->website)
                     ->openUrlInNewTab()
                     ->placeholder('-'),
                 TextEntry::make('email')
-                    ->label('Email address')
+                    ->label(__('Email address'))
                     ->placeholder('-'),
                 TextEntry::make('phone')
                     ->placeholder('-'),

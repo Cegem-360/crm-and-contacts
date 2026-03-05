@@ -18,6 +18,11 @@ final class VersionsRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'version_number';
 
+    public static function getTitle(mixed $ownerRecord, string $pageClass): string
+    {
+        return __('Versions');
+    }
+
     public function table(Table $table): Table
     {
         return $table
@@ -26,10 +31,10 @@ final class VersionsRelationManager extends RelationManager
                     ->label('#')
                     ->sortable(),
                 TextColumn::make('createdBy.name')
-                    ->label('Created by')
+                    ->label(__('Created by'))
                     ->placeholder('-'),
                 TextColumn::make('template.name')
-                    ->label('Template')
+                    ->label(__('Template'))
                     ->placeholder('-'),
                 TextColumn::make('changes_summary')
                     ->label('Changes')
@@ -59,7 +64,7 @@ final class VersionsRelationManager extends RelationManager
             ->defaultSort('version_number', 'desc')
             ->recordActions([
                 Action::make('download_pdf')
-                    ->label('Download PDF')
+                    ->label(__('Generate PDF'))
                     ->icon('heroicon-o-arrow-down-tray')
                     ->visible(fn (QuoteVersion $record): bool => $record->pdf_path !== null
                         && Storage::disk('local')->exists(str_replace(Storage::disk('local')->path(''), '', $record->pdf_path)))

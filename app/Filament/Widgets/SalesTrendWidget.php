@@ -9,11 +9,16 @@ use Filament\Widgets\ChartWidget;
 
 final class SalesTrendWidget extends ChartWidget
 {
-    protected ?string $heading = 'Monthly Sales Trend';
+    protected ?string $heading = null;
 
     protected static ?int $sort = 3;
 
     protected ?string $pollingInterval = '30s';
+
+    public function getHeading(): ?string
+    {
+        return __('Monthly Sales Trend');
+    }
 
     protected function getData(): array
     {
@@ -25,7 +30,7 @@ final class SalesTrendWidget extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Orders Revenue',
+                    'label' => __('Orders Revenue'),
                     'data' => array_map(fn (array $item): float => $item['orders_revenue'], $items),
                     'borderColor' => 'rgb(239, 68, 68)',
                     'backgroundColor' => 'rgba(239, 68, 68, 0.1)',
@@ -33,7 +38,7 @@ final class SalesTrendWidget extends ChartWidget
                     'tension' => 0.4,
                 ],
                 [
-                    'label' => 'Invoices Total',
+                    'label' => __('Invoices Total'),
                     'data' => array_map(fn (array $item): float => $item['invoices_total'], $items),
                     'borderColor' => 'rgb(59, 130, 246)',
                     'backgroundColor' => 'rgba(59, 130, 246, 0.1)',

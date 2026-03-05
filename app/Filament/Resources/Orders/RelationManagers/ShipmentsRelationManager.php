@@ -24,6 +24,11 @@ final class ShipmentsRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'shipment_number';
 
+    public static function getTitle(mixed $ownerRecord, string $pageClass): string
+    {
+        return __('Shipments');
+    }
+
     public function form(Schema $schema): Schema
     {
         return ShipmentResource::form($schema);
@@ -35,7 +40,7 @@ final class ShipmentsRelationManager extends RelationManager
             ->recordTitleAttribute('shipment_number')
             ->columns([
                 TextColumn::make('shipment_number')
-                    ->label('Shipment #')
+                    ->label(__('Shipment #'))
                     ->searchable()
                     ->sortable()
                     ->copyable()
@@ -56,13 +61,13 @@ final class ShipmentsRelationManager extends RelationManager
                     ->sortable(),
 
                 TextColumn::make('shipped_at')
-                    ->label('Shipped')
+                    ->label(__('Shipped'))
                     ->dateTime('Y-m-d H:i')
                     ->sortable()
                     ->placeholder('—'),
 
                 TextColumn::make('delivered_at')
-                    ->label('Delivered')
+                    ->label(__('Delivered'))
                     ->dateTime('Y-m-d H:i')
                     ->sortable()
                     ->placeholder('—'),

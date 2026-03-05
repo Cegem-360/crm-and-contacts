@@ -26,11 +26,17 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 final class OrdersRelationManager extends RelationManager
 {
     protected static string $relationship = 'orders';
+
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
+    {
+        return __('Orders');
+    }
 
     public function form(Schema $schema): Schema
     {

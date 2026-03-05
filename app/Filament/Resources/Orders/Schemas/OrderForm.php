@@ -32,7 +32,7 @@ final class OrderForm
                     ->preload(),
                 TextInput::make('order_number')
                     ->label(__('Order number'))
-                    ->unique(ignoreRecord: true)
+                    ->scopedUnique(ignoreRecord: true)
                     ->required(),
                 DatePicker::make('order_date')
                     ->label(__('Order Date'))

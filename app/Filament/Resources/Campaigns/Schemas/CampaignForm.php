@@ -105,7 +105,7 @@ final class CampaignForm
                 Section::make('Administration')
                     ->schema([
                         Select::make('created_by')
-                            ->relationship('creator', 'name')
+                            ->relationship('creator', 'name', modifyQueryUsing: fn ($query) => $query->whereRelation('teams', 'teams.id', resolve('current_team')->getKey()))
                             ->default(Auth::user()->id)
                             ->searchable()
                             ->preload()

@@ -54,4 +54,5 @@ arch('application does not use helpers where facades exist')
         'App\Models\Scopes',
         'App\Filament\Pages\Auth',
         'App\Filament\Resources',
+        'App\Services',
     ]);

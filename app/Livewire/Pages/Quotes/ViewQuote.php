@@ -53,37 +53,37 @@ final class ViewQuote extends Component implements HasActions, HasSchemas
 
     public function generatePdfAction(): Action
     {
+        $templates = QuoteTemplate::query()
+            ->where('is_active', true)
+            ->pluck('name', 'id');
+
         return Action::make('generatePdf')
             ->label(__('Generate PDF'))
             ->icon('heroicon-o-document-arrow-down')
             ->color('success')
-            ->schema([
-                Select::make('template_id')
-                    ->label(__('Template'))
-                    ->options(
-                        QuoteTemplate::query()
-                            ->where('is_active', true)
-                            ->pluck('name', 'id'),
-                    )
-                    ->placeholder(__('Use default template')),
-            ])
-            ->action(function (array $data): ?BinaryFileResponse {
-                $template = isset($data['template_id'])
-                    ? QuoteTemplate::find($data['template_id'])
-                    : null;
-
-                $service = App::make(QuoteTemplateService::class);
-
-                if (! $template && ! $service->getDefaultTemplate($this->quote->team_id)) {
+            ->schema(fn (): array => $templates->count() > 1
+                ? [
+                    Select::make('template_id')
+                        ->label(__('Template'))
+                        ->options($templates)
+                        ->required(),
+                ]
+                : [])
+            ->action(function (array $data) use ($templates): ?BinaryFileResponse {
+                if ($templates->isEmpty()) {
                     Notification::make()
                         ->title(__('No template available'))
-                        ->body(__('Please select a template or set a default template for your team.'))
+                        ->body(__('Please create a template for your team.'))
                         ->danger()
                         ->send();
 
                     return null;
                 }
 
+                $templateId = $data['template_id'] ?? $templates->keys()->first();
+                $template = QuoteTemplate::find($templateId);
+
+                $service = App::make(QuoteTemplateService::class);
                 $path = $service->generatePdf($this->quote, $template);
 
                 return response()->download($path, $this->quote->quote_number.'.pdf');
@@ -92,11 +92,15 @@ final class ViewQuote extends Component implements HasActions, HasSchemas
 
     public function sendQuoteAction(): Action
     {
+        $templates = QuoteTemplate::query()
+            ->where('is_active', true)
+            ->pluck('name', 'id');
+
         return Action::make('sendQuote')
             ->label(__('Send Quote'))
             ->icon('heroicon-o-paper-airplane')
             ->color('primary')
-            ->schema([
+            ->schema(fn (): array => [
                 TextInput::make('recipient_email')
                     ->label(__('Email'))
                     ->email()
@@ -106,32 +110,30 @@ final class ViewQuote extends Component implements HasActions, HasSchemas
                     ->label(__('Name'))
                     ->required()
                     ->default(fn (): ?string => $this->quote->customer?->name),
-                Select::make('template_id')
-                    ->label(__('PDF Template'))
-                    ->options(
-                        QuoteTemplate::query()
-                            ->where('is_active', true)
-                            ->pluck('name', 'id'),
-                    )
-                    ->placeholder(__('Use default template')),
+                ...($templates->count() > 1
+                    ? [
+                        Select::make('template_id')
+                            ->label(__('PDF Template'))
+                            ->options($templates)
+                            ->required(),
+                    ]
+                    : []),
             ])
-            ->action(function (array $data): void {
-                $template = isset($data['template_id'])
-                    ? QuoteTemplate::find($data['template_id'])
-                    : null;
-
-                $service = App::make(QuoteTemplateService::class);
-
-                if (! $template && ! $service->getDefaultTemplate($this->quote->team_id)) {
+            ->action(function (array $data) use ($templates): void {
+                if ($templates->isEmpty()) {
                     Notification::make()
                         ->title(__('No template available'))
-                        ->body(__('Please select a template or set a default template for your team.'))
+                        ->body(__('Please create a template for your team.'))
                         ->danger()
                         ->send();
 
                     return;
                 }
 
+                $templateId = $data['template_id'] ?? $templates->keys()->first();
+                $template = QuoteTemplate::find($templateId);
+
+                $service = App::make(QuoteTemplateService::class);
                 $service->sendQuote(
                     $this->quote,
                     $data['recipient_email'],

@@ -47,16 +47,19 @@ final class ShipmentsRelationManager extends RelationManager
                     ->url(fn ($record) => $this->getShipmentEditUrl($record)),
 
                 TextColumn::make('carrier')
+                    ->label(__('Carrier'))
                     ->badge()
                     ->color('gray')
                     ->searchable(),
 
                 TextColumn::make('tracking_number')
+                    ->label(__('Tracking number'))
                     ->searchable()
                     ->copyable()
                     ->placeholder('—'),
 
                 TextColumn::make('status')
+                    ->label(__('Status'))
                     ->badge()
                     ->sortable(),
 
@@ -82,6 +85,7 @@ final class ShipmentsRelationManager extends RelationManager
             ])
             ->headerActions([
                 CreateAction::make()
+                    ->label(__('New Shipment'))
                     ->icon('heroicon-o-truck')
                     ->mutateDataUsing(function (array $data, $livewire): array {
                         $data['customer_id'] = $livewire->ownerRecord->customer_id;

@@ -39,7 +39,8 @@ final class QuoteForm
                     ->preload(),
                 TextInput::make('quote_number')
                     ->label(__('Quote number'))
-                    ->required(),
+                    ->required()
+                    ->scopedUnique(ignoreRecord: true),
                 DatePicker::make('issue_date')
                     ->label(__('Issue date'))
                     ->required(),
@@ -98,7 +99,8 @@ final class QuoteForm
                                 ->preload(),
                             TextInput::make('quote_number')
                                 ->label(__('Quote number'))
-                                ->required(),
+                                ->required()
+                                ->scopedUnique(ignoreRecord: true),
                             DatePicker::make('issue_date')
                                 ->label(__('Issue date'))
                                 ->required()
@@ -153,6 +155,7 @@ final class QuoteForm
                                         ->live()
                                         ->afterStateUpdated(fn (Get $get, Set $set) => self::calculateItemTotals($get, $set)),
                                     TextInput::make('unit_price')
+                                        ->label(__('Unit price'))
                                         ->numeric()
                                         ->prefix('HUF')
                                         ->default(0)
@@ -161,6 +164,7 @@ final class QuoteForm
                                         ->live()
                                         ->afterStateUpdated(fn (Get $get, Set $set) => self::calculateItemTotals($get, $set)),
                                     TextInput::make('discount_percent')
+                                        ->label(__('Discount percent'))
                                         ->numeric()
                                         ->suffix('%')
                                         ->default(0)
@@ -169,11 +173,13 @@ final class QuoteForm
                                         ->live()
                                         ->afterStateUpdated(fn (Get $get, Set $set) => self::calculateItemTotals($get, $set)),
                                     TextInput::make('discount_amount')
+                                        ->label(__('Discount amount'))
                                         ->numeric()
                                         ->prefix('HUF')
                                         ->default(0)
                                         ->readOnly(),
                                     TextInput::make('tax_rate')
+                                        ->label(__('Tax rate'))
                                         ->numeric()
                                         ->suffix('%')
                                         ->default(0)
@@ -183,6 +189,7 @@ final class QuoteForm
                                         ->live()
                                         ->afterStateUpdated(fn (Get $get, Set $set) => self::calculateItemTotals($get, $set)),
                                     TextInput::make('total')
+                                        ->label(__('Total'))
                                         ->numeric()
                                         ->prefix('HUF')
                                         ->default(0)
@@ -200,25 +207,30 @@ final class QuoteForm
                         ->columns(2)
                         ->schema([
                             Select::make('status')
+                                ->label(__('Status'))
                                 ->required()
                                 ->default(QuoteStatus::Draft)
                                 ->options(QuoteStatus::class),
                             TextInput::make('subtotal')
+                                ->label(__('Subtotal'))
                                 ->numeric()
                                 ->prefix('HUF')
                                 ->default(0)
                                 ->readOnly(),
                             TextInput::make('discount_amount')
+                                ->label(__('Discount amount'))
                                 ->numeric()
                                 ->prefix('HUF')
                                 ->default(0)
                                 ->readOnly(),
                             TextInput::make('tax_amount')
+                                ->label(__('Tax amount'))
                                 ->numeric()
                                 ->prefix('HUF')
                                 ->default(0)
                                 ->readOnly(),
                             TextInput::make('total')
+                                ->label(__('Total'))
                                 ->numeric()
                                 ->prefix('HUF')
                                 ->default(0)

@@ -32,7 +32,7 @@ final class ChatSessionForm
                                     ->required(),
                                 Select::make('user_id')
                                     ->label('Assigned Agent')
-                                    ->relationship('user', 'name')
+                                    ->relationship('user', 'name', modifyQueryUsing: fn ($query) => $query->whereRelation('teams', 'teams.id', resolve('current_team')->getKey()))
                                     ->searchable()
                                     ->preload()
                                     ->nullable(),

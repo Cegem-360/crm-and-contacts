@@ -54,7 +54,7 @@ final class ShipmentForm
 
                                 TextInput::make('tracking_number')
                                     ->label(__('Tracking'))
-                                    ->unique(ignoreRecord: true)
+                                    ->scopedUnique(ignoreRecord: true)
                                     ->maxLength(255),
 
                                 Select::make('status')
@@ -69,6 +69,8 @@ final class ShipmentForm
                     ->schema([
                         KeyValue::make('shipping_address')
                             ->label('')
+                            ->keyLabel(__('Field'))
+                            ->valueLabel(__('Value'))
                             ->reorderable(false)
                             ->columnSpanFull(),
                     ])

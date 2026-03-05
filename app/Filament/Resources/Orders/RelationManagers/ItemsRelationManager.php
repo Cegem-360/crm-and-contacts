@@ -35,10 +35,13 @@ final class ItemsRelationManager extends RelationManager
         return $schema
             ->components([
                 Select::make('product_id')
+                    ->label(__('Product'))
                     ->live()
                     ->relationship('product', 'name'),
-                RichEditor::make('description'),
+                RichEditor::make('description')
+                    ->label(__('Description')),
                 TextInput::make('quantity')
+                    ->label(__('Quantity'))
                     ->live()
                     ->required()
                     ->integer()
@@ -55,18 +58,22 @@ final class ItemsRelationManager extends RelationManager
                     })
                     ->default(1),
                 TextInput::make('unit_price')
+                    ->label(__('Unit price'))
                     ->required()
                     ->numeric()
                     ->default(0),
                 TextInput::make('discount_amount')
+                    ->label(__('Discount amount'))
                     ->required()
                     ->numeric()
                     ->default(0),
                 TextInput::make('tax_rate')
+                    ->label(__('Tax rate'))
                     ->required()
                     ->numeric()
                     ->default(0),
                 TextInput::make('total')
+                    ->label(__('Total'))
                     ->required()
                     ->numeric()
                     ->default(0),
@@ -79,29 +86,38 @@ final class ItemsRelationManager extends RelationManager
             ->recordTitleAttribute('description')
             ->columns([
                 TextColumn::make('product.name')
+                    ->label(__('Product'))
                     ->searchable(),
                 TextColumn::make('description')
+                    ->label(__('Description'))
                     ->searchable(),
                 TextColumn::make('quantity')
+                    ->label(__('Quantity'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('unit_price')
+                    ->label(__('Unit price'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('discount_amount')
+                    ->label(__('Discount amount'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('tax_rate')
+                    ->label(__('Tax rate'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('total')
+                    ->label(__('Total'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('created_at')
+                    ->label(__('Created at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label(__('Updated at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -110,7 +126,8 @@ final class ItemsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                CreateAction::make(),
+                CreateAction::make()
+                    ->label(__('New Item')),
             ])
             ->recordActions([
                 EditAction::make(),

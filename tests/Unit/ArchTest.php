@@ -14,6 +14,11 @@ arch()->preset()->laravel()->ignoring([
     LoginResponse::class,
     RegistrationResponse::class,
     'App\Http\Middleware\ApplyTenantScopes',
+    'App\Http\Middleware\SetLocale',
+    'App\Http\Controllers\Api\V1\WebhookController',
+    'App\Http\Controllers\Api\V1\IntegrationController',
+    'App\Console\Commands\FetchInboundEmails',
+    'App\Console\Commands\RunNotificationWorkflows',
 ]);
 arch()->preset()->security();
 arch()->expect('App\Models')

@@ -652,6 +652,7 @@
     "Created by": "Létrehozta",
     "Sent": "Elküldve",
     "Accepted": "Elfogadva",
+    "Viewed": "Megtekintve",
     "Expired": "Lejárt",
     "User": "Felhasználó",
     "Customers import": "Ügyfelek importálása",
@@ -659,5 +660,9 @@
     "Update existing records": "Meglévő rekordok frissítése",
     "field is required": "mező kitöltése kötelező",
     "From": "Ettől",
-    "Until": "Eddig"
+    "Until": "Eddig",
+    "New Shipment": "Új szállítmány",
+    "Deleted at": "Törölve",
+    "Field": "Mező",
+    "Individual": "Magánszemély"
 }

@@ -31,7 +31,7 @@ final class EditComplaint extends EditRecord
                 ->schema([
                     Select::make('escalated_to')
                         ->label('Escalate To')
-                        ->relationship('assignedUser', 'name')
+                        ->relationship('assignedUser', 'name', modifyQueryUsing: fn ($query) => $query->whereRelation('teams', 'teams.id', resolve('current_team')->getKey()))
                         ->required(),
                     Textarea::make('reason')
                         ->label('Reason')

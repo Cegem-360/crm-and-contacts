@@ -71,7 +71,7 @@ final class OpportunitiesRelationManager extends RelationManager
                     ->required(),
                 DatePicker::make('expected_close_date'),
                 Select::make('assigned_to')
-                    ->relationship('assignedUser', 'name')
+                    ->relationship('assignedUser', 'name', modifyQueryUsing: fn ($query) => $query->whereRelation('teams', 'teams.id', resolve('current_team')->getKey()))
                     ->searchable()
                     ->preload()
                     ->nullable()

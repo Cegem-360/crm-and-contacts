@@ -19,7 +19,7 @@ final class BugReportForm
         return $schema
             ->components([
                 Select::make('user_id')
-                    ->relationship('user', 'name'),
+                    ->relationship('user', 'name', modifyQueryUsing: fn ($query) => $query->whereRelation('teams', 'teams.id', resolve('current_team')->getKey())),
                 TextInput::make('title')
                     ->required(),
                 Textarea::make('description')
@@ -38,7 +38,7 @@ final class BugReportForm
                 TextInput::make('source')
                     ->nullable(),
                 Select::make('assigned_to')
-                    ->relationship('assignedUser', 'name')
+                    ->relationship('assignedUser', 'name', modifyQueryUsing: fn ($query) => $query->whereRelation('teams', 'teams.id', resolve('current_team')->getKey()))
                     ->nullable(),
                 DateTimePicker::make('resolved_at'),
             ]);

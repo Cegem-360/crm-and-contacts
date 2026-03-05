@@ -72,7 +72,7 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
             return to_route('dashboard', ['team' => $team]);
         }
 
-        return to_route('filament.admin.tenant-registration');
+        return redirect('/admin');
     })->name('dashboard.redirect');
 });
 

@@ -63,7 +63,7 @@ final class LeadOpportunityForm
                     ->required(),
                 Select::make('assigned_to')
                     ->label(__('Assigned User'))
-                    ->relationship('assignedUser', 'name')
+                    ->relationship('assignedUser', 'name', modifyQueryUsing: fn ($query) => $query->whereRelation('teams', 'teams.id', resolve('current_team')->getKey()))
                     ->searchable()
                     ->preload()
                     ->nullable()

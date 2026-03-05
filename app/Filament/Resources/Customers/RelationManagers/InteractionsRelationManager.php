@@ -40,7 +40,7 @@ final class InteractionsRelationManager extends RelationManager
         return $schema
             ->components([
                 Select::make('user_id')
-                    ->relationship('user', 'name')
+                    ->relationship('user', 'name', modifyQueryUsing: fn ($query) => $query->whereRelation('teams', 'teams.id', resolve('current_team')->getKey()))
                     ->required(),
                 TextInput::make('type')
                     ->required()

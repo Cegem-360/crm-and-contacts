@@ -25,14 +25,14 @@ final class TaskForm
                     ->preload(),
                 Select::make('assigned_to')
                     ->label(__('Assigned To'))
-                    ->relationship('assignedUser', 'name')
+                    ->relationship('assignedUser', 'name', modifyQueryUsing: fn ($query) => $query->whereRelation('teams', 'teams.id', resolve('current_team')->getKey()))
                     ->searchable()
                     ->preload()
                     ->default(Auth::id())
                     ->required(),
                 Select::make('assigned_by')
                     ->label(__('Assigned By'))
-                    ->relationship('assigner', 'name')
+                    ->relationship('assigner', 'name', modifyQueryUsing: fn ($query) => $query->whereRelation('teams', 'teams.id', resolve('current_team')->getKey()))
                     ->searchable()
                     ->preload()
                     ->default(Auth::id())

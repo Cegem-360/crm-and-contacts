@@ -17,6 +17,7 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table): void {
             $table->id();
+            $table->foreignId('team_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(Customer::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Order::class)->nullable()->constrained()->nullOnDelete();
             $table->string('invoice_number')->unique();

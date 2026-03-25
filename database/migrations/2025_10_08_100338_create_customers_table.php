@@ -15,14 +15,19 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table): void {
             $table->id();
+            $table->foreignId('team_id')->nullable()->constrained()->nullOnDelete();
             $table->string('unique_identifier')->unique();
             $table->string('name');
             $table->string('type')->default('Individual');
             $table->string('tax_number')->nullable();
+            $table->string('eu_tax_number')->nullable();
+            $table->string('industry')->nullable();
+            $table->string('website')->nullable();
             $table->string('registration_number')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->text('notes')->nullable();
+            $table->json('custom_fields')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
             $table->softDeletes();

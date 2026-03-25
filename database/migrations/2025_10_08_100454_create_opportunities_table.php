@@ -19,6 +19,7 @@ return new class extends Migration
     {
         Schema::create('opportunities', function (Blueprint $table): void {
             $table->id();
+            $table->foreignId('team_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(Customer::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Campaign::class)->nullable()->constrained()->nullOnDelete();
             $table->string('title');

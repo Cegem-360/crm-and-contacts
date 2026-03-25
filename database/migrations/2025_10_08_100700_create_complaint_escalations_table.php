@@ -17,6 +17,7 @@ return new class extends Migration
     {
         Schema::create('complaint_escalations', function (Blueprint $table): void {
             $table->id();
+            $table->foreignId('team_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(Complaint::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(User::class, 'escalated_to')->constrained('users')->cascadeOnDelete();
             $table->foreignIdFor(User::class, 'escalated_by')->constrained('users')->cascadeOnDelete();

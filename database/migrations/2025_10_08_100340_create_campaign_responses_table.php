@@ -17,6 +17,7 @@ return new class extends Migration
     {
         Schema::create('campaign_responses', function (Blueprint $table): void {
             $table->id();
+            $table->foreignId('team_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(Campaign::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Customer::class)->constrained()->cascadeOnDelete();
             $table->enum('response_type', ['interested', 'not_interested', 'callback', 'no_response'])->default('no_response');

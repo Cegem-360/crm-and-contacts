@@ -18,6 +18,7 @@ return new class extends Migration
     {
         Schema::create('bug_reports', function (Blueprint $table): void {
             $table->id();
+            $table->foreignId('team_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(User::class)->nullable()->constrained()->nullOnDelete();
             $table->string('title');
             $table->text('description');

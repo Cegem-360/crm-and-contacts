@@ -16,6 +16,7 @@ return new class extends Migration
     {
         Schema::create('chat_messages', function (Blueprint $table): void {
             $table->id();
+            $table->foreignId('team_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(ChatSession::class)->constrained()->cascadeOnDelete();
             $table->enum('sender_type', ['customer', 'user', 'bot'])->default('customer');
             $table->unsignedBigInteger('sender_id')->nullable();

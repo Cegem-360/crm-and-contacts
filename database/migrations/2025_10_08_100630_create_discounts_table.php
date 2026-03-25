@@ -19,6 +19,7 @@ return new class extends Migration
     {
         Schema::create('discounts', function (Blueprint $table): void {
             $table->id();
+            $table->foreignId('team_id')->nullable()->constrained()->nullOnDelete();
             $table->string('name');
             $table->string('type')->default(DiscountType::Custom->value);
             $table->string('value_type')->default(DiscountValueType::Percentage->value);

@@ -18,18 +18,23 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table): void {
             $table->id();
+            $table->foreignId('team_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(Customer::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Quote::class)->nullable()->constrained()->nullOnDelete();
-            $table->string('order_number')->unique();
+            $table->string('order_number');
             $table->date('order_date');
             $table->string('status')->default(OrderStatus::Pending->value);
             $table->decimal('subtotal', 12, 2)->default(0);
-            $table->decimal('discount_amount', 12, 2)->default(0);
+            $table->decimal('discount_amount', 12, 2)->nullable()->default(0);
             $table->decimal('tax_amount', 12, 2)->default(0);
             $table->decimal('total', 12, 2)->default(0);
+            $table->foreignId('shipping_address_id')->nullable()->constrained('customer_addresses')->nullOnDelete();
+            $table->foreignId('billing_address_id')->nullable()->constrained('customer_addresses')->nullOnDelete();
             $table->text('notes')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->unique(['team_id', 'order_number']);
         });
     }
 

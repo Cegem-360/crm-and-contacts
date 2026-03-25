@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('google_ads_reports', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('team_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('campaign_id')->constrained()->cascadeOnDelete();
             $table->date('report_date');
             $table->json('metadata')->nullable();

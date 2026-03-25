@@ -18,9 +18,10 @@ return new class extends Migration
     {
         Schema::create('quotes', function (Blueprint $table): void {
             $table->id();
+            $table->foreignId('team_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(Customer::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Opportunity::class)->nullable()->constrained()->nullOnDelete();
-            $table->string('quote_number')->unique();
+            $table->string('quote_number');
             $table->date('issue_date');
             $table->date('valid_until');
             $table->string('status')->default(QuoteStatus::Draft->value);
@@ -34,6 +35,8 @@ return new class extends Migration
             $table->timestamp('viewed_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->unique(['team_id', 'quote_number']);
         });
     }
 

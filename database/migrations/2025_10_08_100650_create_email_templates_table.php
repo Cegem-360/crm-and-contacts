@@ -16,6 +16,7 @@ return new class extends Migration
     {
         Schema::create('email_templates', function (Blueprint $table): void {
             $table->id();
+            $table->foreignId('team_id')->nullable()->constrained()->nullOnDelete();
             $table->string('name');
             $table->string('subject');
             $table->text('body');

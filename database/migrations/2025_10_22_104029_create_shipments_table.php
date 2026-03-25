@@ -17,6 +17,7 @@ return new class extends Migration
     {
         Schema::create('shipments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('team_id')->nullable()->constrained()->nullOnDelete();
 
             // Internal references (NULLABLE - might not exist in CRM yet)
             $table->foreignIdFor(Customer::class)->nullable()->constrained()->nullOnDelete();

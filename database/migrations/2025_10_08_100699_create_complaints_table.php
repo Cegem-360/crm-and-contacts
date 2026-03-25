@@ -18,16 +18,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (Schema::hasTable('complaints')) {
-            return;
-        }
-
         Schema::create('complaints', function (Blueprint $table): void {
             $table->id();
+            $table->foreignId('team_id')->nullable()->constrained()->nullOnDelete();
+            $table->string('complaint_number')->unique()->nullable();
             $table->foreignIdFor(Customer::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Order::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(User::class, 'reported_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignIdFor(User::class, 'assigned_to')->nullable()->constrained('users')->nullOnDelete();
+            $table->string('type')->nullable();
+            $table->string('subject')->nullable();
             $table->string('title');
             $table->text('description');
             $table->string('severity')->default(ComplaintSeverity::Medium->value);
@@ -35,6 +35,8 @@ return new class extends Migration
             $table->text('resolution')->nullable();
             $table->timestamp('reported_at');
             $table->timestamp('resolved_at')->nullable();
+            $table->timestamp('sla_deadline_at')->nullable();
+            $table->unsignedInteger('escalation_level')->default(0);
             $table->timestamps();
         });
     }

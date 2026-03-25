@@ -17,6 +17,7 @@ return new class extends Migration
     {
         Schema::create('shipment_items', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('team_id')->nullable()->constrained()->nullOnDelete();
 
             // Relationships
             $table->foreignIdFor(Shipment::class)->constrained()->cascadeOnDelete();

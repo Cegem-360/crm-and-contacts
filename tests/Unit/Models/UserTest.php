@@ -13,10 +13,10 @@ test('to array', function (): void {
             'name',
             'email',
             'email_verified_at',
+            'is_active',
             'created_at',
             'updated_at',
             'is_online',
             'last_seen_at',
-            'is_active',
         ]);
 });

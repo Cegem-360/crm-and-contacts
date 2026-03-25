@@ -9,7 +9,6 @@ use App\Filament\Pages\Auth\Register;
 use App\Filament\Pages\EditTeamProfile;
 use App\Filament\Pages\RegisterTeam;
 use App\Http\Middleware\ApplyTenantScopes;
-use App\Http\Middleware\SetLocale;
 use App\Models\Team;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -27,6 +26,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use MadBox\LocaleSwitcher\SetLocale;
 
 final class AdminPanelServiceProvider extends PanelProvider
 {

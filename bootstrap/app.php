@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use App\Http\Middleware\SetLocale;
 use App\Jobs\CalculateLeadScores;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use MadBox\LocaleSwitcher\SetLocale;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(

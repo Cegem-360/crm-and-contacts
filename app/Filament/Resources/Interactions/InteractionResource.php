@@ -11,8 +11,10 @@ use App\Filament\Resources\Interactions\Pages\ListInteractions;
 use App\Filament\Resources\Interactions\Schemas\InteractionForm;
 use App\Filament\Resources\Interactions\Tables\InteractionsTable;
 use App\Models\Interaction;
+use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use UnitEnum;
 
@@ -20,7 +22,9 @@ final class InteractionResource extends Resource
 {
     protected static ?string $model = Interaction::class;
 
-    protected static string|UnitEnum|null $navigationGroup = NavigationGroup::Marketing;
+    protected static string|UnitEnum|null $navigationGroup = NavigationGroup::Customers;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChatBubbleLeftRight;
 
     public static function form(Schema $schema): Schema
     {

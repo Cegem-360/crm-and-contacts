@@ -11,8 +11,10 @@ use App\Filament\Resources\QuoteTemplates\Pages\ListQuoteTemplates;
 use App\Filament\Resources\QuoteTemplates\Schemas\QuoteTemplateForm;
 use App\Filament\Resources\QuoteTemplates\Tables\QuoteTemplatesTable;
 use App\Models\QuoteTemplate;
+use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use UnitEnum;
 
@@ -20,7 +22,9 @@ final class QuoteTemplateResource extends Resource
 {
     protected static ?string $model = QuoteTemplate::class;
 
-    protected static string|UnitEnum|null $navigationGroup = NavigationGroup::Settings;
+    protected static string|UnitEnum|null $navigationGroup = NavigationGroup::Sales;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSquares2x2;
 
     public static function form(Schema $schema): Schema
     {

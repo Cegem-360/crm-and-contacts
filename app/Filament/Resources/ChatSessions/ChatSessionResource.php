@@ -13,8 +13,10 @@ use App\Filament\Resources\ChatSessions\RelationManagers\MessagesRelationManager
 use App\Filament\Resources\ChatSessions\Schemas\ChatSessionForm;
 use App\Filament\Resources\ChatSessions\Tables\ChatSessionsTable;
 use App\Models\ChatSession;
+use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use UnitEnum;
 
@@ -22,7 +24,9 @@ final class ChatSessionResource extends Resource
 {
     protected static ?string $model = ChatSession::class;
 
-    protected static string|UnitEnum|null $navigationGroup = NavigationGroup::Support;
+    protected static string|UnitEnum|null $navigationGroup = NavigationGroup::Customers;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChatBubbleLeftEllipsis;
 
     protected static ?string $navigationLabel = 'Chat Sessions';
 

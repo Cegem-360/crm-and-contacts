@@ -8,7 +8,9 @@ use App\Enums\NavigationGroup;
 use App\Filament\Resources\NegotiationOpportunities\Pages\ManageNegotiationOpportunities;
 use App\Filament\Resources\NegotiationOpportunities\Tables\NegotiationOpportunitiesTable;
 use App\Models\Opportunity;
+use BackedEnum;
 use Filament\Resources\Resource;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use UnitEnum;
 
@@ -17,6 +19,8 @@ final class NegotiationOpportunitiesResource extends Resource
     protected static ?string $model = Opportunity::class;
 
     protected static string|UnitEnum|null $navigationGroup = NavigationGroup::Customers;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedScale;
 
     protected static ?string $navigationLabel = 'Negotiations';
 

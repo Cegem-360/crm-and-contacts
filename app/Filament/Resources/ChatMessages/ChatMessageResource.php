@@ -13,8 +13,10 @@ use App\Filament\Resources\ChatMessages\Schemas\ChatMessageForm;
 use App\Filament\Resources\ChatMessages\Schemas\ChatMessageInfolist;
 use App\Filament\Resources\ChatMessages\Tables\ChatMessagesTable;
 use App\Models\ChatMessage;
+use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use UnitEnum;
 
@@ -22,7 +24,9 @@ final class ChatMessageResource extends Resource
 {
     protected static ?string $model = ChatMessage::class;
 
-    protected static string|UnitEnum|null $navigationGroup = NavigationGroup::Support;
+    protected static string|UnitEnum|null $navigationGroup = NavigationGroup::System;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChatBubbleBottomCenterText;
 
     public static function form(Schema $schema): Schema
     {

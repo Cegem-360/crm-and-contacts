@@ -13,8 +13,10 @@ use App\Filament\Resources\Communications\Schemas\CommunicationForm;
 use App\Filament\Resources\Communications\Schemas\CommunicationInfolist;
 use App\Filament\Resources\Communications\Tables\CommunicationsTable;
 use App\Models\Communication;
+use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use UnitEnum;
 
@@ -23,6 +25,8 @@ final class CommunicationResource extends Resource
     protected static ?string $model = Communication::class;
 
     protected static string|UnitEnum|null $navigationGroup = NavigationGroup::System;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedEnvelope;
 
     public static function form(Schema $schema): Schema
     {

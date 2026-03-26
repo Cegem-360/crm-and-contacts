@@ -12,8 +12,10 @@ use App\Filament\Resources\LeadOpportunities\RelationManagers\QuotesRelationMana
 use App\Filament\Resources\LeadOpportunities\Schemas\LeadOpportunityForm;
 use App\Filament\Resources\LeadOpportunities\Tables\LeadOpportunitiesTable;
 use App\Models\Opportunity;
+use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use UnitEnum;
 
@@ -22,6 +24,8 @@ final class LeadOpportunitiesResource extends Resource
     protected static ?string $model = Opportunity::class;
 
     protected static string|UnitEnum|null $navigationGroup = NavigationGroup::Customers;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowTrendingUp;
 
     protected static ?string $navigationLabel = 'Leads';
 

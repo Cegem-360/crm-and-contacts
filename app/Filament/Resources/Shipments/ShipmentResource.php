@@ -11,8 +11,10 @@ use App\Filament\Resources\Shipments\Pages\ListShipments;
 use App\Filament\Resources\Shipments\Schemas\ShipmentForm;
 use App\Filament\Resources\Shipments\Tables\ShipmentsTable;
 use App\Models\Shipment;
+use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -23,6 +25,8 @@ final class ShipmentResource extends Resource
     protected static ?string $model = Shipment::class;
 
     protected static string|UnitEnum|null $navigationGroup = NavigationGroup::Sales;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTruck;
 
     public static function form(Schema $schema): Schema
     {

@@ -61,16 +61,15 @@ final class AdminPanelServiceProvider extends PanelProvider
                     ->all(),
             )
             ->renderHook(
-                PanelsRenderHook::GLOBAL_SEARCH_BEFORE,
-                fn (): View => view('filament.topbar-items'),
-            )
-            ->renderHook(
                 PanelsRenderHook::SIDEBAR_NAV_END,
                 fn (): View => view('filament.sidebar-quick-links'),
-            )
-            ->renderHook(
+            )->renderHook(
                 PanelsRenderHook::SCRIPTS_AFTER,
                 fn (): View => view('filament.sidebar-transition-script'),
+            )
+            ->renderHook(
+                PanelsRenderHook::GLOBAL_SEARCH_BEFORE,
+                fn (): View => view('filament.topbar-items'),
             )
             ->tenantMenu(fn (): bool => Auth::check() && (Auth::user()->isAdmin() || Auth::user()->teams()->count() > 1))
             ->tenantMiddleware([

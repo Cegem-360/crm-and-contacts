@@ -14,8 +14,10 @@ use App\Filament\Resources\Quotes\RelationManagers\VersionsRelationManager;
 use App\Filament\Resources\Quotes\Schemas\QuoteForm;
 use App\Filament\Resources\Quotes\Tables\QuotesTable;
 use App\Models\Quote;
+use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -26,6 +28,8 @@ final class QuoteResource extends Resource
     protected static ?string $model = Quote::class;
 
     protected static string|UnitEnum|null $navigationGroup = NavigationGroup::Sales;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
 
     public static function form(Schema $schema): Schema
     {

@@ -4,21 +4,25 @@ declare(strict_types=1);
 
 namespace App\Providers\Filament;
 
+use App\Enums\NavigationGroup;
 use App\Filament\Pages\Auth\Login;
-use App\Filament\Pages\Auth\Register;
 use App\Filament\Pages\EditTeamProfile;
 use App\Filament\Pages\RegisterTeam;
 use App\Http\Middleware\ApplyTenantScopes;
 use App\Models\Team;
+use Filament\Actions\Action;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationGroup as FilamentNavigationGroup;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\View\PanelsRenderHook;
 use Filament\Widgets\AccountWidget;
+use Illuminate\Contracts\View\View;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
@@ -35,13 +39,39 @@ final class AdminPanelServiceProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
-            ->path('admin')
+            ->path('app')
             ->login(Login::class)
-            ->registration(Register::class)
+            ->registration()
             ->profile()
             ->tenant(Team::class, slugAttribute: 'slug')
             ->tenantRegistration(RegisterTeam::class)
             ->tenantProfile(EditTeamProfile::class)
+            ->viteTheme('resources/css/filament/admin/theme.css')
+            ->userMenuItems([
+                'profile' => fn (Action $action): Action => $action
+                    ->url('https://cegem360.eu/admin/profile', shouldOpenInNewTab: true),
+            ])
+            ->navigationGroups(
+                collect(NavigationGroup::cases())
+                    ->mapWithKeys(fn (NavigationGroup $group): array => [
+                        $group->name => FilamentNavigationGroup::make()
+                            ->label(fn (): string => $group->getLabel())
+                            ->extraSidebarAttributes(['class' => 'fi-nav-group-'.str($group->name)->kebab()]),
+                    ])
+                    ->all(),
+            )
+            ->renderHook(
+                PanelsRenderHook::GLOBAL_SEARCH_BEFORE,
+                fn (): View => view('filament.topbar-items'),
+            )
+            ->renderHook(
+                PanelsRenderHook::SIDEBAR_NAV_END,
+                fn (): View => view('filament.sidebar-quick-links'),
+            )
+            ->renderHook(
+                PanelsRenderHook::SCRIPTS_AFTER,
+                fn (): View => view('filament.sidebar-transition-script'),
+            )
             ->tenantMenu(fn (): bool => Auth::check() && (Auth::user()->isAdmin() || Auth::user()->teams()->count() > 1))
             ->tenantMiddleware([
                 ApplyTenantScopes::class,
@@ -49,7 +79,7 @@ final class AdminPanelServiceProvider extends PanelProvider
             ->brandLogo(asset('images/logo.png'))
             ->brandLogoHeight('3rem')
             ->colors([
-                'primary' => Color::Red,
+                'primary' => Color::Emerald,
             ])
             ->databaseNotifications()
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
@@ -75,6 +105,11 @@ final class AdminPanelServiceProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+            ])
+            ->spa()
+            ->spaUrlExceptions([
+                '*/language/*',
+                '*/google/oauth/*',
             ]);
     }
 }

@@ -13,9 +13,12 @@ final class Team extends Model
 {
     use HasFactory;
 
+    public const string CONTAINER_BINDING = 'current_team';
+
     protected $fillable = [
         'name',
         'slug',
+        'is_active',
     ];
 
     public function users(): BelongsToMany

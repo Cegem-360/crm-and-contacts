@@ -28,13 +28,22 @@ final class ChatSessionResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChatBubbleLeftEllipsis;
 
-    protected static ?string $navigationLabel = 'Chat Sessions';
-
-    protected static ?string $modelLabel = 'Chat Session';
-
-    protected static ?string $pluralModelLabel = 'Chat Sessions';
-
     protected static ?int $navigationSort = 5;
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Chat Sessions');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Chat Session');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Chat Sessions');
+    }
 
     public static function form(Schema $schema): Schema
     {

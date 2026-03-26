@@ -28,9 +28,22 @@ final class ProductCategoryResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSquaresPlus;
 
-    protected static ?string $navigationLabel = 'Categories';
-
     protected static ?int $navigationSort = 2;
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Categories');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Product Category');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Product Categories');
+    }
 
     public static function form(Schema $schema): Schema
     {

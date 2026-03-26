@@ -23,11 +23,14 @@ final class SalesReports extends Page
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChartBar;
 
-    protected static ?string $navigationLabel = 'Sales Reports';
-
     protected static ?int $navigationSort = 1;
 
     protected string $view = 'filament.pages.sales-reports';
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Sales Reports');
+    }
 
     public function getTitle(): string
     {

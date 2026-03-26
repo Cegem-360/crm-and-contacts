@@ -24,13 +24,16 @@ final class NegotiationOpportunitiesResource extends Resource
 
     protected static bool $shouldRegisterNavigation = false;
 
-    protected static ?string $navigationLabel = 'Negotiations';
-
     protected static ?string $modelLabel = 'Negotiation Opportunity';
 
     protected static ?string $pluralModelLabel = 'Negotiation Opportunities';
 
     protected static ?int $navigationSort = 13;
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Negotiations');
+    }
 
     public static function table(Table $table): Table
     {

@@ -30,6 +30,11 @@ final class ChatMessageResource extends Resource
 
     protected static bool $shouldRegisterNavigation = false;
 
+    public static function getNavigationLabel(): string
+    {
+        return __('Chat Messages');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return ChatMessageForm::configure($schema);

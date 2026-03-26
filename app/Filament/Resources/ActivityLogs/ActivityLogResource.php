@@ -25,8 +25,6 @@ final class ActivityLogResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClock;
 
-    protected static ?string $navigationLabel = 'Activity Log';
-
     protected static ?string $modelLabel = 'Activity';
 
     protected static ?string $pluralModelLabel = 'Activities';
@@ -34,6 +32,11 @@ final class ActivityLogResource extends Resource
     protected static ?int $navigationSort = 100;
 
     protected static bool $shouldRegisterNavigation = false;
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Activity Log');
+    }
 
     public static function infolist(Schema $schema): Schema
     {

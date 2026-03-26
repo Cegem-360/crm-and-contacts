@@ -28,6 +28,11 @@ final class BugReportResource extends Resource
 
     protected static bool $shouldRegisterNavigation = false;
 
+    public static function getNavigationLabel(): string
+    {
+        return __('Bug Reports');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return BugReportForm::configure($schema);

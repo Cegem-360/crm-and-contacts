@@ -47,6 +47,9 @@ final class AdminPanelServiceProvider extends PanelProvider
             ->tenantRegistration(RegisterTeam::class)
             ->tenantProfile(EditTeamProfile::class)
             ->viteTheme('resources/css/filament/admin/theme.css')
+            ->sidebarFullyCollapsibleOnDesktop()
+            ->sidebarWidth('15rem')
+            ->collapsibleNavigationGroups(false)
             ->userMenuItems([
                 'profile' => fn (Action $action): Action => $action
                     ->url('https://cegem360.eu/admin/profile', shouldOpenInNewTab: true),

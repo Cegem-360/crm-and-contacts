@@ -24,13 +24,16 @@ final class QualifiedOpportunitiesResource extends Resource
 
     protected static bool $shouldRegisterNavigation = false;
 
-    protected static ?string $navigationLabel = 'Qualified';
-
     protected static ?string $modelLabel = 'Qualified Opportunity';
 
     protected static ?string $pluralModelLabel = 'Qualified Opportunities';
 
     protected static ?int $navigationSort = 11;
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Qualified');
+    }
 
     public static function table(Table $table): Table
     {

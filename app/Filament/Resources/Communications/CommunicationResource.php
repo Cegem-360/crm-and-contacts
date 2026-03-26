@@ -30,6 +30,11 @@ final class CommunicationResource extends Resource
 
     protected static bool $shouldRegisterNavigation = false;
 
+    public static function getNavigationLabel(): string
+    {
+        return __('Communications');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return CommunicationForm::configure($schema);

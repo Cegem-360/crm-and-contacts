@@ -28,6 +28,21 @@ final class ComplaintResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
+    public static function getNavigationLabel(): string
+    {
+        return __('Complaints');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Complaint');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Complaints');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return ComplaintForm::configure($schema);

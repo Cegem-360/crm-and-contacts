@@ -28,6 +28,21 @@ final class InteractionResource extends Resource
 
     protected static ?int $navigationSort = 3;
 
+    public static function getNavigationLabel(): string
+    {
+        return __('Interactions');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Interaction');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Interactions');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return InteractionForm::configure($schema);

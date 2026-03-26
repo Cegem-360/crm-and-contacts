@@ -24,13 +24,16 @@ final class LostQuotationOpportunitiesResource extends Resource
 
     protected static bool $shouldRegisterNavigation = false;
 
-    protected static ?string $navigationLabel = 'Lost Quotation';
-
     protected static ?string $modelLabel = 'Lost Quotation Opportunity';
 
     protected static ?string $pluralModelLabel = 'Lost Quotation Opportunities';
 
     protected static ?int $navigationSort = 15;
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Lost Quotation');
+    }
 
     public static function table(Table $table): Table
     {

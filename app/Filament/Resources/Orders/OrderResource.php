@@ -31,6 +31,21 @@ final class OrderResource extends Resource
 
     protected static ?int $navigationSort = 3;
 
+    public static function getNavigationLabel(): string
+    {
+        return __('Orders');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Order');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Orders');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return OrderForm::configure($schema);

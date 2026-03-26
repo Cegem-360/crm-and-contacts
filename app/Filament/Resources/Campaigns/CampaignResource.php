@@ -32,9 +32,22 @@ final class CampaignResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedMegaphone;
 
-    protected static ?string $navigationLabel = 'Campaign List';
-
     protected static ?int $navigationSort = 1;
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Campaign List');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Campaign');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Campaigns');
+    }
 
     public static function form(Schema $schema): Schema
     {

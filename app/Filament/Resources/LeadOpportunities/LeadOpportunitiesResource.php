@@ -27,13 +27,22 @@ final class LeadOpportunitiesResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowTrendingUp;
 
-    protected static ?string $navigationLabel = 'Leads / Opportunities';
-
-    protected static ?string $modelLabel = 'Lead Opportunity';
-
-    protected static ?string $pluralModelLabel = 'Lead Opportunities';
-
     protected static ?int $navigationSort = 2;
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Leads / Opportunities');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Lead');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Leads');
+    }
 
     public static function form(Schema $schema): Schema
     {

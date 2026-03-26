@@ -32,6 +32,21 @@ final class InvoiceResource extends Resource
 
     protected static ?int $navigationSort = 5;
 
+    public static function getNavigationLabel(): string
+    {
+        return __('Invoices');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Invoice');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Invoices');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return InvoiceForm::configure($schema);

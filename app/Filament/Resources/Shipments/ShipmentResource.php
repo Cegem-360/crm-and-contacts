@@ -30,6 +30,21 @@ final class ShipmentResource extends Resource
 
     protected static ?int $navigationSort = 4;
 
+    public static function getNavigationLabel(): string
+    {
+        return __('Shipments');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Shipment');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Shipments');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return ShipmentForm::configure($schema);

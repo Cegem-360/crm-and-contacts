@@ -24,13 +24,16 @@ final class ProposalOpportunitiesResource extends Resource
 
     protected static bool $shouldRegisterNavigation = false;
 
-    protected static ?string $navigationLabel = 'Proposals';
-
     protected static ?string $modelLabel = 'Proposal Opportunity';
 
     protected static ?string $pluralModelLabel = 'Proposal Opportunities';
 
     protected static ?int $navigationSort = 12;
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Proposals');
+    }
 
     public static function table(Table $table): Table
     {

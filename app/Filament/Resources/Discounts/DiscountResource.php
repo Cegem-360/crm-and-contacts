@@ -28,9 +28,22 @@ final class DiscountResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTag;
 
-    protected static ?string $navigationLabel = 'Discount List';
-
     protected static ?int $navigationSort = 1;
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Discount List');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Discount');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Discounts');
+    }
 
     public static function form(Schema $schema): Schema
     {

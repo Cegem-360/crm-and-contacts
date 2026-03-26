@@ -28,6 +28,21 @@ final class TaskResource extends Resource
 
     protected static ?int $navigationSort = 4;
 
+    public static function getNavigationLabel(): string
+    {
+        return __('Tasks');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Task');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Tasks');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return TaskForm::configure($schema);

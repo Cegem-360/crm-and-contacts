@@ -28,6 +28,21 @@ final class QuoteTemplateResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
+    public static function getNavigationLabel(): string
+    {
+        return __('Quote Templates');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Quote Template');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Quote Templates');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return QuoteTemplateForm::configure($schema);

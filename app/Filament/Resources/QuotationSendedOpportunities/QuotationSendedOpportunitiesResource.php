@@ -22,6 +22,8 @@ final class QuotationSendedOpportunitiesResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPaperAirplane;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $navigationLabel = 'Quotation Sended';
 
     protected static ?string $modelLabel = 'Quotation Sended Opportunity';

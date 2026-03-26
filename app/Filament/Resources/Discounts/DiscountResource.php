@@ -28,6 +28,10 @@ final class DiscountResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTag;
 
+    protected static ?string $navigationLabel = 'Discount List';
+
+    protected static ?int $navigationSort = 1;
+
     public static function form(Schema $schema): Schema
     {
         return DiscountForm::configure($schema);

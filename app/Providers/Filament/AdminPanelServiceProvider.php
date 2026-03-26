@@ -61,9 +61,6 @@ final class AdminPanelServiceProvider extends PanelProvider
                     ->all(),
             )
             ->renderHook(
-                PanelsRenderHook::SIDEBAR_NAV_END,
-                fn (): View => view('filament.sidebar-quick-links'),
-            )->renderHook(
                 PanelsRenderHook::SCRIPTS_AFTER,
                 fn (): View => view('filament.sidebar-transition-script'),
             )

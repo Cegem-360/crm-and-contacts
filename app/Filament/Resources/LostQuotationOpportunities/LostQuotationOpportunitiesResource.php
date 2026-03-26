@@ -22,6 +22,8 @@ final class LostQuotationOpportunitiesResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedXCircle;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $navigationLabel = 'Lost Quotation';
 
     protected static ?string $modelLabel = 'Lost Quotation Opportunity';

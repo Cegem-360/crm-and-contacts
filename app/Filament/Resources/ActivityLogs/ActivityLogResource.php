@@ -33,6 +33,8 @@ final class ActivityLogResource extends Resource
 
     protected static ?int $navigationSort = 100;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     public static function infolist(Schema $schema): Schema
     {
         return ActivityLogInfolist::configure($schema);

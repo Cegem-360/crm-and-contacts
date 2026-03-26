@@ -34,7 +34,7 @@ final class ChatSessionResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Chat Sessions';
 
-    protected static ?int $navigationSort = 10;
+    protected static ?int $navigationSort = 5;
 
     public static function form(Schema $schema): Schema
     {

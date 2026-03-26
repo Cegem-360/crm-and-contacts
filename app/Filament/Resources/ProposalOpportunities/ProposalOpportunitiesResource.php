@@ -22,6 +22,8 @@ final class ProposalOpportunitiesResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentCheck;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $navigationLabel = 'Proposals';
 
     protected static ?string $modelLabel = 'Proposal Opportunity';

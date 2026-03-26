@@ -19,6 +19,6 @@ final class LoginResponse implements LoginResponseContract
             return redirect()->route('dashboard', ['team' => $team]);
         }
 
-        return redirect()->route('filament.admin.tenant-registration');
+        return redirect()->route('filament.admin.tenant.registration');
     }
 }

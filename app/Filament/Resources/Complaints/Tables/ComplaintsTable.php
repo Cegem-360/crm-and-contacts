@@ -38,13 +38,13 @@ final class ComplaintsTable
                     ->badge()
                     ->sortable(),
                 TextColumn::make('assignedUser.name')
-                    ->label('Assigned To')
+                    ->label(__('Assigned To'))
                     ->sortable(),
                 TextColumn::make('escalation_level')
-                    ->label('Level')
+                    ->label(__('Level'))
                     ->sortable(),
                 TextColumn::make('sla_deadline_at')
-                    ->label('SLA Deadline')
+                    ->label(__('SLA Deadline'))
                     ->dateTime()
                     ->sortable()
                     ->color(fn ($record) => $record->sla_deadline_at && $record->sla_deadline_at->isPast() && ! in_array($record->status->value, ['resolved', 'closed']) ? 'danger' : null),

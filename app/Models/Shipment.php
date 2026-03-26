@@ -69,6 +69,15 @@ final class Shipment extends Model
         return $this->hasMany(ShipmentTrackingEvent::class)->orderBy('occurred_at');
     }
 
+    protected static function booted(): void
+    {
+        self::creating(function (Shipment $shipment): void {
+            if (empty($shipment->shipment_number)) {
+                $shipment->shipment_number = self::generateShipmentNumber();
+            }
+        });
+    }
+
     protected function casts(): array
     {
         return [

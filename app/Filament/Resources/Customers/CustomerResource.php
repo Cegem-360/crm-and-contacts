@@ -69,7 +69,7 @@ final class CustomerResource extends Resource
     public static function getRelations(): array
     {
         return [
-            ContactsRelationManager::class,
+            /* ContactsRelationManager::class,
             AddressesRelationManager::class,
             AttributesRelationManager::class,
             OpportunitiesRelationManager::class,
@@ -79,7 +79,7 @@ final class CustomerResource extends Resource
             InteractionsRelationManager::class,
             TasksRelationManager::class,
             ComplaintsRelationManager::class,
-            CommunicationsRelationManager::class,
+            CommunicationsRelationManager::class,*/
         ];
     }
 

@@ -53,7 +53,7 @@ final class CampaignsTable
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('budget_usage')
-                    ->label('Budget Usage')
+                    ->label(__('Budget Usage'))
                     ->formatStateUsing(fn (Campaign $record): string => $record->getBudgetUsagePercentage().'%')
                     ->color(fn (Campaign $record): string => match (true) {
                         $record->getBudgetUsagePercentage() >= 100 => 'danger',
@@ -63,22 +63,22 @@ final class CampaignsTable
                     ->sortable(query: fn (Builder $query, string $direction): Builder => $query->orderBy('actual_cost', $direction))
                     ->toggleable(),
                 TextColumn::make('conversions_count')
-                    ->label('Conversions')
+                    ->label(__('Conversions'))
                     ->counts('conversions')
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('cpc')
-                    ->label('CPC')
+                    ->label(__('CPC'))
                     ->formatStateUsing(fn (Campaign $record): string => $record->getCostPerConversion() !== null ? number_format($record->getCostPerConversion(), 0).' Ft' : '-')
                     ->sortable(query: fn (Builder $query, string $direction): Builder => $query->withCount('conversions')->orderByRaw('CASE WHEN conversions_count = 0 THEN NULL ELSE actual_cost / conversions_count END '.$direction))
                     ->toggleable(),
                 TextColumn::make('conversion_rate')
-                    ->label('Conv. Rate')
+                    ->label(__('Conv. Rate'))
                     ->formatStateUsing(fn (Campaign $record): string => $record->getConversionRate() !== null ? $record->getConversionRate().'%' : '-')
                     ->sortable(query: fn (Builder $query, string $direction): Builder => $query->orderBy('clicks', $direction))
                     ->toggleable(),
                 TextColumn::make('roi')
-                    ->label('ROI')
+                    ->label(__('ROI'))
                     ->formatStateUsing(fn (Campaign $record): string => $record->getROI() !== null ? $record->getROI().'%' : '-')
                     ->color(fn (Campaign $record): string => match (true) {
                         $record->getROI() === null => 'gray',
@@ -88,7 +88,7 @@ final class CampaignsTable
                     })
                     ->toggleable(),
                 TextColumn::make('roas')
-                    ->label('ROAS')
+                    ->label(__('ROAS'))
                     ->formatStateUsing(fn (Campaign $record): string => $record->getROAS() !== null ? number_format($record->getROAS(), 2) : '-')
                     ->color(fn (Campaign $record): string => match (true) {
                         $record->getROAS() === null => 'gray',
@@ -106,7 +106,7 @@ final class CampaignsTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('creator.name')
-                    ->label('Created By')
+                    ->label(__('Created By'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')

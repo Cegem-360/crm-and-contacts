@@ -28,16 +28,16 @@ final class ChatSessionsTable
         return $table
             ->columns([
                 TextColumn::make('id')
-                    ->label('ID')
+                    ->label(__('ID'))
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('customer.name')
-                    ->label('Customer')
+                    ->label(__('Customer'))
                     ->searchable()
                     ->sortable()
                     ->description(fn ($record) => $record->customer?->email),
                 TextColumn::make('user.name')
-                    ->label('Assigned Agent')
+                    ->label(__('Assigned Agent'))
                     ->searchable()
                     ->sortable()
                     ->placeholder('Unassigned')
@@ -56,44 +56,44 @@ final class ChatSessionsTable
                         default => Color::Gray,
                     }),
                 TextColumn::make('unread_count')
-                    ->label('Unread')
+                    ->label(__('Unread'))
                     ->numeric()
                     ->sortable()
                     ->badge()
                     ->color(fn ($state): array => $state > 0 ? Color::Red : Color::Gray),
                 TextColumn::make('rating')
-                    ->label('Rating')
+                    ->label(__('Rating'))
                     ->numeric()
                     ->sortable()
                     ->formatStateUsing(fn ($state): string => $state ? $state.'/5 ⭐' : '-')
                     ->toggleable(),
                 TextColumn::make('started_at')
-                    ->label('Started')
+                    ->label(__('Started'))
                     ->dateTime('M d, Y H:i')
                     ->sortable()
                     ->since()
                     ->tooltip(fn ($record) => $record->started_at?->format('M d, Y H:i:s')),
                 TextColumn::make('last_message_at')
-                    ->label('Last Activity')
+                    ->label(__('Last Activity'))
                     ->dateTime('M d, Y H:i')
                     ->sortable()
                     ->since()
                     ->tooltip(fn ($record) => $record->last_message_at?->format('M d, Y H:i:s'))
                     ->placeholder('No messages'),
                 TextColumn::make('ended_at')
-                    ->label('Ended')
+                    ->label(__('Ended'))
                     ->dateTime('M d, Y H:i')
                     ->sortable()
                     ->since()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->placeholder('-'),
                 TextColumn::make('created_at')
-                    ->label('Created')
+                    ->label(__('Created'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->label('Updated')
+                    ->label(__('Updated'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -111,13 +111,13 @@ final class ChatSessionsTable
                     ])
                     ->multiple(),
                 SelectFilter::make('user_id')
-                    ->label('Assigned Agent')
+                    ->label(__('Assigned Agent'))
                     ->relationship('user', 'name', modifyQueryUsing: fn ($query) => $query->whereRelation('teams', 'teams.id', resolve('current_team')->getKey()))
                     ->searchable()
                     ->preload()
                     ->multiple(),
                 SelectFilter::make('assignment')
-                    ->label('Assignment')
+                    ->label(__('Assignment'))
                     ->options([
                         'assigned' => 'Assigned',
                         'unassigned' => 'Unassigned',
@@ -139,7 +139,7 @@ final class ChatSessionsTable
                 ViewAction::make(),
                 EditAction::make(),
                 Action::make('assign')
-                    ->label('Assign to Me')
+                    ->label(__('Assign to Me'))
                     ->icon('heroicon-o-user-plus')
                     ->color(Color::Blue)
                     ->visible(fn ($record): bool => $record->user_id === null)
@@ -154,13 +154,13 @@ final class ChatSessionsTable
                             ->send();
                     }),
                 Action::make('transfer')
-                    ->label('Transfer')
+                    ->label(__('Transfer'))
                     ->icon('heroicon-o-arrow-path')
                     ->color(Color::Orange)
                     ->visible(fn ($record): bool => $record->user_id !== null && $record->status === ChatSessionStatus::Active)
                     ->form([
                         Select::make('new_user_id')
-                            ->label('Transfer to Agent')
+                            ->label(__('Transfer to Agent'))
                             ->options(User::query()->pluck('name', 'id'))
                             ->searchable()
                             ->required(),
@@ -176,7 +176,7 @@ final class ChatSessionsTable
                             ->send();
                     }),
                 Action::make('close')
-                    ->label('Close')
+                    ->label(__('Close'))
                     ->icon('heroicon-o-x-circle')
                     ->color(Color::Red)
                     ->visible(fn ($record): bool => $record->status === ChatSessionStatus::Active)

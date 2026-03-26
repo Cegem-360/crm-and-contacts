@@ -33,6 +33,8 @@ final class ActivityLogResource extends Resource
 
     protected static bool $shouldRegisterNavigation = false;
 
+    protected static bool $isScopedToTenant = false;
+
     public static function getNavigationLabel(): string
     {
         return __('Activity Log');

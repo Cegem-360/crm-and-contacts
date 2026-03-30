@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e0414ee5b85697e7535044b8dccbe0f4",
+    "content-hash": "223d37259cfe5c5f8d2e414fb2ded7a9",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -4095,6 +4095,67 @@
             "time": "2026-03-25T23:19:23+00:00"
         },
         {
+            "name": "madbox-99/filament-spatie-permissions",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MadBox-99/filament-spatie-permissions.git",
+                "reference": "ad500b9b498d28d878f7a6d01fcc3d8f5ded52a7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MadBox-99/filament-spatie-permissions/zipball/ad500b9b498d28d878f7a6d01fcc3d8f5ded52a7",
+                "reference": "ad500b9b498d28d878f7a6d01fcc3d8f5ded52a7",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^5.0",
+                "php": "^8.4",
+                "spatie/laravel-permission": "^6.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "pestphp/pest": "^4.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "MadBox\\FilamentSpatiePermissions\\FilamentSpatiePermissionsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MadBox\\FilamentSpatiePermissions\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "MadBox",
+                    "email": "info@madbox.hu"
+                }
+            ],
+            "description": "Filament v5 plugin for managing Spatie roles and permissions with enum-driven sync",
+            "keywords": [
+                "filament",
+                "laravel",
+                "permissions",
+                "roles",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/MadBox-99/filament-spatie-permissions/issues",
+                "source": "https://github.com/MadBox-99/filament-spatie-permissions/tree/main"
+            },
+            "time": "2026-03-30T13:34:20+00:00"
+        },
+        {
             "name": "madbox-99/laravel-locale-switcher",
             "version": "dev-main",
             "source": {
@@ -4212,62 +4273,6 @@
                 "source": "https://github.com/MadBox-99/laravel-user-team-sync/tree/main"
             },
             "time": "2026-03-23T08:43:31+00:00"
-        },
-        {
-            "name": "madbox/filament-spatie-permissions",
-            "version": "dev-main",
-            "dist": {
-                "type": "path",
-                "url": "../filament-spatie-permissions",
-                "reference": "45aa13c85635e6eec24093ea100f2e51c9a1abe1"
-            },
-            "require": {
-                "filament/filament": "^5.0",
-                "php": "^8.4",
-                "spatie/laravel-permission": "^6.0"
-            },
-            "require-dev": {
-                "laravel/pint": "^1.0",
-                "pestphp/pest": "^4.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "MadBox\\FilamentSpatiePermissions\\FilamentSpatiePermissionsServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "MadBox\\FilamentSpatiePermissions\\": "src/"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "MadBox\\FilamentSpatiePermissions\\Tests\\": "tests/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "MadBox",
-                    "email": "info@madbox.hu"
-                }
-            ],
-            "description": "Filament v5 plugin for managing Spatie roles and permissions with enum-driven sync",
-            "keywords": [
-                "filament",
-                "laravel",
-                "permissions",
-                "roles",
-                "spatie"
-            ],
-            "transport-options": {
-                "relative": true
-            }
         },
         {
             "name": "masterminds/html5",
@@ -16778,9 +16783,9 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "madbox-99/filament-spatie-permissions": 20,
         "madbox-99/laravel-locale-switcher": 20,
         "madbox-99/laravel-user-team-sync": 20,
-        "madbox/filament-spatie-permissions": 20,
         "nunomaduro/essentials": 20
     },
     "prefer-stable": true,

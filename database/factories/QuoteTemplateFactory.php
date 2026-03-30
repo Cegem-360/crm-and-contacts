@@ -107,10 +107,10 @@ final class QuoteTemplateFactory extends Factory
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $item->description ?? '-' }}</td>
                     <td class="number">{{ number_format((float)$item->quantity, 2) }}</td>
-                    <td class="number">{{ number_format((float)$item->unit_price, 0, ',', ' ') }} Ft</td>
-                    <td class="number">{{ number_format((float)$item->discount_amount, 0, ',', ' ') }} Ft</td>
+                    <td class="number">{{ Number::currency((float) $item->unit_price, in: 'HUF', locale: 'hu', precision: 0) }}</td>
+                    <td class="number">{{ Number::currency((float) $item->discount_amount, in: 'HUF', locale: 'hu', precision: 0) }}</td>
                     <td class="number">{{ number_format((float)$item->tax_rate, 0) }}%</td>
-                    <td class="number">{{ number_format((float)$item->total, 0, ',', ' ') }} Ft</td>
+                    <td class="number">{{ Number::currency((float) $item->total, in: 'HUF', locale: 'hu', precision: 0) }}</td>
                 </tr>
             @endforeach
         </tbody>
@@ -119,19 +119,19 @@ final class QuoteTemplateFactory extends Factory
         <table>
             <tr>
                 <td>Részösszeg / Subtotal:</td>
-                <td style="text-align: right;">{{ number_format((float)$quote->subtotal, 0, ',', ' ') }} Ft</td>
+                <td style="text-align: right;">{{ Number::currency((float) $quote->subtotal, in: 'HUF', locale: 'hu', precision: 0) }}</td>
             </tr>
             <tr>
                 <td>Kedvezmény / Discount:</td>
-                <td style="text-align: right;">-{{ number_format((float)$quote->discount_amount, 0, ',', ' ') }} Ft</td>
+                <td style="text-align: right;">{{ Number::currency(-(float) $quote->discount_amount, in: 'HUF', locale: 'hu', precision: 0) }}</td>
             </tr>
             <tr>
                 <td>ÁFA / VAT:</td>
-                <td style="text-align: right;">{{ number_format((float)$quote->tax_amount, 0, ',', ' ') }} Ft</td>
+                <td style="text-align: right;">{{ Number::currency((float) $quote->tax_amount, in: 'HUF', locale: 'hu', precision: 0) }}</td>
             </tr>
             <tr class="total-row">
                 <td>Összesen / Total:</td>
-                <td style="text-align: right;">{{ number_format((float)$quote->total, 0, ',', ' ') }} Ft</td>
+                <td style="text-align: right;">{{ Number::currency((float) $quote->total, in: 'HUF', locale: 'hu', precision: 0) }}</td>
             </tr>
         </table>
     </div>

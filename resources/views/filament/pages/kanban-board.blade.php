@@ -66,7 +66,7 @@
                         </span>
                     </div>
                     <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                        {{ Number::currency($stage['total'], 'HUF', 'hu', 0) }}
+                        {{ Number::currency($stage['total'], in: 'HUF', locale: 'hu', precision: 0) }}
                     </p>
                 </div>
 
@@ -90,7 +90,7 @@
                             </div>
                             <div class="mt-3 flex items-center justify-between">
                                 <span class="text-sm font-bold text-gray-900 dark:text-white">
-                                    {{ Number::currency($opp['value'], 'HUF', 'hu', 0) }}
+                                    {{ Number::currency($opp['value'], in: 'HUF', locale: 'hu', precision: 0) }}
                                 </span>
                                 <span
                                     class="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium

@@ -6,7 +6,7 @@ Tisztelt {{ $quote->customer?->name }}!
 Mellékelten küldjük árajánlatunkat.
 
 **Ajánlat száma / Quote Number:** {{ $quote->quote_number }}
-**Összeg / Total:** {{ number_format((float) $quote->total, 0, ',', ' ') }} Ft
+**Összeg / Total:** {{ Number::currency((float) $quote->total, in: 'HUF', locale: 'hu', precision: 0) }}
 **Érvényesség / Valid Until:** {{ $quote->valid_until?->format('Y-m-d') }}
 
 @if($quote->view_token)

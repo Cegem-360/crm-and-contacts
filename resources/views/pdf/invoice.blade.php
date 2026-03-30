@@ -87,10 +87,10 @@
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $item->description ?? '-' }}</td>
                     <td class="number">{{ number_format((float)$item->quantity, 2) }}</td>
-                    <td class="number">{{ number_format((float)$item->unit_price, 0, ',', ' ') }} Ft</td>
-                    <td class="number">{{ number_format((float)$item->discount_amount, 0, ',', ' ') }} Ft</td>
+                    <td class="number">{{ Number::currency((float) $item->unit_price, in: 'HUF', locale: 'hu', precision: 0) }}</td>
+                    <td class="number">{{ Number::currency((float) $item->discount_amount, in: 'HUF', locale: 'hu', precision: 0) }}</td>
                     <td class="number">{{ number_format((float)$item->tax_rate, 0) }}%</td>
-                    <td class="number">{{ number_format((float)$item->total, 0, ',', ' ') }} Ft</td>
+                    <td class="number">{{ Number::currency((float) $item->total, in: 'HUF', locale: 'hu', precision: 0) }}</td>
                 </tr>
             @endforeach
         </tbody>
@@ -100,19 +100,19 @@
         <table>
             <tr>
                 <td>Részösszeg / Subtotal:</td>
-                <td style="text-align: right;">{{ number_format((float)$invoice->subtotal, 0, ',', ' ') }} Ft</td>
+                <td style="text-align: right;">{{ Number::currency((float) $invoice->subtotal, in: 'HUF', locale: 'hu', precision: 0) }}</td>
             </tr>
             <tr>
                 <td>Kedvezmény / Discount:</td>
-                <td style="text-align: right;">-{{ number_format((float)$invoice->discount_amount, 0, ',', ' ') }} Ft</td>
+                <td style="text-align: right;">{{ Number::currency(-(float) $invoice->discount_amount, in: 'HUF', locale: 'hu', precision: 0) }}</td>
             </tr>
             <tr>
                 <td>ÁFA / VAT:</td>
-                <td style="text-align: right;">{{ number_format((float)$invoice->tax_amount, 0, ',', ' ') }} Ft</td>
+                <td style="text-align: right;">{{ Number::currency((float) $invoice->tax_amount, in: 'HUF', locale: 'hu', precision: 0) }}</td>
             </tr>
             <tr class="total-row">
                 <td>Összesen / Total:</td>
-                <td style="text-align: right;">{{ number_format((float)$invoice->total, 0, ',', ' ') }} Ft</td>
+                <td style="text-align: right;">{{ Number::currency((float) $invoice->total, in: 'HUF', locale: 'hu', precision: 0) }}</td>
             </tr>
         </table>
     </div>

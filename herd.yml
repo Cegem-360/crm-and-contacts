@@ -1,0 +1,5 @@
+integrations:
+  forge:
+    sales.cegem360.eu:
+      server-id: 1173887
+      site-id: 3076085

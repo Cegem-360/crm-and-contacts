@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Pages\Auth;
 
+use Filament\Auth\Http\Responses\Contracts\LoginResponse;
 use Filament\Auth\Pages\Login as BasePage;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\TextInput;
@@ -25,6 +26,19 @@ final class Login extends BasePage
                 'remember' => true,
             ]);
         }
+    }
+
+    public function authenticate(): ?LoginResponse
+    {
+        $response = parent::authenticate();
+
+        if ($response !== null) {
+            $this->redirect('/dashboard');
+
+            return null;
+        }
+
+        return null;
     }
 
     protected function getEmailFormComponent(): TextInput

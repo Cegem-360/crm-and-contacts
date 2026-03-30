@@ -773,5 +773,16 @@
     "Communication": "Kommunikáció",
     "Sent At": "Elküldve",
     "Delivered At": "Kézbesítve",
-    "Read At": "Elolvasva"
+    "Read At": "Elolvasva",
+    "Permissions": "Jogosultságok",
+    "Manage Permissions": "Jogosultságok kezelése",
+    "Sync Permissions": "Jogosultságok szinkronizálása",
+    "Permissions Synced": "Jogosultságok szinkronizálva",
+    "All permissions and roles have been synced successfully.": "Minden jogosultság és szerepkör sikeresen szinkronizálva.",
+    "This will sync all permissions and roles from the code to the database. Existing assignments will be preserved.": "Ez szinkronizálja az összes jogosultságot és szerepkört a kódból az adatbázisba. A meglévő hozzárendelések megmaradnak.",
+    "Total Permissions": "Összes jogosultság",
+    "permissions": "jogosultság",
+    "No permissions assigned": "Nincs hozzárendelt jogosultság",
+    "System": "Rendszer",
+    "Users": "Felhasználók"
 }

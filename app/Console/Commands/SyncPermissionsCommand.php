@@ -15,7 +15,7 @@ use Spatie\Permission\PermissionRegistrar;
 
 #[Signature('permissions:sync')]
 #[Description('Sync all permissions and roles from enums to the database')]
-final class SyncPermissions extends Command
+final class SyncPermissionsCommand extends Command
 {
     public function handle(): int
     {

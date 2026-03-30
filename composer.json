@@ -19,7 +19,7 @@
         "laravel/sanctum": "^4.3.1",
         "laravel/tinker": "^3.0",
         "livewire/livewire": "^4.2.2",
-        "madbox-99/filament-spatie-permissions": "^1.0",
+        "madbox-99/filament-spatie-permissions": "^2.0",
         "madbox-99/laravel-locale-switcher": "dev-main",
         "madbox-99/laravel-user-team-sync": "dev-main",
         "nunomaduro/essentials": "@dev",

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\Role;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasTenants;
 use Filament\Panel;
@@ -64,17 +65,21 @@ final class User extends Authenticatable implements FilamentUser, HasTenants
 
     public function getTenants(Panel $panel): Collection
     {
+        if ($this->isAdmin()) {
+            return Team::all();
+        }
+
         return $this->teams;
     }
 
     public function canAccessTenant(Model $tenant): bool
     {
-        return $this->teams()->whereKey($tenant->getKey())->exists();
+        return $this->isAdmin() || $this->teams()->whereKey($tenant->getKey())->exists();
     }
 
     public function isAdmin(): bool
     {
-        return $this->hasRole('admin');
+        return $this->hasRole(Role::Admin);
     }
 
     protected function casts(): array

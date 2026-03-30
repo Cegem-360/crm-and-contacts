@@ -8,6 +8,7 @@ use App\Enums\CampaignResponseType;
 use App\Enums\CampaignType;
 use App\Models\Concerns\BelongsToTeam;
 use Database\Factories\CampaignFactory;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -17,6 +18,22 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
+#[Fillable([
+    'team_id',
+    'name',
+    'description',
+    'start_date',
+    'end_date',
+    'status',
+    'campaign_type',
+    'budget',
+    'actual_cost',
+    'clicks',
+    'impressions',
+    'google_ads_campaign_id',
+    'target_audience_criteria',
+    'created_by',
+])]
 final class Campaign extends Model
 {
     use BelongsToTeam;
@@ -26,23 +43,6 @@ final class Campaign extends Model
 
     use LogsActivity;
     use SoftDeletes;
-
-    protected $fillable = [
-        'team_id',
-        'name',
-        'description',
-        'start_date',
-        'end_date',
-        'status',
-        'campaign_type',
-        'budget',
-        'actual_cost',
-        'clicks',
-        'impressions',
-        'google_ads_campaign_id',
-        'target_audience_criteria',
-        'created_by',
-    ];
 
     public function creator(): BelongsTo
     {

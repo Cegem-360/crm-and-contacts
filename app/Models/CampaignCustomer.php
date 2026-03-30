@@ -4,20 +4,14 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
+#[Fillable(['campaign_id', 'customer_id', 'added_at', 'added_by', 'notes'])]
 final class CampaignCustomer extends Pivot
 {
     protected $table = 'campaign_customer';
-
-    protected $fillable = [
-        'campaign_id',
-        'customer_id',
-        'added_at',
-        'added_by',
-        'notes',
-    ];
 
     public function campaign(): BelongsTo
     {

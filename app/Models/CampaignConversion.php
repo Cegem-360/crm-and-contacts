@@ -6,12 +6,29 @@ namespace App\Models;
 
 use App\Models\Concerns\BelongsToTeam;
 use Database\Factories\CampaignConversionFactory;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
+#[Fillable([
+    'team_id',
+    'campaign_id',
+    'customer_id',
+    'opportunity_id',
+    'conversion_date',
+    'conversion_value',
+    'cost_at_conversion',
+    'utm_source',
+    'utm_medium',
+    'utm_campaign',
+    'utm_term',
+    'utm_content',
+    'google_ads_conversion_id',
+    'notes',
+])]
 final class CampaignConversion extends Model
 {
     use BelongsToTeam;
@@ -20,23 +37,6 @@ final class CampaignConversion extends Model
     use HasFactory;
 
     use LogsActivity;
-
-    protected $fillable = [
-        'team_id',
-        'campaign_id',
-        'customer_id',
-        'opportunity_id',
-        'conversion_date',
-        'conversion_value',
-        'cost_at_conversion',
-        'utm_source',
-        'utm_medium',
-        'utm_campaign',
-        'utm_term',
-        'utm_content',
-        'google_ads_conversion_id',
-        'notes',
-    ];
 
     public function campaign(): BelongsTo
     {

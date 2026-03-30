@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "223d37259cfe5c5f8d2e414fb2ded7a9",
+    "content-hash": "d2c6ceb4275ab2283c70b312f4499dee",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -2733,6 +2733,72 @@
             "time": "2026-03-29T12:05:03+00:00"
         },
         {
+            "name": "laravel/ai",
+            "version": "v0.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/ai.git",
+                "reference": "91441b6ae5bc995f21bb3043744860bd3043e78c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/ai/zipball/91441b6ae5bc995f21bb3043744860bd3043e78c",
+                "reference": "91441b6ae5bc995f21bb3043744860bd3043e78c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^12.0|^13.0",
+                "illuminate/container": "^12.0|^13.0",
+                "illuminate/contracts": "^12.0|^13.0",
+                "illuminate/filesystem": "^12.0|^13.0",
+                "illuminate/json-schema": "^12.0|^13.0",
+                "illuminate/support": "^12.0|^13.0",
+                "laravel/prompts": "^0.3.6",
+                "laravel/serializable-closure": "^2.0",
+                "php": "^8.3",
+                "prism-php/prism": "^0.99.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.26",
+                "mockery/mockery": "^1.6.12",
+                "orchestra/testbench": "^10.6|^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Ai\\AiServiceProvider"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "functions.php"
+                ],
+                "psr-4": {
+                    "Laravel\\Ai\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "The official AI SDK for Laravel.",
+            "homepage": "https://github.com/laravel/ai",
+            "keywords": [
+                "ai",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/ai/issues",
+                "source": "https://github.com/laravel/ai"
+            },
+            "time": "2026-03-27T18:24:41+00:00"
+        },
+        {
             "name": "laravel/framework",
             "version": "v13.2.0",
             "source": {
@@ -4100,17 +4166,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/MadBox-99/filament-spatie-permissions.git",
-                "reference": "ad500b9b498d28d878f7a6d01fcc3d8f5ded52a7"
+                "reference": "d0ddbe691f9eb3a3b1df27a524acd3447e2375a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MadBox-99/filament-spatie-permissions/zipball/ad500b9b498d28d878f7a6d01fcc3d8f5ded52a7",
-                "reference": "ad500b9b498d28d878f7a6d01fcc3d8f5ded52a7",
+                "url": "https://api.github.com/repos/MadBox-99/filament-spatie-permissions/zipball/d0ddbe691f9eb3a3b1df27a524acd3447e2375a2",
+                "reference": "d0ddbe691f9eb3a3b1df27a524acd3447e2375a2",
                 "shasum": ""
             },
             "require": {
-                "filament/filament": "^5.0",
-                "php": "^8.4",
+                "filament/filament": "^4.0 || ^5.0",
+                "php": "^8.3",
                 "spatie/laravel-permission": "^6.0"
             },
             "require-dev": {
@@ -4138,22 +4204,29 @@
             "authors": [
                 {
                     "name": "MadBox",
-                    "email": "info@madbox.hu"
+                    "email": "info@madbox.hu",
+                    "homepage": "https://madbox.hu"
                 }
             ],
-            "description": "Filament v5 plugin for managing Spatie roles and permissions with enum-driven sync",
+            "description": "Filament v5 plugin for managing Spatie roles and permissions with enum-driven sync, CRUD resources, and a permission matrix overview.",
+            "homepage": "https://github.com/MadBox-99/filament-spatie-permissions",
             "keywords": [
+                "acl",
                 "filament",
+                "filament-plugin",
                 "laravel",
+                "laravel-permission",
+                "madbox",
                 "permissions",
+                "rbac",
                 "roles",
                 "spatie"
             ],
             "support": {
                 "issues": "https://github.com/MadBox-99/filament-spatie-permissions/issues",
-                "source": "https://github.com/MadBox-99/filament-spatie-permissions/tree/main"
+                "source": "https://github.com/MadBox-99/filament-spatie-permissions"
             },
-            "time": "2026-03-30T13:34:20+00:00"
+            "time": "2026-03-30T13:42:56+00:00"
         },
         {
             "name": "madbox-99/laravel-locale-switcher",
@@ -6017,6 +6090,85 @@
                 "source": "https://github.com/antonioribeiro/google2fa-qrcode/tree/v3.0.0"
             },
             "time": "2021-08-15T12:53:48+00:00"
+        },
+        {
+            "name": "prism-php/prism",
+            "version": "v0.99.22",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/prism-php/prism.git",
+                "reference": "989f67567aef69c613eae6e932d615fb96e2f5d7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/prism-php/prism/zipball/989f67567aef69c613eae6e932d615fb96e2f5d7",
+                "reference": "989f67567aef69c613eae6e932d615fb96e2f5d7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-fileinfo": "*",
+                "laravel/framework": "^11.0|^12.0|^13.0",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "brianium/paratest": "^7.8.4",
+                "laravel/mcp": "^0.6.0",
+                "laravel/pint": "^1.14",
+                "mockery/mockery": "^1.6",
+                "orchestra/testbench": "^10",
+                "pestphp/pest": "^3.0",
+                "pestphp/pest-plugin-arch": "^3.0",
+                "pestphp/pest-plugin-laravel": "^3.0",
+                "phpstan/extension-installer": "^1.3",
+                "phpstan/phpdoc-parser": "^2.0",
+                "phpstan/phpstan": "2.1.34",
+                "phpstan/phpstan-deprecation-rules": "^2.0",
+                "projektgopher/whisky": "^0.7.0",
+                "rector/rector": "2.3.3",
+                "spatie/laravel-ray": "^1.39",
+                "symplify/rule-doc-generator-contracts": "^11.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "PrismServer": "Prism\\Prism\\Facades\\PrismServer"
+                    },
+                    "providers": [
+                        "Prism\\Prism\\PrismServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Prism\\Prism\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "TJ Miller",
+                    "email": "hello@echolabs.dev"
+                }
+            ],
+            "description": "A powerful Laravel package for integrating Large Language Models (LLMs) into your applications.",
+            "support": {
+                "issues": "https://github.com/prism-php/prism/issues",
+                "source": "https://github.com/prism-php/prism/tree/v0.99.22"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sixlive",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-03-12T17:55:23+00:00"
         },
         {
             "name": "psr/cache",
@@ -14949,11 +15101,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.44",
+            "version": "2.1.45",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/4a88c083c668b2c364a425c9b3171b2d9ea5d218",
-                "reference": "4a88c083c668b2c364a425c9b3171b2d9ea5d218",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/f8cdfd9421b7edb7686a2d150a234870464eac70",
+                "reference": "f8cdfd9421b7edb7686a2d150a234870464eac70",
                 "shasum": ""
             },
             "require": {
@@ -14998,7 +15150,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-25T17:34:21+00:00"
+            "time": "2026-03-30T13:22:02+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",

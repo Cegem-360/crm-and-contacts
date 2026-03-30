@@ -81,21 +81,21 @@
                         'justify-start' => $entry['role'] === 'assistant',
                     ])>
                         @if ($entry['role'] === 'assistant')
-                            <div class="flex items-start gap-3 max-w-[85%]">
+                            <div class="flex items-start gap-3 max-w-[85%] min-w-0">
                                 <div class="shrink-0 w-7 h-7 rounded-full bg-primary-100 dark:bg-primary-900/40 flex items-center justify-center mt-0.5">
                                     <x-filament::icon
                                         :icon="\Filament\Support\Icons\Heroicon::Sparkles"
                                         class="w-4 h-4 text-primary-600 dark:text-primary-400"
                                     />
                                 </div>
-                                <div class="rounded-2xl rounded-tl-md bg-gray-100 dark:bg-gray-800 px-4 py-3">
-                                    <div class="prose dark:prose-invert prose-sm max-w-none">
+                                <div class="min-w-0 rounded-2xl rounded-tl-md bg-gray-100 dark:bg-gray-800 px-4 py-3 overflow-hidden">
+                                    <div class="prose dark:prose-invert prose-sm max-w-none overflow-x-auto wrap-break-word [&_table]:text-xs [&_pre]:overflow-x-auto">
                                         {!! \Illuminate\Support\Str::markdown($entry['content']) !!}
                                     </div>
                                 </div>
                             </div>
                         @else
-                            <div class="max-w-[75%] rounded-2xl rounded-tr-md bg-primary-500 px-4 py-3 text-sm text-white shadow-sm">
+                            <div class="max-w-[75%] rounded-2xl rounded-tr-md bg-primary-500 px-4 py-3 text-sm text-white shadow-sm wrap-break-word">
                                 {{ $entry['content'] }}
                             </div>
                         @endif

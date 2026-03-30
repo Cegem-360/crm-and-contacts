@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-enum Permission: string
+use MadBox\FilamentSpatiePermissions\Contracts\PermissionEnum;
+
+enum Permission: string implements PermissionEnum
 {
     // Customer permissions
     case ViewAnyCustomer = 'view_any_customer';

@@ -30,6 +30,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use MadBox\FilamentSpatiePermissions\FilamentSpatiePermissionsPlugin;
 use MadBox\LocaleSwitcher\SetLocale;
 
 final class AdminPanelServiceProvider extends PanelProvider
@@ -80,6 +81,13 @@ final class AdminPanelServiceProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Emerald,
             ])
+            ->plugin(
+                FilamentSpatiePermissionsPlugin::make()
+                    ->permissionEnum(\App\Enums\Permission::class)
+                    ->roleEnum(\App\Enums\Role::class)
+                    ->navigationGroup('System')
+                    ->canAccessUsing(fn ($user) => $user?->hasRole(\App\Enums\Role::Admin) ?? false)
+            )
             ->databaseNotifications()
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')

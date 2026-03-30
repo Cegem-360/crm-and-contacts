@@ -22,7 +22,7 @@ final class CampaignForm
     {
         return $schema
             ->components([
-                Section::make('Basic Information')
+                Section::make(__('Basic Information'))
                     ->schema([
                         TextInput::make('name')
                             ->required()
@@ -32,7 +32,7 @@ final class CampaignForm
                             ->columnSpanFull(),
                     ]),
 
-                Section::make('Campaign Settings')
+                Section::make(__('Campaign Settings'))
                     ->schema([
                         Grid::make(2)
                             ->schema([
@@ -56,7 +56,7 @@ final class CampaignForm
                             ]),
                     ]),
 
-                Section::make('Budget & Performance')
+                Section::make(__('Budget & Performance'))
                     ->schema([
                         Grid::make(2)
                             ->schema([
@@ -82,7 +82,7 @@ final class CampaignForm
                             ]),
                     ]),
 
-                Section::make('Google Ads Integration')
+                Section::make(__('Google Ads Integration'))
                     ->schema([
                         TextInput::make('google_ads_campaign_id')
                             ->label('Google Ads Campaign ID')
@@ -92,7 +92,7 @@ final class CampaignForm
                     ->visible(fn ($get) => $get('campaign_type') === CampaignType::GoogleAds->value)
                     ->collapsed(),
 
-                Section::make('Targeting')
+                Section::make(__('Targeting'))
                     ->schema([
                         Textarea::make('target_audience_criteria')
                             ->label('Target Audience Criteria')
@@ -102,7 +102,7 @@ final class CampaignForm
                     ])
                     ->collapsed(),
 
-                Section::make('Administration')
+                Section::make(__('Administration'))
                     ->schema([
                         Select::make('created_by')
                             ->relationship('creator', 'name', modifyQueryUsing: fn ($query) => $query->whereRelation('teams', 'teams.id', resolve('current_team')->getKey()))

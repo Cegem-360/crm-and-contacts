@@ -20,6 +20,7 @@
         "livewire/livewire": "^4.2.2",
         "madbox-99/laravel-locale-switcher": "dev-main",
         "madbox-99/laravel-user-team-sync": "dev-main",
+        "madbox/filament-spatie-permissions": "@dev",
         "nunomaduro/essentials": "@dev",
         "spatie/laravel-activitylog": "^4.12.3",
         "spatie/laravel-permission": "^6.25.0",
@@ -127,6 +128,10 @@
             "name": "filament",
             "type": "composer",
             "url": "https://packages.filamentphp.com/composer"
+        },
+        {
+            "type": "path",
+            "url": "../filament-spatie-permissions"
         }
     ]
 }

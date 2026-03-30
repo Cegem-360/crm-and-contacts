@@ -16,7 +16,7 @@ final class ActivityLogInfolist
     {
         return $schema
             ->components([
-                Section::make('Activity Details')
+                Section::make(__('Activity Details'))
                     ->schema([
                         Grid::make(2)
                             ->schema([
@@ -36,7 +36,7 @@ final class ActivityLogInfolist
                                     ->columnSpanFull(),
                             ]),
                     ]),
-                Section::make('Subject Information')
+                Section::make(__('Subject Information'))
                     ->schema([
                         Grid::make(2)
                             ->schema([
@@ -47,7 +47,7 @@ final class ActivityLogInfolist
                                     ->label('Subject ID'),
                             ]),
                     ]),
-                Section::make('Causer Information')
+                Section::make(__('Causer Information'))
                     ->schema([
                         Grid::make(2)
                             ->schema([
@@ -65,7 +65,7 @@ final class ActivityLogInfolist
                                     ->placeholder('System'),
                             ]),
                     ]),
-                Section::make('Changes')
+                Section::make(__('Changes'))
                     ->schema([
                         KeyValueEntry::make('properties.attributes')
                             ->label('New Values')
@@ -77,7 +77,7 @@ final class ActivityLogInfolist
                             ->visible(fn ($record): bool => ! empty($record->properties['old'] ?? [])),
                     ])
                     ->collapsed(),
-                Section::make('Metadata')
+                Section::make(__('Metadata'))
                     ->schema([
                         Grid::make(2)
                             ->schema([

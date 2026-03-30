@@ -20,7 +20,7 @@ final class ChatSessionForm
     {
         return $schema
             ->components([
-                Section::make('Session Details')
+                Section::make(__('Session Details'))
                     ->schema([
                         Grid::make(2)
                             ->schema([
@@ -61,7 +61,7 @@ final class ChatSessionForm
                                     ->nullable(),
                             ]),
                     ]),
-                Section::make('Timestamps')
+                Section::make(__('Timestamps'))
                     ->schema([
                         Grid::make(3)
                             ->schema([
@@ -82,7 +82,7 @@ final class ChatSessionForm
                             ]),
                     ])
                     ->collapsible(),
-                Section::make('Additional Information')
+                Section::make(__('Additional Information'))
                     ->schema([
                         Placeholder::make('unread_count')
                             ->label('Unread Messages')

@@ -16,7 +16,7 @@ final class CampaignInfolist
     {
         return $schema
             ->components([
-                Section::make('Campaign Details')
+                Section::make(__('Campaign Details'))
                     ->schema([
                         Grid::make(2)
                             ->schema([
@@ -35,7 +35,7 @@ final class CampaignInfolist
                             ->columnSpanFull(),
                     ]),
 
-                Section::make('Campaign Period')
+                Section::make(__('Campaign Period'))
                     ->schema([
                         Grid::make(2)
                             ->schema([
@@ -47,7 +47,7 @@ final class CampaignInfolist
                             ]),
                     ]),
 
-                Section::make('Budget & Costs')
+                Section::make(__('Budget & Costs'))
                     ->schema([
                         Grid::make(3)
                             ->schema([
@@ -68,7 +68,7 @@ final class CampaignInfolist
                             ]),
                     ]),
 
-                Section::make('Performance Metrics')
+                Section::make(__('Performance Metrics'))
                     ->schema([
                         Grid::make(4)
                             ->schema([
@@ -89,7 +89,7 @@ final class CampaignInfolist
                             ]),
                     ]),
 
-                Section::make('KPI Metrics')
+                Section::make(__('KPI Metrics'))
                     ->schema([
                         Grid::make(4)
                             ->schema([
@@ -126,7 +126,7 @@ final class CampaignInfolist
                             ]),
                     ]),
 
-                Section::make('Response Analysis')
+                Section::make(__('Response Analysis'))
                     ->schema([
                         Grid::make(3)
                             ->schema([
@@ -174,7 +174,7 @@ final class CampaignInfolist
                             ]),
                     ]),
 
-                Section::make('Google Ads Integration')
+                Section::make(__('Google Ads Integration'))
                     ->schema([
                         TextEntry::make('google_ads_campaign_id')
                             ->label('Google Ads Campaign ID')
@@ -184,7 +184,7 @@ final class CampaignInfolist
                     ])
                     ->visible(fn (Campaign $record): bool => $record->google_ads_campaign_id !== null),
 
-                Section::make('Target Audience')
+                Section::make(__('Target Audience'))
                     ->schema([
                         TextEntry::make('target_audience_criteria')
                             ->placeholder('-')
@@ -193,7 +193,7 @@ final class CampaignInfolist
                     ->collapsible()
                     ->collapsed(),
 
-                Section::make('System Information')
+                Section::make(__('System Information'))
                     ->schema([
                         Grid::make(3)
                             ->schema([

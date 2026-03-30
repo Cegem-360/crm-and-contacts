@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-enum Role: string
+use MadBox\FilamentSpatiePermissions\Contracts\RoleEnum;
+
+enum Role: string implements RoleEnum
 {
     case Admin = 'Admin';
     case Manager = 'Manager';

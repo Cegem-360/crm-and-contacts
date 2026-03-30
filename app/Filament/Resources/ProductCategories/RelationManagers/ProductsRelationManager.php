@@ -34,23 +34,27 @@ final class ProductsRelationManager extends RelationManager
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->label(__('Name'))
                     ->required()
                     ->maxLength(255),
                 TextInput::make('sku')
-                    ->label('SKU')
+                    ->label(__('SKU'))
                     ->required()
                     ->unique(ignoreRecord: true)
                     ->maxLength(255),
                 Textarea::make('description')
+                    ->label(__('Description'))
                     ->rows(3)
                     ->columnSpanFull(),
                 TextInput::make('unit_price')
+                    ->label(__('Unit Price'))
                     ->required()
                     ->numeric()
                     ->prefix('$')
                     ->default(0)
                     ->minValue(0),
                 TextInput::make('tax_rate')
+                    ->label(__('Tax Rate'))
                     ->required()
                     ->numeric()
                     ->suffix('%')
@@ -58,6 +62,7 @@ final class ProductsRelationManager extends RelationManager
                     ->minValue(0)
                     ->maxValue(100),
                 Toggle::make('is_active')
+                    ->label(__('Active'))
                     ->default(true)
                     ->required(),
             ]);
@@ -69,31 +74,38 @@ final class ProductsRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->columns([
                 TextColumn::make('name')
+                    ->label(__('Name'))
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('sku')
-                    ->label('SKU')
+                    ->label(__('SKU'))
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('unit_price')
+                    ->label(__('Unit Price'))
                     ->money('USD')
                     ->sortable(),
                 TextColumn::make('tax_rate')
+                    ->label(__('Tax Rate'))
                     ->suffix('%')
                     ->numeric(decimalPlaces: 2)
                     ->sortable(),
                 IconColumn::make('is_active')
+                    ->label(__('Active'))
                     ->boolean()
                     ->sortable(),
                 TextColumn::make('created_at')
+                    ->label(__('Created At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label(__('Updated At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('deleted_at')
+                    ->label(__('Deleted At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

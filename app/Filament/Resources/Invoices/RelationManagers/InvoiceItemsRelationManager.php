@@ -23,15 +23,23 @@ final class InvoiceItemsRelationManager extends RelationManager
 {
     protected static string $relationship = 'invoiceItems';
 
+    public static function getModelLabel(): string
+    {
+        return __('Item');
+    }
+
     public function form(Schema $schema): Schema
     {
         return $schema
             ->components([
                 Select::make('product_id')
+                    ->label(__('Product'))
                     ->relationship('product', 'name'),
                 Textarea::make('description')
+                    ->label(__('Description'))
                     ->columnSpanFull(),
                 TextInput::make('quantity')
+                    ->label(__('Quantity'))
                     ->live()
                     ->required()
                     ->numeric()
@@ -44,18 +52,22 @@ final class InvoiceItemsRelationManager extends RelationManager
                     })
                     ->default(1),
                 TextInput::make('unit_price')
+                    ->label(__('Unit Price'))
                     ->required()
                     ->numeric()
                     ->default(0),
                 TextInput::make('discount_amount')
+                    ->label(__('Discount Amount'))
                     ->required()
                     ->numeric()
                     ->default(0),
                 TextInput::make('tax_rate')
+                    ->label(__('Tax Rate'))
                     ->required()
                     ->numeric()
                     ->default(0),
                 TextInput::make('total')
+                    ->label(__('Total'))
                     ->required()
                     ->numeric()
                     ->default(0),
@@ -68,23 +80,30 @@ final class InvoiceItemsRelationManager extends RelationManager
             ->recordTitleAttribute('description')
             ->columns([
                 TextColumn::make('product.name')
+                    ->label(__('Product'))
                     ->searchable(),
                 TextColumn::make('description')
+                    ->label(__('Description'))
                     ->searchable()
                     ->limit(50),
                 TextColumn::make('quantity')
+                    ->label(__('Quantity'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('unit_price')
+                    ->label(__('Unit Price'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('discount_amount')
+                    ->label(__('Discount Amount'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('tax_rate')
+                    ->label(__('Tax Rate'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('total')
+                    ->label(__('Total'))
                     ->numeric()
                     ->sortable(),
             ])

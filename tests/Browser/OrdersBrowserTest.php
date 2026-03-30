@@ -19,20 +19,20 @@ beforeEach(function (): void {
 
 function loginAndVisitOrders(object $context): mixed
 {
-    $page = visit('/admin/login');
+    $page = visit('/app/login');
 
     $page->type('#form\\.email', 'orders@example.com')
         ->type('#form\\.password', 'password')
         ->submit()
         ->wait(2);
 
-    return visit('/dashboard/'.$context->team->slug.'/orders');
+    return visit('/app/'.$context->team->slug.'/orders');
 }
 
 it('renders the orders list page', function (): void {
     $page = loginAndVisitOrders($this);
 
-    $page->assertPathIs('/dashboard/'.$this->team->slug.'/orders')
+    $page->assertPathIs('/app/'.$this->team->slug.'/orders')
         ->assertSee('Orders')
         ->assertSee('New Order')
         ->assertNoJavaScriptErrors()
@@ -65,7 +65,7 @@ it('renders the order view page', function (): void {
 
     loginAndVisitOrders($this);
 
-    $page = visit('/dashboard/'.$this->team->slug.'/orders/'.$order->id);
+    $page = visit('/app/'.$this->team->slug.'/orders/'.$order->id);
 
     $page->assertSee('ORD-VIEW-001')
         ->assertSee('Order details')
@@ -80,7 +80,7 @@ it('renders the order edit page', function (): void {
 
     loginAndVisitOrders($this);
 
-    $page = visit('/dashboard/'.$this->team->slug.'/orders/'.$order->id.'/edit');
+    $page = visit('/app/'.$this->team->slug.'/orders/'.$order->id.'/edit');
 
     $page->assertSee('Edit Order')
         ->assertNoJavaScriptErrors()

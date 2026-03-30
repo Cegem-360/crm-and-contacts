@@ -30,6 +30,11 @@ final class ItemsRelationManager extends RelationManager
         return __('Order Items');
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('Item');
+    }
+
     public function form(Schema $schema): Schema
     {
         return $schema

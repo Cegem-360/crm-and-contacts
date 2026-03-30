@@ -29,17 +29,17 @@ final class MessagesRelationManager extends RelationManager
         return $schema
             ->components([
                 Select::make('sender_type')
-                    ->label('Sender Type')
+                    ->label(__('Sender Type'))
                     ->options(ChatMessageSenderType::class)
                     ->required()
                     ->reactive()
                     ->disabled(),
                 Select::make('sender_id')
-                    ->label('Sender')
+                    ->label(__('Sender'))
                     ->required()
                     ->disabled(),
                 Textarea::make('message')
-                    ->label('Message')
+                    ->label(__('Message'))
                     ->required()
                     ->rows(4)
                     ->maxLength(1000)
@@ -56,11 +56,11 @@ final class MessagesRelationManager extends RelationManager
             ->recordTitleAttribute('message')
             ->columns([
                 TextColumn::make('id')
-                    ->label('ID')
+                    ->label(__('ID'))
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('sender_type')
-                    ->label('From')
+                    ->label(__('From'))
                     ->badge()
                     ->sortable()
                     ->color(fn (ChatMessageSenderType $state): array => match ($state) {
@@ -68,46 +68,46 @@ final class MessagesRelationManager extends RelationManager
                         ChatMessageSenderType::Customer => Color::Green,
                     }),
                 TextColumn::make('sender.name')
-                    ->label('Sender')
+                    ->label(__('Sender'))
                     ->sortable()
                     ->searchable()
                     ->getStateUsing(fn ($record) => $record->sender?->name ?? 'Unknown'),
                 TextColumn::make('message')
-                    ->label('Message')
+                    ->label(__('Message'))
                     ->searchable()
                     ->limit(50)
                     ->wrap()
                     ->tooltip(fn ($record) => $record->message),
                 IconColumn::make('is_read')
-                    ->label('Read')
+                    ->label(__('Read'))
                     ->boolean()
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('created_at')
-                    ->label('Sent At')
+                    ->label(__('Sent At'))
                     ->dateTime('M d, Y H:i')
                     ->sortable()
                     ->since()
                     ->tooltip(fn ($record) => $record->created_at?->format('M d, Y H:i:s')),
                 TextColumn::make('read_at')
-                    ->label('Read At')
+                    ->label(__('Read At'))
                     ->dateTime('M d, Y H:i')
                     ->sortable()
                     ->placeholder('Not read')
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('parentMessage.message')
-                    ->label('Reply To')
+                    ->label(__('Reply To'))
                     ->limit(30)
                     ->placeholder('-')
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 SelectFilter::make('sender_type')
-                    ->label('Sender Type')
+                    ->label(__('Sender Type'))
                     ->options(ChatMessageSenderType::class)
                     ->multiple(),
                 SelectFilter::make('is_read')
-                    ->label('Read Status')
+                    ->label(__('Read Status'))
                     ->options([
                         true => 'Read',
                         false => 'Unread',

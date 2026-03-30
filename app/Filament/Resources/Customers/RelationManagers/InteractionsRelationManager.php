@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Customers\RelationManagers;
 
+use App\Enums\InteractionType;
 use Filament\Actions\AssociateAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
@@ -40,21 +41,30 @@ final class InteractionsRelationManager extends RelationManager
         return $schema
             ->components([
                 Select::make('user_id')
+                    ->label(__('User'))
                     ->relationship('user', 'name', modifyQueryUsing: fn ($query) => $query->whereRelation('teams', 'teams.id', resolve('current_team')->getKey()))
                     ->required(),
-                TextInput::make('type')
-                    ->required()
-                    ->default('note'),
+                Select::make('type')
+                    ->label(__('Type'))
+                    ->options(InteractionType::class)
+                    ->default(InteractionType::Note)
+                    ->required(),
                 TextInput::make('subject')
+                    ->label(__('Subject'))
                     ->required(),
                 Textarea::make('description')
+                    ->label(__('Description'))
                     ->columnSpanFull(),
                 DateTimePicker::make('interaction_date')
+                    ->label(__('Interaction Date'))
                     ->required(),
                 TextInput::make('duration')
+                    ->label(__('Duration'))
                     ->numeric(),
-                TextInput::make('next_action'),
-                DatePicker::make('next_action_date'),
+                TextInput::make('next_action')
+                    ->label(__('Next Action')),
+                DatePicker::make('next_action_date')
+                    ->label(__('Next Action Date')),
             ]);
     }
 
@@ -64,39 +74,43 @@ final class InteractionsRelationManager extends RelationManager
             ->recordTitleAttribute('subject')
             ->columns([
                 TextColumn::make('user.name')
+                    ->label(__('User'))
                     ->searchable(),
                 TextColumn::make('type')
+                    ->label(__('Type'))
                     ->searchable(),
                 TextColumn::make('subject')
+                    ->label(__('Subject'))
                     ->searchable(),
                 TextColumn::make('interaction_date')
+                    ->label(__('Interaction Date'))
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('duration')
+                    ->label(__('Duration'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('next_action')
+                    ->label(__('Next Action'))
                     ->searchable(),
                 TextColumn::make('next_action_date')
+                    ->label(__('Next Action Date'))
                     ->date()
                     ->sortable(),
                 TextColumn::make('created_at')
+                    ->label(__('Created At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label(__('Updated At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 SelectFilter::make('type')
-                    ->options([
-                        'note' => __('Note'),
-                        'call' => __('Call'),
-                        'meeting' => __('Meeting'),
-                        'email' => __('Email'),
-                    ]),
+                    ->options(InteractionType::class),
                 Filter::make('date_range')
                     ->form([
                         DatePicker::make('from')

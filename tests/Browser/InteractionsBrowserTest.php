@@ -19,20 +19,20 @@ beforeEach(function (): void {
 
 function loginAndVisitInteractions(object $context): mixed
 {
-    $page = visit('/admin/login');
+    $page = visit('/app/login');
 
     $page->type('#form\\.email', 'interactions@example.com')
         ->type('#form\\.password', 'password')
         ->submit()
         ->wait(2);
 
-    return visit('/dashboard/'.$context->team->slug.'/interactions');
+    return visit('/app/'.$context->team->slug.'/interactions');
 }
 
 it('renders the interactions list page', function (): void {
     $page = loginAndVisitInteractions($this);
 
-    $page->assertPathIs('/dashboard/'.$this->team->slug.'/interactions')
+    $page->assertPathIs('/app/'.$this->team->slug.'/interactions')
         ->assertSee('Interactions')
         ->assertSee('New Interaction')
         ->assertNoJavaScriptErrors()
@@ -69,7 +69,7 @@ it('renders the interaction view page', function (): void {
 
     loginAndVisitInteractions($this);
 
-    $page = visit('/dashboard/'.$this->team->slug.'/interactions/'.$interaction->id);
+    $page = visit('/app/'.$this->team->slug.'/interactions/'.$interaction->id);
 
     $page->assertSee('Interaction Details')
         ->assertNoJavaScriptErrors()
@@ -85,7 +85,7 @@ it('renders the interaction edit page', function (): void {
 
     loginAndVisitInteractions($this);
 
-    $page = visit('/dashboard/'.$this->team->slug.'/interactions/'.$interaction->id.'/edit');
+    $page = visit('/app/'.$this->team->slug.'/interactions/'.$interaction->id.'/edit');
 
     $page->assertSee('Edit Interaction')
         ->assertNoJavaScriptErrors()

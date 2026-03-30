@@ -81,37 +81,4 @@ final class CustomersTable
                 ]),
             ]);
     }
-
-    public static function configureDashboard(Table $table): Table
-    {
-        return $table
-            ->columns([
-                TextColumn::make('name')
-                    ->label(__('Name'))
-                    ->searchable()
-                    ->sortable(),
-                TextColumn::make('type')
-                    ->label(__('Type'))
-                    ->badge(),
-                TextColumn::make('email')
-                    ->label(__('Email'))
-                    ->searchable(),
-                TextColumn::make('phone')
-                    ->label(__('Phone'))
-                    ->searchable(),
-                IconColumn::make('is_active')
-                    ->label(__('Active'))
-                    ->boolean(),
-                TextColumn::make('created_at')
-                    ->label(__('Created'))
-                    ->date()
-                    ->sortable(),
-            ])
-            ->recordActions([
-                EditAction::make()
-                    ->url(fn ($record): string => route('dashboard.customers.edit', ['team' => app('current_team'), 'customer' => $record])),
-            ])
-            ->defaultSort('name', 'asc')
-            ->paginated([10, 25, 50, 100]);
-    }
 }

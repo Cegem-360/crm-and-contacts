@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Customers\RelationManagers;
 
+use App\Enums\OrderStatus;
 use Filament\Actions\AssociateAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
@@ -43,31 +44,41 @@ final class OrdersRelationManager extends RelationManager
         return $schema
             ->components([
                 Select::make('quote_id')
-                    ->relationship('quote', 'id'),
+                    ->label(__('Quote'))
+                    ->relationship('quote', 'quote_number'),
                 TextInput::make('order_number')
+                    ->label(__('Order Number'))
                     ->required(),
                 DatePicker::make('order_date')
+                    ->label(__('Order Date'))
                     ->required(),
-                TextInput::make('status')
-                    ->required()
-                    ->default('pending'),
+                Select::make('status')
+                    ->label(__('Status'))
+                    ->options(OrderStatus::class)
+                    ->default(OrderStatus::Pending)
+                    ->required(),
                 TextInput::make('subtotal')
+                    ->label(__('Subtotal'))
                     ->required()
                     ->numeric()
                     ->default(0),
                 TextInput::make('discount_amount')
+                    ->label(__('Discount Amount'))
                     ->required()
                     ->numeric()
                     ->default(0),
                 TextInput::make('tax_amount')
+                    ->label(__('Tax Amount'))
                     ->required()
                     ->numeric()
                     ->default(0),
                 TextInput::make('total')
+                    ->label(__('Total'))
                     ->required()
                     ->numeric()
                     ->default(0),
                 Textarea::make('notes')
+                    ->label(__('Notes'))
                     ->columnSpanFull(),
             ]);
     }
@@ -77,36 +88,47 @@ final class OrdersRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('order_number')
             ->columns([
-                TextColumn::make('quote.id')
+                TextColumn::make('quote.quote_number')
+                    ->label(__('Quote'))
                     ->searchable(),
                 TextColumn::make('order_number')
+                    ->label(__('Order Number'))
                     ->searchable(),
                 TextColumn::make('order_date')
+                    ->label(__('Order Date'))
                     ->date()
                     ->sortable(),
                 TextColumn::make('status')
+                    ->label(__('Status'))
                     ->searchable(),
                 TextColumn::make('subtotal')
+                    ->label(__('Subtotal'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('discount_amount')
+                    ->label(__('Discount Amount'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('tax_amount')
+                    ->label(__('Tax Amount'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('total')
+                    ->label(__('Total'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('created_at')
+                    ->label(__('Created At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label(__('Updated At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('deleted_at')
+                    ->label(__('Deleted At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

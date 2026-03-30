@@ -17,14 +17,14 @@ beforeEach(function (): void {
 
 function loginAndVisitHome(object $context): mixed
 {
-    $page = visit('/admin/login');
+    $page = visit('/app/login');
 
     $page->type('#form\\.email', 'navigation@example.com')
         ->type('#form\\.password', 'password')
         ->submit()
         ->wait(2);
 
-    return visit('/dashboard/'.$context->team->slug);
+    return visit('/app/'.$context->team->slug);
 }
 
 it('navigates to sales dashboard via sidebar', function (): void {
@@ -32,7 +32,7 @@ it('navigates to sales dashboard via sidebar', function (): void {
 
     $page->click('Sales Dashboard')
         ->wait(1)
-        ->assertPathIs('/dashboard/'.$this->team->slug.'/sales-dashboard')
+        ->assertPathIs('/app/'.$this->team->slug.'/sales-dashboard')
         ->assertSee('Sales Dashboard')
         ->assertNoJavaScriptErrors()
         ->screenshot(filename: screenshotPath('navigation/sales-dashboard'), fullPage: true);
@@ -43,7 +43,7 @@ it('navigates to customer list via sidebar', function (): void {
 
     $page->click('Customer List')
         ->wait(1)
-        ->assertPathIs('/dashboard/'.$this->team->slug.'/customers')
+        ->assertPathIs('/app/'.$this->team->slug.'/customers')
         ->assertSee('Customers')
         ->assertNoJavaScriptErrors()
         ->screenshot(filename: screenshotPath('navigation/customer-list'), fullPage: true);
@@ -54,16 +54,16 @@ it('navigates to opportunities via sidebar', function (): void {
 
     $page->click('Leads / Opportunities')
         ->wait(1)
-        ->assertPathIs('/dashboard/'.$this->team->slug.'/opportunities')
+        ->assertPathIs('/app/'.$this->team->slug.'/opportunities')
         ->assertSee('Opportunities')
         ->assertNoJavaScriptErrors()
         ->screenshot(filename: screenshotPath('navigation/opportunities'), fullPage: true);
 });
 
 it('redirects guest to login page', function (): void {
-    $page = visit('/dashboard/'.$this->team->slug);
+    $page = visit('/app/'.$this->team->slug);
 
-    $page->assertPathIs('/admin/login')
+    $page->assertPathIs('/app/login')
         ->assertSee('Sign in')
         ->screenshot(filename: screenshotPath('navigation/guest-redirect'), fullPage: true);
 });

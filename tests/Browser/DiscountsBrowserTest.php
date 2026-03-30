@@ -18,20 +18,20 @@ beforeEach(function (): void {
 
 function loginAndVisitDiscounts(object $context): mixed
 {
-    $page = visit('/admin/login');
+    $page = visit('/app/login');
 
     $page->type('#form\\.email', 'discounts@example.com')
         ->type('#form\\.password', 'password')
         ->submit()
         ->wait(2);
 
-    return visit('/dashboard/'.$context->team->slug.'/discounts');
+    return visit('/app/'.$context->team->slug.'/discounts');
 }
 
 it('renders the discounts list page', function (): void {
     $page = loginAndVisitDiscounts($this);
 
-    $page->assertPathIs('/dashboard/'.$this->team->slug.'/discounts')
+    $page->assertPathIs('/app/'.$this->team->slug.'/discounts')
         ->assertSee('Discounts')
         ->assertSee('New Discount')
         ->assertNoJavaScriptErrors()
@@ -61,7 +61,7 @@ it('renders the discount view page', function (): void {
 
     loginAndVisitDiscounts($this);
 
-    $page = visit('/dashboard/'.$this->team->slug.'/discounts/'.$discount->id);
+    $page = visit('/app/'.$this->team->slug.'/discounts/'.$discount->id);
 
     $page->assertSee('View Discount Test')
         ->assertSee('Discount details')
@@ -77,7 +77,7 @@ it('renders the discount edit page', function (): void {
 
     loginAndVisitDiscounts($this);
 
-    $page = visit('/dashboard/'.$this->team->slug.'/discounts/'.$discount->id.'/edit');
+    $page = visit('/app/'.$this->team->slug.'/discounts/'.$discount->id.'/edit');
 
     $page->assertSee('Edit Discount')
         ->assertNoJavaScriptErrors()

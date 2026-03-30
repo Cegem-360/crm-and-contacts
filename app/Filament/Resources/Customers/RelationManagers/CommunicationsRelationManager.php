@@ -39,24 +39,32 @@ final class CommunicationsRelationManager extends RelationManager
         return $schema
             ->components([
                 Select::make('channel')
+                    ->label(__('Channel'))
                     ->options(CommunicationChannel::class)
-                    ->default('email')
+                    ->default(CommunicationChannel::Email)
                     ->required(),
                 Select::make('direction')
+                    ->label(__('Direction'))
                     ->options(CommunicationDirection::class)
-                    ->default('outbound')
+                    ->default(CommunicationDirection::Outbound)
                     ->required(),
-                TextInput::make('subject'),
+                TextInput::make('subject')
+                    ->label(__('Subject')),
                 Textarea::make('content')
+                    ->label(__('Content'))
                     ->required()
                     ->columnSpanFull(),
                 Select::make('status')
+                    ->label(__('Status'))
                     ->options(CommunicationStatus::class)
-                    ->default('pending')
+                    ->default(CommunicationStatus::Pending)
                     ->required(),
-                DateTimePicker::make('sent_at'),
-                DateTimePicker::make('delivered_at'),
-                DateTimePicker::make('read_at'),
+                DateTimePicker::make('sent_at')
+                    ->label(__('Sent At')),
+                DateTimePicker::make('delivered_at')
+                    ->label(__('Delivered At')),
+                DateTimePicker::make('read_at')
+                    ->label(__('Read At')),
             ]);
     }
 
@@ -66,30 +74,39 @@ final class CommunicationsRelationManager extends RelationManager
             ->recordTitleAttribute('subject')
             ->columns([
                 TextColumn::make('channel')
+                    ->label(__('Channel'))
                     ->badge()
                     ->searchable(),
                 TextColumn::make('direction')
+                    ->label(__('Direction'))
                     ->badge()
                     ->searchable(),
                 TextColumn::make('subject')
+                    ->label(__('Subject'))
                     ->searchable(),
                 TextColumn::make('status')
+                    ->label(__('Status'))
                     ->badge()
                     ->searchable(),
                 TextColumn::make('sent_at')
+                    ->label(__('Sent At'))
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('delivered_at')
+                    ->label(__('Delivered At'))
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('read_at')
+                    ->label(__('Read At'))
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('created_at')
+                    ->label(__('Created At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label(__('Updated At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

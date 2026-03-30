@@ -8,12 +8,16 @@ use App\Models\Team;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
+use Illuminate\Support\Facades\App;
 
 final class TeamScope implements Scope
 {
+    /** @param Builder<Model> $builder */
     public function apply(Builder $builder, Model $model): void
     {
-        $team = app()->bound('current_team') ? resolve('current_team') : null;
+        $team = App::bound(Team::CONTAINER_BINDING)
+            ? App::make(Team::CONTAINER_BINDING)
+            : null;
 
         if ($team instanceof Team) {
             $builder->where(

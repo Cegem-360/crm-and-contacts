@@ -19,20 +19,20 @@ beforeEach(function (): void {
 
 function loginAndVisitDashboard(object $context): mixed
 {
-    $page = visit('/admin/login');
+    $page = visit('/app/login');
 
     $page->type('#form\\.email', 'dashboard@example.com')
         ->type('#form\\.password', 'password')
         ->submit()
         ->wait(2);
 
-    return visit('/dashboard/'.$context->team->slug);
+    return visit('/app/'.$context->team->slug);
 }
 
 it('renders the dashboard with stats and quick actions', function (): void {
     $page = loginAndVisitDashboard($this);
 
-    $page->assertPathIs('/dashboard/'.$this->team->slug)
+    $page->assertPathIs('/app/'.$this->team->slug)
         ->assertSee('Welcome')
         ->assertSee($this->user->name)
         ->assertSee('Customers')

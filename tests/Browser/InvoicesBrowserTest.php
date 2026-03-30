@@ -19,20 +19,20 @@ beforeEach(function (): void {
 
 function loginAndVisitInvoices(object $context): mixed
 {
-    $page = visit('/admin/login');
+    $page = visit('/app/login');
 
     $page->type('#form\\.email', 'invoices@example.com')
         ->type('#form\\.password', 'password')
         ->submit()
         ->wait(2);
 
-    return visit('/dashboard/'.$context->team->slug.'/invoices');
+    return visit('/app/'.$context->team->slug.'/invoices');
 }
 
 it('renders the invoices list page', function (): void {
     $page = loginAndVisitInvoices($this);
 
-    $page->assertPathIs('/dashboard/'.$this->team->slug.'/invoices')
+    $page->assertPathIs('/app/'.$this->team->slug.'/invoices')
         ->assertSee('Invoices')
         ->assertSee('New Invoice')
         ->assertNoJavaScriptErrors()
@@ -67,7 +67,7 @@ it('renders the invoice view page', function (): void {
 
     loginAndVisitInvoices($this);
 
-    $page = visit('/dashboard/'.$this->team->slug.'/invoices/'.$invoice->id);
+    $page = visit('/app/'.$this->team->slug.'/invoices/'.$invoice->id);
 
     $page->assertSee('INV-VIEW-001')
         ->assertSee('Invoice details')
@@ -84,7 +84,7 @@ it('renders the invoice edit page', function (): void {
 
     loginAndVisitInvoices($this);
 
-    $page = visit('/dashboard/'.$this->team->slug.'/invoices/'.$invoice->id.'/edit');
+    $page = visit('/app/'.$this->team->slug.'/invoices/'.$invoice->id.'/edit');
 
     $page->assertSee('Edit Invoice')
         ->assertNoJavaScriptErrors()

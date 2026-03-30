@@ -20,20 +20,20 @@ beforeEach(function (): void {
 
 function loginAndVisitShipments(object $context): mixed
 {
-    $page = visit('/admin/login');
+    $page = visit('/app/login');
 
     $page->type('#form\\.email', 'shipments@example.com')
         ->type('#form\\.password', 'password')
         ->submit()
         ->wait(2);
 
-    return visit('/dashboard/'.$context->team->slug.'/shipments');
+    return visit('/app/'.$context->team->slug.'/shipments');
 }
 
 it('renders the shipments list page', function (): void {
     $page = loginAndVisitShipments($this);
 
-    $page->assertPathIs('/dashboard/'.$this->team->slug.'/shipments')
+    $page->assertPathIs('/app/'.$this->team->slug.'/shipments')
         ->assertSee('Shipments')
         ->assertNoJavaScriptErrors()
         ->screenshot(filename: screenshotPath('shipments/list'), fullPage: true);

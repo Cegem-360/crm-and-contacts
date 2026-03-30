@@ -46,37 +46,49 @@ final class InvoicesRelationManager extends RelationManager
         return $schema
             ->components([
                 Select::make('order_id')
-                    ->relationship('order', 'id'),
+                    ->label(__('Order'))
+                    ->relationship('order', 'order_number'),
                 TextInput::make('invoice_number')
+                    ->label(__('Invoice Number'))
                     ->required(),
                 DatePicker::make('issue_date')
+                    ->label(__('Issue Date'))
                     ->required(),
                 DatePicker::make('due_date')
+                    ->label(__('Due Date'))
                     ->required(),
                 Select::make('status')
+                    ->label(__('Status'))
                     ->options(InvoiceStatus::class)
-                    ->default('draft')
+                    ->default(InvoiceStatus::Draft)
                     ->required(),
                 TextInput::make('subtotal')
+                    ->label(__('Subtotal'))
                     ->required()
                     ->numeric()
                     ->default(0),
                 TextInput::make('discount_amount')
+                    ->label(__('Discount Amount'))
                     ->required()
                     ->numeric()
                     ->default(0),
                 TextInput::make('tax_amount')
+                    ->label(__('Tax Amount'))
                     ->required()
                     ->numeric()
                     ->default(0),
                 TextInput::make('total')
+                    ->label(__('Total'))
                     ->required()
                     ->numeric()
                     ->default(0),
                 Textarea::make('notes')
+                    ->label(__('Notes'))
                     ->columnSpanFull(),
-                DateTimePicker::make('paid_at'),
+                DateTimePicker::make('paid_at')
+                    ->label(__('Paid At')),
                 FileUpload::make('files')
+                    ->label(__('Files'))
                     ->directory('invoices')
                     ->panelLayout('grid')
                     ->multiple()
@@ -89,43 +101,56 @@ final class InvoicesRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('invoice_number')
             ->columns([
-                TextColumn::make('order.id')
+                TextColumn::make('order.order_number')
+                    ->label(__('Order'))
                     ->searchable(),
                 TextColumn::make('invoice_number')
+                    ->label(__('Invoice Number'))
                     ->searchable(),
                 TextColumn::make('issue_date')
+                    ->label(__('Issue Date'))
                     ->date()
                     ->sortable(),
                 TextColumn::make('due_date')
+                    ->label(__('Due Date'))
                     ->date()
                     ->sortable(),
                 TextColumn::make('status')
+                    ->label(__('Status'))
                     ->badge()
                     ->searchable(),
                 TextColumn::make('subtotal')
+                    ->label(__('Subtotal'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('discount_amount')
+                    ->label(__('Discount Amount'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('tax_amount')
+                    ->label(__('Tax Amount'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('total')
+                    ->label(__('Total'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('paid_at')
+                    ->label(__('Paid At'))
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('created_at')
+                    ->label(__('Created At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label(__('Updated At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('deleted_at')
+                    ->label(__('Deleted At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

@@ -76,6 +76,7 @@ final class ShipmentsRelationManager extends RelationManager
                     ->placeholder('—'),
 
                 TextColumn::make('created_at')
+                    ->label(__('Created At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

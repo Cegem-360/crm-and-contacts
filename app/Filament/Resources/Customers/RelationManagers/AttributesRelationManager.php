@@ -29,13 +29,20 @@ final class AttributesRelationManager extends RelationManager
         return __('Attributes');
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('Attribute');
+    }
+
     public function form(Schema $schema): Schema
     {
         return $schema
             ->components([
                 TextInput::make('attribute_key')
+                    ->label(__('Key'))
                     ->required(),
                 Textarea::make('attribute_value')
+                    ->label(__('Value'))
                     ->columnSpanFull(),
             ]);
     }
@@ -46,12 +53,15 @@ final class AttributesRelationManager extends RelationManager
             ->recordTitleAttribute('attribute_key')
             ->columns([
                 TextColumn::make('attribute_key')
+                    ->label(__('Key'))
                     ->searchable(),
                 TextColumn::make('created_at')
+                    ->label(__('Created At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label(__('Updated At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

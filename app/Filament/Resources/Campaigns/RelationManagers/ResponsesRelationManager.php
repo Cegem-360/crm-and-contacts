@@ -33,17 +33,21 @@ final class ResponsesRelationManager extends RelationManager
         return $schema
             ->components([
                 Select::make('customer_id')
+                    ->label(__('Customer'))
                     ->relationship('customer', 'name')
                     ->required()
                     ->searchable(),
                 Select::make('response_type')
+                    ->label(__('Response Type'))
                     ->options(CampaignResponseType::class)
                     ->required()
                     ->default(CampaignResponseType::NoResponse),
                 Textarea::make('notes')
+                    ->label(__('Notes'))
                     ->rows(3)
                     ->columnSpanFull(),
                 DateTimePicker::make('responded_at')
+                    ->label(__('Responded At'))
                     ->seconds(false),
             ]);
     }
@@ -54,23 +58,29 @@ final class ResponsesRelationManager extends RelationManager
             ->recordTitleAttribute('customer.name')
             ->columns([
                 TextColumn::make('customer.name')
+                    ->label(__('Customer'))
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('response_type')
+                    ->label(__('Response Type'))
                     ->badge()
                     ->sortable(),
                 TextColumn::make('notes')
+                    ->label(__('Notes'))
                     ->limit(50)
                     ->toggleable(),
                 TextColumn::make('responded_at')
+                    ->label(__('Responded At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('created_at')
+                    ->label(__('Created At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label(__('Updated At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -81,9 +91,9 @@ final class ResponsesRelationManager extends RelationManager
                 Filter::make('date_range')
                     ->form([
                         DatePicker::make('from')
-                            ->label('From'),
+                            ->label(__('From')),
                         DatePicker::make('until')
-                            ->label('Until'),
+                            ->label(__('Until')),
                     ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query

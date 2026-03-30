@@ -144,7 +144,7 @@ final class ShipmentsTable
                     ->label(__('Order'))
                     ->searchable()
                     ->sortable()
-                    ->url(fn ($record) => $record->order ? route('dashboard.orders.view', ['team' => app('current_team'), 'order' => $record->order]) : null),
+                    ->url(fn ($record) => $record->order ? \App\Filament\Resources\Orders\OrderResource::getUrl('edit', ['record' => $record->order]) : null),
                 TextColumn::make('carrier')
                     ->label(__('Carrier'))
                     ->searchable()

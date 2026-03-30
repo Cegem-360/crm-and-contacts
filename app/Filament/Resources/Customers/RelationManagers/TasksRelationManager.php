@@ -14,6 +14,7 @@ use Filament\Actions\DissociateBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -21,6 +22,7 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 final class TasksRelationManager extends RelationManager
 {
@@ -35,24 +37,44 @@ final class TasksRelationManager extends RelationManager
     {
         return $schema
             ->components([
-                TextInput::make('assigned_to')
-                    ->required()
-                    ->numeric(),
-                TextInput::make('assigned_by')
-                    ->required()
-                    ->numeric(),
+                Select::make('assigned_to')
+                    ->label(__('Assigned User'))
+                    ->relationship('assignedUser', 'name', modifyQueryUsing: fn ($query) => $query->whereRelation('teams', 'teams.id', resolve('current_team')->getKey()))
+                    ->required(),
+                Select::make('assigned_by')
+                    ->label(__('Assigned By'))
+                    ->relationship('assigner', 'name', modifyQueryUsing: fn ($query) => $query->whereRelation('teams', 'teams.id', resolve('current_team')->getKey()))
+                    ->default(Auth::id()),
                 TextInput::make('title')
+                    ->label(__('Title'))
                     ->required(),
                 Textarea::make('description')
+                    ->label(__('Description'))
                     ->columnSpanFull(),
-                TextInput::make('priority')
-                    ->required()
-                    ->default('medium'),
-                TextInput::make('status')
-                    ->required()
-                    ->default('pending'),
-                DatePicker::make('due_date'),
-                DateTimePicker::make('completed_at'),
+                Select::make('priority')
+                    ->label(__('Priority'))
+                    ->options([
+                        'low' => __('Low'),
+                        'medium' => __('Medium'),
+                        'high' => __('High'),
+                        'urgent' => __('Urgent'),
+                    ])
+                    ->default('medium')
+                    ->required(),
+                Select::make('status')
+                    ->label(__('Status'))
+                    ->options([
+                        'pending' => __('Pending'),
+                        'in_progress' => __('In Progress'),
+                        'completed' => __('Completed'),
+                        'cancelled' => __('Cancelled'),
+                    ])
+                    ->default('pending')
+                    ->required(),
+                DatePicker::make('due_date')
+                    ->label(__('Due Date')),
+                DateTimePicker::make('completed_at')
+                    ->label(__('Completed At')),
             ]);
     }
 
@@ -61,29 +83,36 @@ final class TasksRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('title')
             ->columns([
-                TextColumn::make('assigned_to')
-                    ->numeric()
+                TextColumn::make('assignedUser.name')
+                    ->label(__('Assigned User'))
                     ->sortable(),
-                TextColumn::make('assigned_by')
-                    ->numeric()
+                TextColumn::make('assigner.name')
+                    ->label(__('Assigned By'))
                     ->sortable(),
                 TextColumn::make('title')
+                    ->label(__('Title'))
                     ->searchable(),
                 TextColumn::make('priority')
+                    ->label(__('Priority'))
                     ->searchable(),
                 TextColumn::make('status')
+                    ->label(__('Status'))
                     ->searchable(),
                 TextColumn::make('due_date')
+                    ->label(__('Due Date'))
                     ->date()
                     ->sortable(),
                 TextColumn::make('completed_at')
+                    ->label(__('Completed At'))
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('created_at')
+                    ->label(__('Created At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label(__('Updated At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

@@ -34,41 +34,50 @@ final class QuotesRelationManager extends RelationManager
                     ->default($this->ownerRecord->customer_id)
                     ->required(),
                 TextInput::make('quote_number')
+                    ->label(__('Quote Number'))
                     ->required()
                     ->unique(ignoreRecord: true)
                     ->default(fn (): string => 'QUO-'.now()->year.'-'.mb_str_pad((string) random_int(1, 9999), 4, '0', STR_PAD_LEFT)),
                 DatePicker::make('issue_date')
+                    ->label(__('Issue Date'))
                     ->required()
                     ->default(now())
                     ->native(false),
                 DatePicker::make('valid_until')
+                    ->label(__('Valid Until'))
                     ->required()
                     ->default(now()->addDays(30))
                     ->native(false),
                 Select::make('status')
+                    ->label(__('Status'))
                     ->options(QuoteStatus::class)
                     ->required()
                     ->default(QuoteStatus::Draft),
                 TextInput::make('subtotal')
+                    ->label(__('Subtotal'))
                     ->required()
                     ->numeric()
                     ->prefix('HUF')
                     ->default(0),
                 TextInput::make('discount_amount')
+                    ->label(__('Discount Amount'))
                     ->numeric()
                     ->prefix('HUF')
                     ->default(0),
                 TextInput::make('tax_amount')
+                    ->label(__('Tax Amount'))
                     ->required()
                     ->numeric()
                     ->prefix('HUF')
                     ->default(0),
                 TextInput::make('total')
+                    ->label(__('Total'))
                     ->required()
                     ->numeric()
                     ->prefix('HUF')
                     ->default(0),
                 Textarea::make('notes')
+                    ->label(__('Notes'))
                     ->columnSpanFull()
                     ->rows(3),
             ]);
@@ -80,24 +89,31 @@ final class QuotesRelationManager extends RelationManager
             ->recordTitleAttribute('quote_number')
             ->columns([
                 TextColumn::make('quote_number')
+                    ->label(__('Quote Number'))
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('status')
+                    ->label(__('Status'))
                     ->badge()
                     ->sortable(),
                 TextColumn::make('issue_date')
+                    ->label(__('Issue Date'))
                     ->date()
                     ->sortable(),
                 TextColumn::make('valid_until')
+                    ->label(__('Valid Until'))
                     ->date()
                     ->sortable(),
                 TextColumn::make('subtotal')
+                    ->label(__('Subtotal'))
                     ->money('HUF')
                     ->sortable(),
                 TextColumn::make('total')
+                    ->label(__('Total'))
                     ->money('HUF')
                     ->sortable(),
                 TextColumn::make('created_at')
+                    ->label(__('Created At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

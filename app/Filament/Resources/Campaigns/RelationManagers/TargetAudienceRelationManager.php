@@ -32,18 +32,23 @@ final class TargetAudienceRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $title = 'Target Audience';
+    protected static ?string $title = null;
+
+    public static function getModelLabel(): string
+    {
+        return __('Target Customer');
+    }
 
     public function form(Schema $schema): Schema
     {
         return $schema
             ->components([
                 Textarea::make('notes')
-                    ->label('Notes')
+                    ->label(__('Notes'))
                     ->rows(3)
                     ->columnSpanFull(),
                 DateTimePicker::make('added_at')
-                    ->label('Added At')
+                    ->label(__('Added At'))
                     ->default(now())
                     ->seconds(false),
             ]);
@@ -55,60 +60,60 @@ final class TargetAudienceRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->columns([
                 TextColumn::make('name')
-                    ->label('Customer Name')
+                    ->label(__('Customer Name'))
                     ->searchable()
                     ->sortable()
                     ->weight('medium'),
                 TextColumn::make('type')
-                    ->label('Type')
+                    ->label(__('Type'))
                     ->badge()
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('email')
-                    ->label('Email')
+                    ->label(__('Email address'))
                     ->searchable()
                     ->copyable()
                     ->toggleable(),
                 TextColumn::make('phone')
-                    ->label('Phone')
+                    ->label(__('Phone'))
                     ->searchable()
                     ->copyable()
                     ->toggleable(),
                 TextColumn::make('addresses.city')
-                    ->label('City')
+                    ->label(__('City'))
                     ->searchable()
                     ->toggleable()
                     ->limitedToFirst(),
                 TextColumn::make('is_active')
-                    ->label('Active')
+                    ->label(__('Active'))
                     ->badge()
                     ->formatStateUsing(fn (bool $state): string => $state ? 'Active' : 'Inactive')
                     ->color(fn (bool $state): string => $state ? 'success' : 'danger')
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('pivot.added_at')
-                    ->label('Added to Campaign')
+                    ->label(__('Added to Campaign'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('pivot.notes')
-                    ->label('Campaign Notes')
+                    ->label(__('Campaign Notes'))
                     ->limit(30)
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 SelectFilter::make('type')
-                    ->label('Customer Type')
+                    ->label(__('Customer Type'))
                     ->options(CustomerType::class),
                 TernaryFilter::make('is_active')
-                    ->label('Active Status')
+                    ->label(__('Active Status'))
                     ->placeholder('All customers')
                     ->trueLabel('Active only')
                     ->falseLabel('Inactive only'),
                 Filter::make('city')
                     ->form([
                         Select::make('city')
-                            ->label('City')
+                            ->label(__('City'))
                             ->searchable()
                             ->options(function (): array {
                                 return \App\Models\CustomerAddress::query()
@@ -130,7 +135,7 @@ final class TargetAudienceRelationManager extends RelationManager
                 Filter::make('industry')
                     ->form([
                         Select::make('industry')
-                            ->label('Industry')
+                            ->label(__('Industry'))
                             ->searchable()
                             ->options(function (): array {
                                 return \App\Models\Customer::query()
@@ -149,7 +154,7 @@ final class TargetAudienceRelationManager extends RelationManager
                 Filter::make('last_purchase')
                     ->form([
                         DatePicker::make('purchased_since')
-                            ->label('Purchased since'),
+                            ->label(__('Purchased since')),
                     ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query->when(

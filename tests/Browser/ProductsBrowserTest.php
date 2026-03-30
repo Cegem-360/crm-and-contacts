@@ -18,20 +18,20 @@ beforeEach(function (): void {
 
 function loginAndVisitProducts(object $context): mixed
 {
-    $page = visit('/admin/login');
+    $page = visit('/app/login');
 
     $page->type('#form\\.email', 'products@example.com')
         ->type('#form\\.password', 'password')
         ->submit()
         ->wait(2);
 
-    return visit('/dashboard/'.$context->team->slug.'/products');
+    return visit('/app/'.$context->team->slug.'/products');
 }
 
 it('renders the products list page', function (): void {
     $page = loginAndVisitProducts($this);
 
-    $page->assertPathIs('/dashboard/'.$this->team->slug.'/products')
+    $page->assertPathIs('/app/'.$this->team->slug.'/products')
         ->assertSee('Products')
         ->assertSee('New Product')
         ->assertNoJavaScriptErrors()
@@ -59,7 +59,7 @@ it('renders the product view page', function (): void {
 
     loginAndVisitProducts($this);
 
-    $page = visit('/dashboard/'.$this->team->slug.'/products/'.$product->id);
+    $page = visit('/app/'.$this->team->slug.'/products/'.$product->id);
 
     $page->assertSee('View Test Product')
         ->assertSee('Product details')
@@ -72,7 +72,7 @@ it('renders the product edit page', function (): void {
 
     loginAndVisitProducts($this);
 
-    $page = visit('/dashboard/'.$this->team->slug.'/products/'.$product->id.'/edit');
+    $page = visit('/app/'.$this->team->slug.'/products/'.$product->id.'/edit');
 
     $page->assertSee('Edit Product')
         ->assertNoJavaScriptErrors()

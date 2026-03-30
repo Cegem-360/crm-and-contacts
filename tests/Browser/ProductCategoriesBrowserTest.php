@@ -18,20 +18,20 @@ beforeEach(function (): void {
 
 function loginAndVisitProductCategories(object $context): mixed
 {
-    $page = visit('/admin/login');
+    $page = visit('/app/login');
 
     $page->type('#form\\.email', 'categories@example.com')
         ->type('#form\\.password', 'password')
         ->submit()
         ->wait(2);
 
-    return visit('/dashboard/'.$context->team->slug.'/product-categories');
+    return visit('/app/'.$context->team->slug.'/product-categories');
 }
 
 it('renders the product categories list page', function (): void {
     $page = loginAndVisitProductCategories($this);
 
-    $page->assertPathIs('/dashboard/'.$this->team->slug.'/product-categories')
+    $page->assertPathIs('/app/'.$this->team->slug.'/product-categories')
         ->assertSee('Product Categories')
         ->assertSee('New Product Category')
         ->assertNoJavaScriptErrors()
@@ -57,7 +57,7 @@ it('renders the product category edit page', function (): void {
 
     loginAndVisitProductCategories($this);
 
-    $page = visit('/dashboard/'.$this->team->slug.'/product-categories/'.$category->id.'/edit');
+    $page = visit('/app/'.$this->team->slug.'/product-categories/'.$category->id.'/edit');
 
     $page->assertSee('Edit Product Category')
         ->assertNoJavaScriptErrors()

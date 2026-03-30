@@ -18,20 +18,20 @@ beforeEach(function (): void {
 
 function loginAndVisitQuoteTemplates(object $context): mixed
 {
-    $page = visit('/admin/login');
+    $page = visit('/app/login');
 
     $page->type('#form\\.email', 'quote-templates@example.com')
         ->type('#form\\.password', 'password')
         ->submit()
         ->wait(2);
 
-    return visit('/dashboard/'.$context->team->slug.'/quote-templates');
+    return visit('/app/'.$context->team->slug.'/quote-templates');
 }
 
 it('renders the quote templates list page', function (): void {
     $page = loginAndVisitQuoteTemplates($this);
 
-    $page->assertPathIs('/dashboard/'.$this->team->slug.'/quote-templates')
+    $page->assertPathIs('/app/'.$this->team->slug.'/quote-templates')
         ->assertSee('Quote Templates')
         ->assertSee('New Quote Template')
         ->assertNoJavaScriptErrors()
@@ -58,7 +58,7 @@ it('renders the quote template edit page', function (): void {
 
     loginAndVisitQuoteTemplates($this);
 
-    $page = visit('/dashboard/'.$this->team->slug.'/quote-templates/'.$template->id.'/edit');
+    $page = visit('/app/'.$this->team->slug.'/quote-templates/'.$template->id.'/edit');
 
     $page->assertSee('Edit Quote Template')
         ->assertNoJavaScriptErrors()

@@ -28,11 +28,17 @@ final class AddressesRelationManager extends RelationManager
         return __('Addresses');
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('Address');
+    }
+
     public function form(Schema $schema): Schema
     {
         return $schema
             ->components([
                 Select::make('type')
+                    ->label(__('Type'))
                     ->required()
                     ->default('billing')
                     ->options([
@@ -40,17 +46,25 @@ final class AddressesRelationManager extends RelationManager
                         'shipping' => __('Shipping'),
                     ]),
                 TextInput::make('country')
+                    ->label(__('Country'))
                     ->required(),
                 TextInput::make('postal_code')
+                    ->label(__('Postal Code'))
                     ->required(),
                 TextInput::make('city')
+                    ->label(__('City'))
                     ->required(),
                 TextInput::make('street')
+                    ->label(__('Street'))
                     ->required(),
-                TextInput::make('building_number'),
-                TextInput::make('floor'),
-                TextInput::make('door'),
+                TextInput::make('building_number')
+                    ->label(__('Building Number')),
+                TextInput::make('floor')
+                    ->label(__('Floor')),
+                TextInput::make('door')
+                    ->label(__('Door')),
                 Toggle::make('is_default')
+                    ->label(__('Default'))
                     ->required(),
             ]);
     }
@@ -61,28 +75,39 @@ final class AddressesRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->columns([
                 TextColumn::make('type')
+                    ->label(__('Type'))
                     ->searchable(),
                 TextColumn::make('country')
+                    ->label(__('Country'))
                     ->searchable(),
                 TextColumn::make('postal_code')
+                    ->label(__('Postal Code'))
                     ->searchable(),
                 TextColumn::make('city')
+                    ->label(__('City'))
                     ->searchable(),
                 TextColumn::make('street')
+                    ->label(__('Street'))
                     ->searchable(),
                 TextColumn::make('building_number')
+                    ->label(__('Building Number'))
                     ->searchable(),
                 TextColumn::make('floor')
+                    ->label(__('Floor'))
                     ->searchable(),
                 TextColumn::make('door')
+                    ->label(__('Door'))
                     ->searchable(),
                 IconColumn::make('is_default')
+                    ->label(__('Default'))
                     ->boolean(),
                 TextColumn::make('created_at')
+                    ->label(__('Created At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label(__('Updated At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

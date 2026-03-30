@@ -37,7 +37,7 @@ final class VersionsRelationManager extends RelationManager
                     ->label(__('Template'))
                     ->placeholder('-'),
                 TextColumn::make('changes_summary')
-                    ->label('Changes')
+                    ->label(__('Changes'))
                     ->state(function (QuoteVersion $record): string {
                         $log = $record->changes_log;
                         if (empty($log)) {
@@ -58,6 +58,7 @@ final class VersionsRelationManager extends RelationManager
                         return implode(', ', $parts) ?: '-';
                     }),
                 TextColumn::make('created_at')
+                    ->label(__('Created At'))
                     ->dateTime()
                     ->sortable(),
             ])

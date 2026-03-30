@@ -19,20 +19,20 @@ beforeEach(function (): void {
 
 function loginAndVisitQuotes(object $context): mixed
 {
-    $page = visit('/admin/login');
+    $page = visit('/app/login');
 
     $page->type('#form\\.email', 'quotes@example.com')
         ->type('#form\\.password', 'password')
         ->submit()
         ->wait(2);
 
-    return visit('/dashboard/'.$context->team->slug.'/quotes');
+    return visit('/app/'.$context->team->slug.'/quotes');
 }
 
 it('renders the quotes list page', function (): void {
     $page = loginAndVisitQuotes($this);
 
-    $page->assertPathIs('/dashboard/'.$this->team->slug.'/quotes')
+    $page->assertPathIs('/app/'.$this->team->slug.'/quotes')
         ->assertSee('Quotes')
         ->assertSee('New Quote')
         ->assertNoJavaScriptErrors()
@@ -65,7 +65,7 @@ it('renders the quote view page', function (): void {
 
     loginAndVisitQuotes($this);
 
-    $page = visit('/dashboard/'.$this->team->slug.'/quotes/'.$quote->id);
+    $page = visit('/app/'.$this->team->slug.'/quotes/'.$quote->id);
 
     $page->assertSee('QT-VIEW-001')
         ->assertSee('Quote details')
@@ -80,7 +80,7 @@ it('renders the quote edit page', function (): void {
 
     loginAndVisitQuotes($this);
 
-    $page = visit('/dashboard/'.$this->team->slug.'/quotes/'.$quote->id.'/edit');
+    $page = visit('/app/'.$this->team->slug.'/quotes/'.$quote->id.'/edit');
 
     $page->assertSee('Edit Quote')
         ->assertNoJavaScriptErrors()

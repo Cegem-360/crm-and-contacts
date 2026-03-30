@@ -20,20 +20,20 @@ beforeEach(function (): void {
 
 function loginAndVisitOpportunities(object $context): mixed
 {
-    $page = visit('/admin/login');
+    $page = visit('/app/login');
 
     $page->type('#form\\.email', 'opportunities@example.com')
         ->type('#form\\.password', 'password')
         ->submit()
         ->wait(2);
 
-    return visit('/dashboard/'.$context->team->slug.'/opportunities');
+    return visit('/app/'.$context->team->slug.'/opportunities');
 }
 
 it('renders the opportunities list page', function (): void {
     $page = loginAndVisitOpportunities($this);
 
-    $page->assertPathIs('/dashboard/'.$this->team->slug.'/opportunities')
+    $page->assertPathIs('/app/'.$this->team->slug.'/opportunities')
         ->assertSee('Opportunities')
         ->assertSee('New Opportunity')
         ->assertNoJavaScriptErrors()
@@ -64,7 +64,7 @@ it('renders the opportunity edit page', function (): void {
 
     loginAndVisitOpportunities($this);
 
-    $page = visit('/dashboard/'.$this->team->slug.'/opportunities/'.$opportunity->id.'/edit');
+    $page = visit('/app/'.$this->team->slug.'/opportunities/'.$opportunity->id.'/edit');
 
     $page->assertSee('Edit Opportunity')
         ->assertNoJavaScriptErrors()

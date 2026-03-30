@@ -14,7 +14,7 @@ it('can sign in the user', function () {
     ]);
     $user->teams()->attach($team);
 
-    $page = visit('/admin/login');
+    $page = visit('/app/login');
 
     $page->assertSee('Sign in')
         ->assertNoJavaScriptErrors()
@@ -22,7 +22,7 @@ it('can sign in the user', function () {
         ->type('#form\\.password', 'password')
         ->submit()
         ->wait(2)
-        ->assertPathIs('/dashboard/'.$team->slug)
+        ->assertPathIs('/app/'.$team->slug)
         ->assertSee($user->name)
         ->assertNoJavaScriptErrors()
         ->screenshot(filename: screenshotPath('auth/login-success'), fullPage: true);
@@ -38,7 +38,7 @@ it('cannot sign in with invalid credentials', function () {
     ]);
     $user->teams()->attach($team);
 
-    $page = visit('/admin/login');
+    $page = visit('/app/login');
 
     $page->assertSee('Sign in')
         ->assertNoJavaScriptErrors()
@@ -46,7 +46,7 @@ it('cannot sign in with invalid credentials', function () {
         ->type('#form\\.password', 'wrong-password')
         ->submit()
         ->wait(1)
-        ->assertPathIs('/admin/login')
+        ->assertPathIs('/app/login')
         ->assertSee('Sign in')
         ->assertNoJavaScriptErrors()
         ->screenshot(filename: screenshotPath('auth/login-failed'), fullPage: true);

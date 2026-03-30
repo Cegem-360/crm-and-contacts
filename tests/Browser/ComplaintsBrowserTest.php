@@ -19,20 +19,20 @@ beforeEach(function (): void {
 
 function loginAndVisitComplaints(object $context): mixed
 {
-    $page = visit('/admin/login');
+    $page = visit('/app/login');
 
     $page->type('#form\\.email', 'complaints@example.com')
         ->type('#form\\.password', 'password')
         ->submit()
         ->wait(2);
 
-    return visit('/dashboard/'.$context->team->slug.'/complaints');
+    return visit('/app/'.$context->team->slug.'/complaints');
 }
 
 it('renders the complaints list page', function (): void {
     $page = loginAndVisitComplaints($this);
 
-    $page->assertPathIs('/dashboard/'.$this->team->slug.'/complaints')
+    $page->assertPathIs('/app/'.$this->team->slug.'/complaints')
         ->assertSee('Complaints')
         ->assertSee('New Complaint')
         ->assertNoJavaScriptErrors()
@@ -70,7 +70,7 @@ it('renders the complaint view page', function (): void {
 
     loginAndVisitComplaints($this);
 
-    $page = visit('/dashboard/'.$this->team->slug.'/complaints/'.$complaint->id);
+    $page = visit('/app/'.$this->team->slug.'/complaints/'.$complaint->id);
 
     $page->assertSee('Complaint details')
         ->assertNoJavaScriptErrors()
@@ -88,7 +88,7 @@ it('renders the complaint edit page', function (): void {
 
     loginAndVisitComplaints($this);
 
-    $page = visit('/dashboard/'.$this->team->slug.'/complaints/'.$complaint->id.'/edit');
+    $page = visit('/app/'.$this->team->slug.'/complaints/'.$complaint->id.'/edit');
 
     $page->assertSee('Edit Complaint')
         ->assertNoJavaScriptErrors()

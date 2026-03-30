@@ -22,38 +22,43 @@ final class TrackingEventsRelationManager extends RelationManager
 {
     protected static string $relationship = 'trackingEvents';
 
-    protected static ?string $title = 'Tracking Events Timeline';
+    protected static ?string $title = null;
+
+    public static function getModelLabel(): string
+    {
+        return __('Tracking Event');
+    }
 
     public function form(Schema $schema): Schema
     {
         return $schema
             ->components([
                 TextInput::make('status_code')
-                    ->label('Status Code')
+                    ->label(__('Status Code'))
                     ->placeholder('IN_TRANSIT, DELIVERED, etc.')
                     ->required()
                     ->maxLength(255),
 
                 TextInput::make('location')
-                    ->label('Location')
+                    ->label(__('Location'))
                     ->placeholder('Budapest, Hungary')
                     ->maxLength(255),
 
                 Textarea::make('description')
-                    ->label('Description')
+                    ->label(__('Description'))
                     ->placeholder('Package is in transit...')
                     ->rows(3)
                     ->columnSpanFull(),
 
                 DateTimePicker::make('occurred_at')
-                    ->label('Occurred At')
+                    ->label(__('Occurred At'))
                     ->required()
                     ->default(now()),
 
                 KeyValue::make('metadata')
-                    ->label('Additional Data')
-                    ->keyLabel('Key')
-                    ->valueLabel('Value')
+                    ->label(__('Additional Data'))
+                    ->keyLabel(__('Key'))
+                    ->valueLabel(__('Value'))
                     ->reorderable(false)
                     ->columnSpanFull(),
             ]);
@@ -65,32 +70,32 @@ final class TrackingEventsRelationManager extends RelationManager
             ->recordTitleAttribute('status_code')
             ->columns([
                 TextColumn::make('occurred_at')
-                    ->label('Time')
+                    ->label(__('Time'))
                     ->dateTime('Y-m-d H:i')
                     ->sortable()
                     ->description(fn ($record) => $record->occurred_at->diffForHumans()),
 
                 TextColumn::make('status_code')
-                    ->label('Status')
+                    ->label(__('Status'))
                     ->badge()
                     ->color('primary')
                     ->searchable(),
 
                 TextColumn::make('location')
-                    ->label('Location')
+                    ->label(__('Location'))
                     ->searchable()
                     ->icon('heroicon-o-map-pin')
                     ->placeholder('—'),
 
                 TextColumn::make('description')
-                    ->label('Description')
+                    ->label(__('Description'))
                     ->searchable()
                     ->limit(50)
                     ->wrap()
                     ->placeholder('—'),
 
                 TextColumn::make('created_at')
-                    ->label('Logged At')
+                    ->label(__('Logged At'))
                     ->dateTime('Y-m-d H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

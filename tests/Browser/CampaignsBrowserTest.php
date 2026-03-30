@@ -18,20 +18,20 @@ beforeEach(function (): void {
 
 function loginAndVisitCampaigns(object $context): mixed
 {
-    $page = visit('/admin/login');
+    $page = visit('/app/login');
 
     $page->type('#form\\.email', 'campaigns@example.com')
         ->type('#form\\.password', 'password')
         ->submit()
         ->wait(2);
 
-    return visit('/dashboard/'.$context->team->slug.'/campaigns');
+    return visit('/app/'.$context->team->slug.'/campaigns');
 }
 
 it('renders the campaigns list page', function (): void {
     $page = loginAndVisitCampaigns($this);
 
-    $page->assertPathIs('/dashboard/'.$this->team->slug.'/campaigns')
+    $page->assertPathIs('/app/'.$this->team->slug.'/campaigns')
         ->assertSee('Campaigns')
         ->assertNoJavaScriptErrors()
         ->screenshot(filename: screenshotPath('campaigns/list'), fullPage: true);
@@ -59,7 +59,7 @@ it('renders the campaign view page', function (): void {
 
     loginAndVisitCampaigns($this);
 
-    $page = visit('/dashboard/'.$this->team->slug.'/campaigns/'.$campaign->id);
+    $page = visit('/app/'.$this->team->slug.'/campaigns/'.$campaign->id);
 
     $page->assertSee('View Test Campaign')
         ->assertSee('Campaign details')

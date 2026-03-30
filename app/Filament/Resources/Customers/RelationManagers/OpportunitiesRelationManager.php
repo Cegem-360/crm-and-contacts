@@ -48,13 +48,17 @@ final class OpportunitiesRelationManager extends RelationManager
         return $schema
             ->components([
                 TextInput::make('title')
+                    ->label(__('Title'))
                     ->string()
                     ->required(),
                 Textarea::make('description')
+                    ->label(__('Description'))
                     ->columnSpanFull(),
                 TextInput::make('value')
+                    ->label(__('Value'))
                     ->numeric(),
                 Slider::make('probability')
+                    ->label(__('Probability'))
                     ->required()
                     ->minValue(0)
                     ->maxValue(100)
@@ -66,11 +70,14 @@ final class OpportunitiesRelationManager extends RelationManager
                     ->pips(PipsMode::Steps, 5),
 
                 Select::make('stage')
+                    ->label(__('Stage'))
                     ->options(OpportunityStage::class)
                     ->default(OpportunityStage::Lead)
                     ->required(),
-                DatePicker::make('expected_close_date'),
+                DatePicker::make('expected_close_date')
+                    ->label(__('Expected Close Date')),
                 Select::make('assigned_to')
+                    ->label(__('Assigned User'))
                     ->relationship('assignedUser', 'name', modifyQueryUsing: fn ($query) => $query->whereRelation('teams', 'teams.id', resolve('current_team')->getKey()))
                     ->searchable()
                     ->preload()
@@ -86,30 +93,39 @@ final class OpportunitiesRelationManager extends RelationManager
             ->recordTitleAttribute('title')
             ->columns([
                 TextColumn::make('title')
+                    ->label(__('Title'))
                     ->searchable(),
                 TextColumn::make('value')
+                    ->label(__('Value'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('probability')
+                    ->label(__('Probability'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('stage')
+                    ->label(__('Stage'))
                     ->badge()
                     ->searchable(),
                 TextColumn::make('expected_close_date')
+                    ->label(__('Expected Close Date'))
                     ->date()
                     ->sortable(),
                 TextColumn::make('assignedUser.name')
+                    ->label(__('Assigned User'))
                     ->sortable(),
                 TextColumn::make('created_at')
+                    ->label(__('Created At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label(__('Updated At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('deleted_at')
+                    ->label(__('Deleted At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

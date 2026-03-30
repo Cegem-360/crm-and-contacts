@@ -23,18 +23,26 @@ final class ItemsRelationManager extends RelationManager
 {
     protected static string $relationship = 'items';
 
+    public static function getModelLabel(): string
+    {
+        return __('Item');
+    }
+
     public function form(Schema $schema): Schema
     {
         return $schema
             ->components([
                 Select::make('product_id')
+                    ->label(__('Product'))
                     ->relationship('product', 'name')
                     ->searchable()
                     ->preload(),
                 TextInput::make('description')
+                    ->label(__('Description'))
                     ->required()
                     ->maxLength(255),
                 TextInput::make('quantity')
+                    ->label(__('Quantity'))
                     ->afterStateUpdated(fn (Get $get, Set $set) => $this->calculateQuoteItemTotals($get, $set))
                     ->required()
                     ->numeric()
@@ -42,6 +50,7 @@ final class ItemsRelationManager extends RelationManager
                     ->live()
                     ->minValue(0.01),
                 TextInput::make('unit_price')
+                    ->label(__('Unit Price'))
                     ->afterStateUpdated(fn (Get $get, Set $set) => $this->calculateQuoteItemTotals($get, $set))
                     ->required()
                     ->numeric()
@@ -50,6 +59,7 @@ final class ItemsRelationManager extends RelationManager
                     ->live()
                     ->minValue(0),
                 TextInput::make('discount_percent')
+                    ->label(__('Discount Percent'))
                     ->afterStateUpdated(fn (Get $get, Set $set) => $this->calculateQuoteItemTotals($get, $set))
                     ->numeric()
                     ->suffix('%')
@@ -58,12 +68,14 @@ final class ItemsRelationManager extends RelationManager
                     ->minValue(0)
                     ->maxValue(100),
                 TextInput::make('discount_amount')
+                    ->label(__('Discount Amount'))
                     ->readOnly()
                     ->numeric()
                     ->prefix('$')
                     ->default(0)
                     ->minValue(0),
                 TextInput::make('tax_rate')
+                    ->label(__('Tax Rate'))
                     ->afterStateUpdated(fn (Get $get, Set $set) => $this->calculateQuoteItemTotals($get, $set))
                     ->required()
                     ->numeric()
@@ -73,6 +85,7 @@ final class ItemsRelationManager extends RelationManager
                     ->minValue(0)
                     ->maxValue(100),
                 TextInput::make('total')
+                    ->label(__('Total'))
                     ->required()
                     ->live()
                     ->numeric()
@@ -87,39 +100,49 @@ final class ItemsRelationManager extends RelationManager
             ->recordTitleAttribute('description')
             ->columns([
                 TextColumn::make('product.name')
+                    ->label(__('Product'))
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('description')
+                    ->label(__('Description'))
                     ->searchable()
                     ->limit(40),
                 TextColumn::make('quantity')
+                    ->label(__('Quantity'))
                     ->numeric(decimalPlaces: 2)
                     ->sortable(),
                 TextColumn::make('unit_price')
+                    ->label(__('Unit Price'))
                     ->money('USD')
                     ->sortable(),
                 TextColumn::make('discount_percent')
+                    ->label(__('Discount Percent'))
                     ->suffix('%')
                     ->numeric(decimalPlaces: 2)
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('discount_amount')
+                    ->label(__('Discount Amount'))
                     ->money('USD')
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('tax_rate')
+                    ->label(__('Tax Rate'))
                     ->suffix('%')
                     ->numeric(decimalPlaces: 2)
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('total')
+                    ->label(__('Total'))
                     ->money('USD'),
                 TextColumn::make('created_at')
+                    ->label(__('Created At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label(__('Updated At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

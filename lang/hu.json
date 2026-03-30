@@ -708,5 +708,17 @@
     "Who uses it?": "Ki használja?",
     "Won opportunities": "Megnyert lehetőségek",
     "Work email": "Munkahelyi email",
-    "Your position": "Beosztása"
+    "Your position": "Beosztása",
+    "Primary Contact": "Elsődleges kapcsolat",
+    "Tracking Event": "Nyomkövetési esemény",
+    "Bug Report": "Hibajelentés",
+    "Target Customer": "Célcsoport ügyfél",
+    "Item": "Tétel",
+    "Address": "Cím",
+    "Attribute": "Tulajdonság",
+    "Reported By": "Bejelentő",
+    "Unit Price": "Egységár",
+    "Discount Percent": "Kedvezmény %",
+    "Discount Amount": "Kedvezmény összege",
+    "Tax Rate": "Adókulcs"
 }

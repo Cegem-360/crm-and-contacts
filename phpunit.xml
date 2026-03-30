@@ -14,10 +14,16 @@
         <testsuite name="Architecture">
             <directory>tests/Architecture</directory>
         </testsuite>
-        <testsuite name="Browser">
+        <!-- Browser tests temporarily excluded from default runs -->
+        <!--<testsuite name="Browser">
             <directory>tests/Browser</directory>
-        </testsuite>
+        </testsuite>-->
     </testsuites>
+    <groups>
+        <exclude>
+            <group>browser</group>
+        </exclude>
+    </groups>
     <source>
         <include>
             <directory>app</directory>

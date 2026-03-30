@@ -18,20 +18,20 @@ beforeEach(function (): void {
 
 function loginAndVisitCustomers(object $context): mixed
 {
-    $page = visit('/admin/login');
+    $page = visit('/app/login');
 
     $page->type('#form\\.email', 'customers@example.com')
         ->type('#form\\.password', 'password')
         ->submit()
         ->wait(2);
 
-    return visit('/dashboard/'.$context->team->slug.'/customers');
+    return visit('/app/'.$context->team->slug.'/customers');
 }
 
 it('renders the customer list page', function (): void {
     $page = loginAndVisitCustomers($this);
 
-    $page->assertPathIs('/dashboard/'.$this->team->slug.'/customers')
+    $page->assertPathIs('/app/'.$this->team->slug.'/customers')
         ->assertSee('Customers')
         ->assertSee('New Customer')
         ->assertNoJavaScriptErrors()
@@ -57,7 +57,7 @@ it('renders the customer view page', function (): void {
 
     loginAndVisitCustomers($this);
 
-    $page = visit('/dashboard/'.$this->team->slug.'/customers/'.$customer->id);
+    $page = visit('/app/'.$this->team->slug.'/customers/'.$customer->id);
 
     $page->assertSee('View Customer Corp')
         ->assertSee('Customer details')
@@ -72,7 +72,7 @@ it('renders the customer edit page', function (): void {
 
     loginAndVisitCustomers($this);
 
-    $page = visit('/dashboard/'.$this->team->slug.'/customers/'.$customer->id.'/edit');
+    $page = visit('/app/'.$this->team->slug.'/customers/'.$customer->id.'/edit');
 
     $page->assertSee('Edit Customer')
         ->assertNoJavaScriptErrors()

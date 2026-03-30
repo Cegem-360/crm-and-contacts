@@ -46,36 +46,46 @@ final class QuotesRelationManager extends RelationManager
         return $schema
             ->components([
                 Select::make('opportunity_id')
+                    ->label(__('Opportunity'))
                     ->relationship('opportunity', 'title',
                         fn (Builder $query) => $query->whereBelongsTo($this->ownerRecord)),
                 TextInput::make('quote_number')
+                    ->label(__('Quote Number'))
                     ->required(),
                 DatePicker::make('issue_date')
+                    ->label(__('Issue Date'))
                     ->required(),
                 DatePicker::make('valid_until')
+                    ->label(__('Valid Until'))
                     ->required(),
                 Select::make('status')
+                    ->label(__('Status'))
                     ->options(QuoteStatus::class)
                     ->enum(QuoteStatus::class)
                     ->required()
                     ->default(QuoteStatus::Draft),
                 TextInput::make('subtotal')
+                    ->label(__('Subtotal'))
                     ->required()
                     ->numeric()
                     ->default(0),
                 TextInput::make('discount_amount')
+                    ->label(__('Discount Amount'))
                     ->required()
                     ->numeric()
                     ->default(0),
                 TextInput::make('tax_amount')
+                    ->label(__('Tax Amount'))
                     ->required()
                     ->numeric()
                     ->default(0),
                 TextInput::make('total')
+                    ->label(__('Total'))
                     ->required()
                     ->numeric()
                     ->default(0),
                 Textarea::make('notes')
+                    ->label(__('Notes'))
                     ->columnSpanFull(),
             ]);
     }
@@ -86,38 +96,50 @@ final class QuotesRelationManager extends RelationManager
             ->recordTitleAttribute('quote_number')
             ->columns([
                 TextColumn::make('opportunity.title')
+                    ->label(__('Opportunity'))
                     ->searchable(),
                 TextColumn::make('quote_number')
+                    ->label(__('Quote Number'))
                     ->searchable(),
                 TextColumn::make('issue_date')
+                    ->label(__('Issue Date'))
                     ->date()
                     ->sortable(),
                 TextColumn::make('valid_until')
+                    ->label(__('Valid Until'))
                     ->date()
                     ->sortable(),
                 TextColumn::make('status')
+                    ->label(__('Status'))
                     ->searchable(),
                 TextColumn::make('subtotal')
+                    ->label(__('Subtotal'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('discount_amount')
+                    ->label(__('Discount Amount'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('tax_amount')
+                    ->label(__('Tax Amount'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('total')
+                    ->label(__('Total'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('created_at')
+                    ->label(__('Created At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label(__('Updated At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('deleted_at')
+                    ->label(__('Deleted At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

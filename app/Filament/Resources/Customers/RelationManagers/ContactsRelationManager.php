@@ -30,19 +30,28 @@ final class ContactsRelationManager extends RelationManager
         return __('Contacts');
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('Contact');
+    }
+
     public function form(Schema $schema): Schema
     {
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->label(__('Name'))
                     ->required(),
                 TextInput::make('email')
                     ->label(__('Email address'))
                     ->email(),
                 TextInput::make('phone')
+                    ->label(__('Phone'))
                     ->tel(),
-                TextInput::make('position'),
+                TextInput::make('position')
+                    ->label(__('Position')),
                 Toggle::make('is_primary')
+                    ->label(__('Primary Contact'))
                     ->required(),
             ]);
     }
@@ -53,21 +62,27 @@ final class ContactsRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->columns([
                 TextColumn::make('name')
+                    ->label(__('Name'))
                     ->searchable(),
                 TextColumn::make('email')
                     ->label(__('Email address'))
                     ->searchable(),
                 TextColumn::make('phone')
+                    ->label(__('Phone'))
                     ->searchable(),
                 TextColumn::make('position')
+                    ->label(__('Position'))
                     ->searchable(),
                 IconColumn::make('is_primary')
+                    ->label(__('Primary Contact'))
                     ->boolean(),
                 TextColumn::make('created_at')
+                    ->label(__('Created At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label(__('Updated At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

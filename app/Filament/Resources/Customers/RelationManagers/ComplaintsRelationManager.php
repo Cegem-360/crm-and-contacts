@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Customers\RelationManagers;
 
+use App\Enums\ComplaintSeverity;
+use App\Enums\ComplaintStatus;
 use Filament\Actions\AssociateAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
@@ -36,28 +38,39 @@ final class ComplaintsRelationManager extends RelationManager
         return $schema
             ->components([
                 Select::make('order_id')
-                    ->relationship('order', 'id'),
-                TextInput::make('reported_by')
-                    ->required()
-                    ->numeric(),
-                TextInput::make('assigned_to')
-                    ->numeric(),
+                    ->label(__('Order'))
+                    ->relationship('order', 'order_number'),
+                Select::make('reported_by')
+                    ->label(__('Reported By'))
+                    ->relationship('reporter', 'name', modifyQueryUsing: fn ($query) => $query->whereRelation('teams', 'teams.id', resolve('current_team')->getKey())),
+                Select::make('assigned_to')
+                    ->label(__('Assigned User'))
+                    ->relationship('assignedUser', 'name', modifyQueryUsing: fn ($query) => $query->whereRelation('teams', 'teams.id', resolve('current_team')->getKey())),
                 TextInput::make('title')
+                    ->label(__('Title'))
                     ->required(),
                 Textarea::make('description')
+                    ->label(__('Description'))
                     ->required()
                     ->columnSpanFull(),
-                TextInput::make('severity')
-                    ->required()
-                    ->default('medium'),
-                TextInput::make('status')
-                    ->required()
-                    ->default('open'),
+                Select::make('severity')
+                    ->label(__('Severity'))
+                    ->options(ComplaintSeverity::class)
+                    ->default(ComplaintSeverity::Medium)
+                    ->required(),
+                Select::make('status')
+                    ->label(__('Status'))
+                    ->options(ComplaintStatus::class)
+                    ->default(ComplaintStatus::Open)
+                    ->required(),
                 Textarea::make('resolution')
+                    ->label(__('Resolution'))
                     ->columnSpanFull(),
                 DateTimePicker::make('reported_at')
+                    ->label(__('Reported At'))
                     ->required(),
-                DateTimePicker::make('resolved_at'),
+                DateTimePicker::make('resolved_at')
+                    ->label(__('Resolved At')),
             ]);
     }
 
@@ -66,31 +79,39 @@ final class ComplaintsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('title')
             ->columns([
-                TextColumn::make('order.id')
+                TextColumn::make('order.order_number')
+                    ->label(__('Order'))
                     ->searchable(),
-                TextColumn::make('reported_by')
-                    ->numeric()
+                TextColumn::make('reporter.name')
+                    ->label(__('Reported By'))
                     ->sortable(),
-                TextColumn::make('assigned_to')
-                    ->numeric()
+                TextColumn::make('assignedUser.name')
+                    ->label(__('Assigned User'))
                     ->sortable(),
                 TextColumn::make('title')
+                    ->label(__('Title'))
                     ->searchable(),
                 TextColumn::make('severity')
+                    ->label(__('Severity'))
                     ->searchable(),
                 TextColumn::make('status')
+                    ->label(__('Status'))
                     ->searchable(),
                 TextColumn::make('reported_at')
+                    ->label(__('Reported At'))
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('resolved_at')
+                    ->label(__('Resolved At'))
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('created_at')
+                    ->label(__('Created At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label(__('Updated At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

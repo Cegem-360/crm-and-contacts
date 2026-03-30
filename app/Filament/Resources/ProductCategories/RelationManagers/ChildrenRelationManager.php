@@ -25,9 +25,11 @@ final class ChildrenRelationManager extends RelationManager
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->label(__('Name'))
                     ->required()
                     ->maxLength(255),
                 Textarea::make('description')
+                    ->label(__('Description'))
                     ->rows(3)
                     ->columnSpanFull(),
             ]);
@@ -39,20 +41,24 @@ final class ChildrenRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->columns([
                 TextColumn::make('name')
+                    ->label(__('Name'))
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('description')
+                    ->label(__('Description'))
                     ->limit(50)
                     ->toggleable(),
                 TextColumn::make('products_count')
                     ->counts('products')
-                    ->label('Products')
+                    ->label(__('Products'))
                     ->sortable(),
                 TextColumn::make('created_at')
+                    ->label(__('Created At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label(__('Updated At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

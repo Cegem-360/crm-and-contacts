@@ -19,20 +19,20 @@ beforeEach(function (): void {
 
 function loginAndVisitTasks(object $context): mixed
 {
-    $page = visit('/admin/login');
+    $page = visit('/app/login');
 
     $page->type('#form\\.email', 'tasks@example.com')
         ->type('#form\\.password', 'password')
         ->submit()
         ->wait(2);
 
-    return visit('/dashboard/'.$context->team->slug.'/tasks');
+    return visit('/app/'.$context->team->slug.'/tasks');
 }
 
 it('renders the tasks list page', function (): void {
     $page = loginAndVisitTasks($this);
 
-    $page->assertPathIs('/dashboard/'.$this->team->slug.'/tasks')
+    $page->assertPathIs('/app/'.$this->team->slug.'/tasks')
         ->assertSee('Tasks')
         ->assertSee('New Task')
         ->assertNoJavaScriptErrors()
@@ -66,7 +66,7 @@ it('renders the task view page', function (): void {
 
     loginAndVisitTasks($this);
 
-    $page = visit('/dashboard/'.$this->team->slug.'/tasks/'.$task->id);
+    $page = visit('/app/'.$this->team->slug.'/tasks/'.$task->id);
 
     $page->assertSee('View Test Task')
         ->assertSee('Task details')
@@ -84,7 +84,7 @@ it('renders the task edit page', function (): void {
 
     loginAndVisitTasks($this);
 
-    $page = visit('/dashboard/'.$this->team->slug.'/tasks/'.$task->id.'/edit');
+    $page = visit('/app/'.$this->team->slug.'/tasks/'.$task->id.'/edit');
 
     $page->assertSee('Edit Task')
         ->assertNoJavaScriptErrors()

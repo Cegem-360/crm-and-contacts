@@ -19,20 +19,20 @@ beforeEach(function (): void {
 
 function loginAndVisitChatSessions(object $context): mixed
 {
-    $page = visit('/admin/login');
+    $page = visit('/app/login');
 
     $page->type('#form\\.email', 'chatsessions@example.com')
         ->type('#form\\.password', 'password')
         ->submit()
         ->wait(2);
 
-    return visit('/dashboard/'.$context->team->slug.'/chat-sessions');
+    return visit('/app/'.$context->team->slug.'/chat-sessions');
 }
 
 it('renders the chat sessions list page', function (): void {
     $page = loginAndVisitChatSessions($this);
 
-    $page->assertPathIs('/dashboard/'.$this->team->slug.'/chat-sessions')
+    $page->assertPathIs('/app/'.$this->team->slug.'/chat-sessions')
         ->assertSee('Chat Sessions')
         ->assertNoJavaScriptErrors()
         ->screenshot(filename: screenshotPath('chat-sessions/list'), fullPage: true);

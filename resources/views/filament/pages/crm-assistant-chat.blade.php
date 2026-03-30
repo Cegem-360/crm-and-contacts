@@ -1,5 +1,5 @@
 <x-filament-panels::page>
-    <div class="flex h-[calc(100vh-10rem)] rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white dark:bg-gray-900">
+    <div class="flex rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white dark:bg-gray-900" style="height: calc(100vh - 13rem); min-height: 400px;">
 
         {{-- Left Sidebar - Conversation History (macOS style) --}}
         <div class="w-72 shrink-0 flex flex-col border-e border-gray-200 dark:border-gray-700 bg-gray-50/80 dark:bg-gray-900/80 backdrop-blur-xl">
@@ -21,10 +21,11 @@
             {{-- Conversation List --}}
             <div class="flex-1 overflow-y-auto">
                 @forelse ($this->conversations as $conversation)
-                    <button
+                    <div
                         wire:click="loadConversation('{{ $conversation->id }}')"
+                        role="button"
                         @class([
-                            'w-full text-left px-3 py-2.5 border-b border-gray-100 dark:border-gray-800 transition group relative',
+                            'w-full text-left px-3 py-2.5 border-b border-gray-100 dark:border-gray-800 transition group relative cursor-pointer',
                             'bg-primary-50 dark:bg-primary-900/20 border-l-2 border-l-primary-500' => $conversationId === $conversation->id,
                             'hover:bg-gray-100 dark:hover:bg-gray-800/60 border-l-2 border-l-transparent' => $conversationId !== $conversation->id,
                         ])
@@ -55,7 +56,7 @@
                                 />
                             </button>
                         </div>
-                    </button>
+                    </div>
                 @empty
                     <div class="p-4 text-center text-sm text-gray-400 dark:text-gray-500">
                         {{ __('No conversations yet') }}
@@ -142,7 +143,7 @@
             </div>
 
             {{-- Input Area --}}
-            <div class="border-t border-gray-200 dark:border-gray-700 p-4 bg-white dark:bg-gray-900">
+            <div class="shrink-0 border-t border-gray-200 dark:border-gray-700 p-4 bg-white dark:bg-gray-900">
                 <form wire:submit="sendMessage" class="flex items-end gap-3">
                     <div class="flex-1">
                         <textarea

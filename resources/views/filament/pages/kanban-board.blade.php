@@ -66,7 +66,7 @@
                         </span>
                     </div>
                     <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                        {{ Number::currency($stage['total'], 'hu', ',', '.') }} Ft
+                        {{ Number::currency($stage['total'], 'HUF', 'hu', 0) }}
                     </p>
                 </div>
 

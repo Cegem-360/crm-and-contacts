@@ -39,7 +39,8 @@ final class ComplaintsRelationManager extends RelationManager
             ->components([
                 Select::make('order_id')
                     ->label(__('Order'))
-                    ->relationship('order', 'order_number'),
+                    ->relationship('order', 'order_number')
+                    ->getOptionLabelFromRecordUsing(fn ($record): string => "#{$record->order_number} — {$record->customer?->name}"),
                 Select::make('reported_by')
                     ->label(__('Reported By'))
                     ->relationship('reporter', 'name', modifyQueryUsing: fn ($query) => $query->whereRelation('teams', 'teams.id', resolve('current_team')->getKey())),

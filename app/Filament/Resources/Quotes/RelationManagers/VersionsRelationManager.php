@@ -18,6 +18,11 @@ final class VersionsRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'version_number';
 
+    public static function getModelLabel(): string
+    {
+        return __('Version');
+    }
+
     public static function getTitle(mixed $ownerRecord, string $pageClass): string
     {
         return __('Versions');

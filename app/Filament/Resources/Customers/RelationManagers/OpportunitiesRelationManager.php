@@ -43,6 +43,11 @@ final class OpportunitiesRelationManager extends RelationManager
         return __('Opportunities');
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('Opportunity');
+    }
+
     public function form(Schema $schema): Schema
     {
         return $schema

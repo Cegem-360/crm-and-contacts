@@ -58,6 +58,7 @@ final class DatabaseSeeder extends Seeder
             ->create();
         $this->call([
             OrderSeeder::class,
+            CarrierSeeder::class,
         ]);
         $this->command->info('Database seeded successfully!');
     }

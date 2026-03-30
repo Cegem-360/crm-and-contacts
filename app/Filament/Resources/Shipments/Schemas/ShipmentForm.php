@@ -33,6 +33,7 @@ final class ShipmentForm
                                 Select::make('order_id')
                                     ->label(__('Order'))
                                     ->relationship('order', 'order_number')
+                                    ->getOptionLabelFromRecordUsing(fn ($record): string => "#{$record->order_number} — {$record->customer?->name}")
                                     ->searchable()
                                     ->preload(),
 
@@ -47,10 +48,13 @@ final class ShipmentForm
                                     ->disabled()
                                     ->dehydrated(),
 
-                                TextInput::make('carrier')
+                                Select::make('carrier')
                                     ->label(__('Carrier'))
-                                    ->placeholder('GLS, DPD, FoxPost...')
-                                    ->maxLength(255),
+                                    ->options(fn (): array => \App\Models\Carrier::query()
+                                        ->where('is_active', true)
+                                        ->pluck('name', 'name')
+                                        ->toArray())
+                                    ->searchable(),
 
                                 TextInput::make('tracking_number')
                                     ->label(__('Tracking'))

@@ -28,6 +28,7 @@ final class OrderForm
                 Select::make('quote_id')
                     ->label(__('Quote'))
                     ->relationship('quote', 'quote_number')
+                    ->getOptionLabelFromRecordUsing(fn ($record): string => "#{$record->quote_number} — {$record->customer?->name}")
                     ->searchable()
                     ->preload(),
                 TextInput::make('order_number')

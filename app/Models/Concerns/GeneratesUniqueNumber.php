@@ -30,7 +30,7 @@ trait GeneratesUniqueNumber
         $year = now()->year;
         $pattern = $prefix.'-'.$year.'-';
 
-        $lastRecord = static::query()
+        $lastRecord = static::withoutGlobalScopes()
             ->where($field, 'like', $pattern.'%')
             ->orderByDesc($field)
             ->first();

@@ -20,6 +20,11 @@ final class ChildrenRelationManager extends RelationManager
 {
     protected static string $relationship = 'children';
 
+    public static function getModelLabel(): string
+    {
+        return __('Subcategory');
+    }
+
     public function form(Schema $schema): Schema
     {
         return $schema

@@ -29,6 +29,11 @@ final class ProductsRelationManager extends RelationManager
 {
     protected static string $relationship = 'products';
 
+    public static function getModelLabel(): string
+    {
+        return __('Product');
+    }
+
     public function form(Schema $schema): Schema
     {
         return $schema

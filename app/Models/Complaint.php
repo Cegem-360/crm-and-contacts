@@ -44,7 +44,7 @@ final class Complaint extends Model
     public static function generateComplaintNumber(): string
     {
         $year = now()->format('Y');
-        $lastComplaint = self::query()
+        $lastComplaint = self::withoutGlobalScopes()
             ->whereYear('created_at', $year)
             ->whereNotNull('complaint_number')
             ->orderBy('id', 'desc')

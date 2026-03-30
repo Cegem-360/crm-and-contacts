@@ -23,7 +23,11 @@ final class InvoiceForm
                     ->relationship('customer', 'name')
                     ->required(),
                 Select::make('order_id')
-                    ->relationship('order', 'order_number'),
+                    ->label(__('Order'))
+                    ->relationship('order', 'order_number')
+                    ->getOptionLabelFromRecordUsing(fn ($record): string => "#{$record->order_number} — {$record->customer?->name}")
+                    ->searchable()
+                    ->preload(),
                 TextInput::make('invoice_number')
                     ->unique(ignoreRecord: true)
                     ->required(),

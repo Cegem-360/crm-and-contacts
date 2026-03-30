@@ -28,6 +28,11 @@ final class ResponsesRelationManager extends RelationManager
 {
     protected static string $relationship = 'responses';
 
+    public static function getModelLabel(): string
+    {
+        return __('Response');
+    }
+
     public function form(Schema $schema): Schema
     {
         return $schema

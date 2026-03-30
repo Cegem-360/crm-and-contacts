@@ -45,7 +45,8 @@ final class OrdersRelationManager extends RelationManager
             ->components([
                 Select::make('quote_id')
                     ->label(__('Quote'))
-                    ->relationship('quote', 'quote_number'),
+                    ->relationship('quote', 'quote_number')
+                    ->getOptionLabelFromRecordUsing(fn ($record): string => "#{$record->quote_number} — {$record->customer?->name}"),
                 TextInput::make('order_number')
                     ->label(__('Order Number'))
                     ->required(),

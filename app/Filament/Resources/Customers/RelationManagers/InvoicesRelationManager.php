@@ -47,7 +47,8 @@ final class InvoicesRelationManager extends RelationManager
             ->components([
                 Select::make('order_id')
                     ->label(__('Order'))
-                    ->relationship('order', 'order_number'),
+                    ->relationship('order', 'order_number')
+                    ->getOptionLabelFromRecordUsing(fn ($record): string => "#{$record->order_number} — {$record->customer?->name}"),
                 TextInput::make('invoice_number')
                     ->label(__('Invoice Number'))
                     ->required(),

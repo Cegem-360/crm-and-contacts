@@ -15,7 +15,6 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\RestoreAction;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 
@@ -47,8 +46,8 @@ final class EditOrder extends EditRecord
 
                     Notification::make()
                         ->success()
-                        ->title('Status Updated')
-                        ->body(sprintf('Order status changed to %s.', $newStatus->getLabel()))
+                        ->title(__('Status Updated'))
+                        ->body(__('Order status changed to :status.', ['status' => $newStatus->getLabel()]))
                         ->send();
 
                     $this->refreshFormData(['status']);
@@ -67,8 +66,8 @@ final class EditOrder extends EditRecord
                     if ($record->invoices()->exists()) {
                         Notification::make()
                             ->warning()
-                            ->title('Invoice Already Exists')
-                            ->body('An invoice has already been generated for this order.')
+                            ->title(__('Invoice Already Exists'))
+                            ->body(__('An invoice has already been generated for this order.'))
                             ->send();
 
                         return;
@@ -78,11 +77,11 @@ final class EditOrder extends EditRecord
 
                     Notification::make()
                         ->success()
-                        ->title('Invoice Generated')
-                        ->body(sprintf('Invoice %s created with %d items.', $invoice->invoice_number, $invoice->invoiceItems->count()))
+                        ->title(__('Invoice Generated'))
+                        ->body(__('Invoice :number created with :count items.', ['number' => $invoice->invoice_number, 'count' => $invoice->invoiceItems->count()]))
                         ->send();
 
-                    $this->redirect(route('filament.admin.resources.invoices.edit', ['record' => $invoice->id]));
+                    $this->redirect(\App\Filament\Resources\Invoices\InvoiceResource::getUrl('edit', ['record' => $invoice]));
                 })
                 ->visible(fn (Order $record): bool => ! $record->invoices()->exists()),
 
@@ -91,21 +90,25 @@ final class EditOrder extends EditRecord
                 ->icon('heroicon-o-truck')
                 ->color('info')
                 ->schema([
-                    TextInput::make('carrier')
+                    Select::make('carrier')
                         ->label(__('Carrier'))
-                        ->required()
-                        ->placeholder('DPD, GLS, FoxPost...'),
+                        ->options(fn (): array => \App\Models\Carrier::query()
+                            ->where('is_active', true)
+                            ->pluck('name', 'name')
+                            ->toArray())
+                        ->searchable()
+                        ->required(),
                 ])
                 ->action(function (array $data, Order $record, ShipmentService $shipmentService): void {
                     $shipment = $shipmentService->createFromOrder($record, $data['carrier']);
 
                     Notification::make()
                         ->success()
-                        ->title('Shipment Created')
-                        ->body(sprintf('Shipment %s created with carrier %s.', $shipment->shipment_number, $shipment->carrier))
+                        ->title(__('Shipment Created'))
+                        ->body(__('Shipment :number created with carrier :carrier.', ['number' => $shipment->shipment_number, 'carrier' => $shipment->carrier]))
                         ->send();
 
-                    $this->redirect(route('filament.admin.resources.shipments.edit', ['record' => $shipment->id]));
+                    $this->redirect(\App\Filament\Resources\Shipments\ShipmentResource::getUrl('edit', ['record' => $shipment]));
                 }),
 
             DeleteAction::make(),

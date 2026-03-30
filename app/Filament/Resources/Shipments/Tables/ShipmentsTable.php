@@ -38,7 +38,7 @@ final class ShipmentsTable
                     ->searchable()
                     ->sortable()
                     ->toggleable()
-                    ->url(fn ($record) => $record->order ? route('filament.admin.resources.orders.edit', $record->order) : null),
+                    ->url(fn ($record) => $record->order ? \App\Filament\Resources\Orders\OrderResource::getUrl('edit', ['record' => $record->order]) : null),
 
                 TextColumn::make('carrier')
                     ->searchable()

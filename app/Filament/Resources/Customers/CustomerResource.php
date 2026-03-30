@@ -15,6 +15,7 @@ use App\Filament\Resources\Customers\RelationManagers\ComplaintsRelationManager;
 use App\Filament\Resources\Customers\RelationManagers\ContactsRelationManager;
 use App\Filament\Resources\Customers\RelationManagers\InteractionsRelationManager;
 use App\Filament\Resources\Customers\RelationManagers\InvoicesRelationManager;
+use App\Filament\Resources\Customers\RelationManagers\LoyaltyPointsRelationManager;
 use App\Filament\Resources\Customers\RelationManagers\OpportunitiesRelationManager;
 use App\Filament\Resources\Customers\RelationManagers\OrdersRelationManager;
 use App\Filament\Resources\Customers\RelationManagers\QuotesRelationManager;
@@ -80,6 +81,7 @@ final class CustomerResource extends Resource
             TasksRelationManager::class,
             ComplaintsRelationManager::class,
             CommunicationsRelationManager::class,
+            LoyaltyPointsRelationManager::class,
         ];
     }
 

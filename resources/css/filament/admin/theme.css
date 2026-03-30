@@ -202,6 +202,7 @@
 .fi-nav-group-sales .fi-sidebar-item-btn > .fi-icon { @apply text-blue-400!; }
 .fi-nav-group-discounts .fi-sidebar-item-btn > .fi-icon { @apply text-orange-400!; }
 .fi-nav-group-customers .fi-sidebar-item-btn > .fi-icon { @apply text-red-400!; }
+.fi-nav-group-loyalty .fi-sidebar-item-btn > .fi-icon { @apply text-amber-400!; }
 .fi-nav-group-complaints .fi-sidebar-item-btn > .fi-icon { @apply text-yellow-400!; }
 .fi-nav-group-products .fi-sidebar-item-btn > .fi-icon { @apply text-teal-400!; }
 .fi-nav-group-reports .fi-sidebar-item-btn > .fi-icon { @apply text-emerald-400!; }

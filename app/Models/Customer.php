@@ -8,6 +8,7 @@ use App\Enums\CustomerType;
 use App\Models\Concerns\BelongsToTeam;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\LogOptions;
@@ -35,6 +36,8 @@ final class Customer extends Model
         'notes',
         'custom_fields',
         'is_active',
+        'loyalty_points',
+        'loyalty_level_id',
     ];
 
     public function contacts(): HasMany
@@ -112,6 +115,27 @@ final class Customer extends Model
         return $this->hasMany(Shipment::class);
     }
 
+    public function loyaltyLevel(): BelongsTo
+    {
+        return $this->belongsTo(LoyaltyLevel::class);
+    }
+
+    public function loyaltyPointTransactions(): HasMany
+    {
+        return $this->hasMany(LoyaltyPoint::class);
+    }
+
+    public function recalculateLoyaltyLevel(): void
+    {
+        $level = LoyaltyLevel::query()
+            ->where('is_active', true)
+            ->where('minimum_points', '<=', $this->loyalty_points)
+            ->orderByDesc('minimum_points')
+            ->first();
+
+        $this->update(['loyalty_level_id' => $level?->id]);
+    }
+
     public function getPriceForProduct(int $productId): float
     {
         $product = Product::query()->find($productId);
@@ -132,7 +156,7 @@ final class Customer extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-            ->logOnly(['name', 'type', 'email', 'phone', 'is_active'])
+            ->logOnly(['name', 'type', 'email', 'phone', 'is_active', 'loyalty_points', 'loyalty_level_id'])
             ->logOnlyDirty()
             ->dontSubmitEmptyLogs();
     }

@@ -20,6 +20,8 @@ use App\Models\EmailTemplate;
 use App\Models\Interaction;
 use App\Models\Invoice;
 use App\Models\LeadScore;
+use App\Models\LoyaltyLevel;
+use App\Models\LoyaltyPoint;
 use App\Models\Opportunity;
 use App\Models\Order;
 use App\Models\Product;
@@ -105,6 +107,8 @@ final class AppServiceProvider extends ServiceProvider
             'interaction' => Interaction::class,
             'invoice' => Invoice::class,
             'lead_score' => LeadScore::class,
+            'loyalty_level' => LoyaltyLevel::class,
+            'loyalty_point' => LoyaltyPoint::class,
             'opportunity' => Opportunity::class,
             'order' => Order::class,
             'product' => Product::class,

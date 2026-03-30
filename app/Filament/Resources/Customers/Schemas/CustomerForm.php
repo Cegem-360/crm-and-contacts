@@ -6,10 +6,12 @@ namespace App\Filament\Resources\Customers\Schemas;
 
 use App\Enums\CustomerType;
 use Filament\Forms\Components\KeyValue;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Str;
 
@@ -57,6 +59,22 @@ final class CustomerForm
                 Toggle::make('is_active')
                     ->label(__('Is active'))
                     ->required(),
+                Section::make(__('Loyalty Program'))
+                    ->columns(3)
+                    ->visible(fn (?object $record): bool => $record !== null)
+                    ->components([
+                        Placeholder::make('loyalty_points_display')
+                            ->label(__('Current Points'))
+                            ->content(fn (?object $record): string => (string) ($record?->loyalty_points ?? 0)),
+                        Placeholder::make('loyalty_level_display')
+                            ->label(__('Current Level'))
+                            ->content(fn (?object $record): string => $record?->loyaltyLevel?->name ?? __('None')),
+                        Placeholder::make('loyalty_discount_display')
+                            ->label(__('Discount Percentage'))
+                            ->content(fn (?object $record): string => $record?->loyaltyLevel
+                                ? $record->loyaltyLevel->discount_percentage.'%'
+                                : '0%'),
+                    ]),
             ]);
     }
 }

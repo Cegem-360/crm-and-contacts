@@ -15,10 +15,16 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 final class ChildrenRelationManager extends RelationManager
 {
     protected static string $relationship = 'children';
+
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
+    {
+        return __('Subcategories');
+    }
 
     public static function getModelLabel(): string
     {

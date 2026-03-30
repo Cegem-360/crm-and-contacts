@@ -768,5 +768,10 @@
     "Spent": "Felhasznált",
     "Adjusted": "Módosított",
     "None": "Nincs",
-    "Color": "Szín"
+    "Color": "Szín",
+    "Subcategories": "Alkategóriák",
+    "Communication": "Kommunikáció",
+    "Sent At": "Elküldve",
+    "Delivered At": "Kézbesítve",
+    "Read At": "Elolvasva"
 }

@@ -34,6 +34,11 @@ final class CommunicationsRelationManager extends RelationManager
         return __('Communications');
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('Communication');
+    }
+
     public function form(Schema $schema): Schema
     {
         return $schema

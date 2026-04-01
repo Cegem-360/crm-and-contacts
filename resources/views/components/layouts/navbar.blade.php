@@ -57,7 +57,7 @@
                     @php($tenant = Auth::user()->teams->first())
                     @if ($tenant)
                         {{-- Dashboard link --}}
-                        <a href="{{ route('dashboard', ['team' => $tenant]) }}"
+                        <a href="{{ route('filament.admin.pages.dashboard', ['tenant' => $tenant]) }}"
                             class="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
                             {{ __('Dashboard') }}
                         </a>

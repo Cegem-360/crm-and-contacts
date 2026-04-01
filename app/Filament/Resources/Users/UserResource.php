@@ -31,6 +31,8 @@ final class UserResource extends Resource
 
     protected static ?string $tenantOwnershipRelationshipName = 'teams';
 
+    protected static bool $isScopedToTenant = false;
+
     protected static string|UnitEnum|null $navigationGroup = NavigationGroup::System;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserCircle;

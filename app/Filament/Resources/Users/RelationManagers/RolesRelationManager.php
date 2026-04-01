@@ -64,7 +64,8 @@ final class RolesRelationManager extends RelationManager
             ])
             ->headerActions([
                 CreateAction::make(),
-                AttachAction::make(),
+                AttachAction::make()
+                    ->preloadRecordSelect(),
             ])
             ->recordActions([
                 EditAction::make(),

@@ -88,6 +88,8 @@ final class CustomerImporter extends Importer
 
     protected function beforeCreate(): void
     {
+        $this->record->team_id = $this->options['teamId'] ?? null;
+
         if (blank($this->record->unique_identifier)) {
             $this->record->unique_identifier = $this->data['unique_identifier'];
         }

@@ -84,4 +84,9 @@ final class CustomerAddressImporter extends Importer
 
         return new CustomerAddress();
     }
+
+    protected function beforeCreate(): void
+    {
+        $this->record->team_id = $this->options['teamId'] ?? null;
+    }
 }

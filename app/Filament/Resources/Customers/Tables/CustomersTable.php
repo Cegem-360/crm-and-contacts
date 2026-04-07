@@ -14,6 +14,7 @@ use Filament\Actions\Exports\Enums\ExportFormat;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\ImportAction;
 use Filament\Actions\RestoreBulkAction;
+use Filament\Facades\Filament;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
@@ -64,7 +65,8 @@ final class CustomersTable
             ->headerActions([
                 ImportAction::make('Import Customers')
                     ->label(__('Customers import'))
-                    ->importer(CustomerImporter::class),
+                    ->importer(CustomerImporter::class)
+                    ->options(['teamId' => Filament::getTenant()?->getKey()]),
                 ExportAction::make('Export Customers')
                     ->label(__('Customers export'))
                     ->exporter(CustomerExporter::class)

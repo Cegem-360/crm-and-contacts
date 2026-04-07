@@ -70,4 +70,9 @@ final class CustomerContactImporter extends Importer
 
         return new CustomerContact();
     }
+
+    protected function beforeCreate(): void
+    {
+        $this->record->team_id = $this->options['teamId'] ?? null;
+    }
 }

@@ -11,6 +11,7 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ImportAction;
+use Filament\Facades\Filament;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -121,7 +122,10 @@ final class AddressesRelationManager extends RelationManager
                 CreateAction::make(),
                 ImportAction::make()
                     ->importer(CustomerAddressImporter::class)
-                    ->options(['customerId' => $this->getOwnerRecord()->getKey()]),
+                    ->options([
+                        'customerId' => $this->getOwnerRecord()->getKey(),
+                        'teamId' => Filament::getTenant()?->getKey(),
+                    ]),
             ])
             ->recordActions([
                 EditAction::make(),

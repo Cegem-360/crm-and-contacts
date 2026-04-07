@@ -14,6 +14,7 @@ use Filament\Actions\DissociateAction;
 use Filament\Actions\DissociateBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ImportAction;
+use Filament\Facades\Filament;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -97,7 +98,10 @@ final class ContactsRelationManager extends RelationManager
                 AssociateAction::make(),
                 ImportAction::make()
                     ->importer(CustomerContactImporter::class)
-                    ->options(['customerId' => $this->getOwnerRecord()->getKey()]),
+                    ->options([
+                        'customerId' => $this->getOwnerRecord()->getKey(),
+                        'teamId' => Filament::getTenant()?->getKey(),
+                    ]),
             ])
             ->recordActions([
                 EditAction::make(),

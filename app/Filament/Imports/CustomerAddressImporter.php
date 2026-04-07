@@ -25,6 +25,8 @@ final class CustomerAddressImporter extends Importer
                     return Customer::query()
                         ->where('unique_identifier', $state)
                         ->orWhere('name', $state)
+                        ->orWhere('email', $state)
+                        ->orWhere('tax_number', $state)
                         ->first();
                 })
                 ->rules(['required']),

@@ -7,6 +7,7 @@ namespace App\Filament\Imports;
 use App\Enums\CustomerType;
 use App\Filament\Imports\Columns\ImportColumn;
 use App\Models\Customer;
+use Filament\Actions\Imports\Exceptions\RowImportFailedException;
 use Filament\Actions\Imports\Importer;
 use Filament\Actions\Imports\Models\Import;
 use Filament\Forms\Components\Checkbox;
@@ -78,9 +79,25 @@ final class CustomerImporter extends Importer
         }
 
         if ($this->options['updateExisting'] ?? false) {
-            return Customer::query()->firstOrNew([
-                'unique_identifier' => $this->data['unique_identifier'],
-            ]);
+            $customer = Customer::query()
+                ->where(function ($query): void {
+                    $query->where('unique_identifier', $this->data['unique_identifier']);
+
+                    if (! empty($this->data['email'])) {
+                        $query->orWhere('email', $this->data['email']);
+                    }
+
+                    if (! empty($this->data['tax_number'])) {
+                        $query->orWhere('tax_number', $this->data['tax_number']);
+                    }
+                })
+                ->first();
+
+            if (! $customer) {
+                throw new RowImportFailedException("Nem talalhato ugyfel: [{$this->data['unique_identifier']}].");
+            }
+
+            return $customer;
         }
 
         return new Customer();

@@ -71,10 +71,6 @@ final class CustomerImporter extends Importer
             $this->data['unique_identifier'] = 'CUST-'.Str::upper(Str::random(8));
         }
 
-        if (! isset($this->data['is_active'])) {
-            $this->data['is_active'] = true;
-        }
-
         if (empty($this->data['type'])) {
             $this->data['type'] = empty($this->data['eu_tax_number'])
                 ? CustomerType::Individual->value
@@ -88,5 +84,20 @@ final class CustomerImporter extends Importer
         }
 
         return new Customer();
+    }
+
+    protected function beforeCreate(): void
+    {
+        if (blank($this->record->unique_identifier)) {
+            $this->record->unique_identifier = $this->data['unique_identifier'];
+        }
+
+        if (blank($this->record->type)) {
+            $this->record->type = $this->data['type'];
+        }
+
+        if ($this->record->is_active === null) {
+            $this->record->is_active = true;
+        }
     }
 }

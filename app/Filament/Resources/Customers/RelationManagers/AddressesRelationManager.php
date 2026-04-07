@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Customers\RelationManagers;
 
+use App\Filament\Imports\CustomerAddressImporter;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ImportAction;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -117,7 +119,9 @@ final class AddressesRelationManager extends RelationManager
             ])
             ->headerActions([
                 CreateAction::make(),
-
+                ImportAction::make()
+                    ->importer(CustomerAddressImporter::class)
+                    ->options(['customerId' => $this->getOwnerRecord()->getKey()]),
             ])
             ->recordActions([
                 EditAction::make(),

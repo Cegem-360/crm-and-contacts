@@ -1,0 +1,73 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Filament\Imports;
+
+use App\Filament\Imports\Columns\ImportColumn;
+use App\Models\Customer;
+use App\Models\CustomerContact;
+use Filament\Actions\Imports\Importer;
+use Filament\Actions\Imports\Models\Import;
+use Filament\Forms\Components\Checkbox;
+use Illuminate\Support\Number;
+
+final class CustomerContactImporter extends Importer
+{
+    protected static ?string $model = CustomerContact::class;
+
+    public static function getColumns(): array
+    {
+        return [
+            ImportColumn::make('customer')
+                ->requiredMapping()
+                ->relationship(resolveUsing: function (string $state): ?Customer {
+                    return Customer::query()
+                        ->where('unique_identifier', $state)
+                        ->orWhere('name', $state)
+                        ->first();
+                })
+                ->rules(['required']),
+            ImportColumn::make('name')
+                ->requiredMapping()
+                ->rules(['required']),
+            ImportColumn::make('email')
+                ->rules(['email']),
+            ImportColumn::make('phone'),
+            ImportColumn::make('position'),
+            ImportColumn::make('is_primary')
+                ->localizedBoolean(default: false),
+        ];
+    }
+
+    public static function getCompletedNotificationBody(Import $import): string
+    {
+        $body = 'Your customer contact import has completed and '.Number::format($import->successful_rows).' '.str('row')->plural($import->successful_rows).' imported.';
+
+        if (($failedRowsCount = $import->getFailedRowsCount()) !== 0) {
+            $body .= ' '.Number::format($failedRowsCount).' '.str('row')->plural($failedRowsCount).' failed to import.';
+        }
+
+        return $body;
+    }
+
+    public static function getOptionsFormComponents(): array
+    {
+        return [
+            Checkbox::make('updateExisting')
+                ->label(__('Update existing records')),
+        ];
+    }
+
+    public function resolveRecord(): CustomerContact
+    {
+        if ($this->options['updateExisting'] ?? false) {
+            return CustomerContact::query()->firstOrNew([
+                'customer_id' => $this->data['customer_id'] ?? null,
+                'name' => $this->data['name'],
+            ]);
+        }
+
+        return new CustomerContact();
+    }
+}

@@ -12,6 +12,7 @@ use App\Http\Middleware\ApplyTenantScopes;
 use App\Models\Team;
 use Filament\Actions\Action;
 use Filament\Http\Middleware\Authenticate;
+use Madbox99\UserTeamSync\Receiver\Http\Middleware\EnsureUserHasActiveSubscription;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -112,6 +113,7 @@ final class AdminPanelServiceProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+                EnsureUserHasActiveSubscription::class,
             ])
             ->spa()
             ->spaUrlExceptions([

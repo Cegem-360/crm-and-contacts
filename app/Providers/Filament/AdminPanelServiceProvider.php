@@ -9,7 +9,6 @@ use App\Enums\Permission;
 use App\Enums\Role;
 use App\Filament\Pages\Auth\Login;
 use App\Filament\Pages\EditTeamProfile;
-use App\Filament\Pages\RegisterTeam;
 use App\Http\Middleware\ApplyTenantScopes;
 use App\Models\Team;
 use Filament\Actions\Action;
@@ -37,6 +36,7 @@ use MadBox\LocaleSwitcher\Middleware\SetLocale;
 use Madbox99\FilamentChatWidget\FilamentChatWidgetPlugin;
 use Madbox99\FilamentFormBuilder\FilamentFormBuilderPlugin;
 use Madbox99\FilamentWooCommerce\FilamentWooCommercePlugin;
+use Madbox99\UserTeamSync\Client\Http\Middleware\RevalidateIdentity;
 use Madbox99\UserTeamSync\Receiver\Http\Middleware\EnsureUserHasActiveSubscription;
 
 final class AdminPanelServiceProvider extends PanelProvider
@@ -51,7 +51,6 @@ final class AdminPanelServiceProvider extends PanelProvider
             ->registration()
             ->profile()
             ->tenant(Team::class, slugAttribute: 'slug')
-            ->tenantRegistration(RegisterTeam::class)
             ->tenantProfile(EditTeamProfile::class)
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->sidebarFullyCollapsibleOnDesktop()
@@ -121,6 +120,7 @@ final class AdminPanelServiceProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+                RevalidateIdentity::class,
                 EnsureUserHasActiveSubscription::class,
             ])
             ->spa()

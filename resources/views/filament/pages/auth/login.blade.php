@@ -20,6 +20,17 @@
         </div>
     </form>
 
+    @if ($ssoUrl = $this->ssoUrl())
+        <div class="mt-6 border-t border-gray-200 pt-6 text-center dark:border-gray-700">
+            <a
+                href="{{ $ssoUrl }}"
+                class="fi-btn fi-btn-size-md inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-primary-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-500"
+            >
+                {{ __('Sign in with your Cégem 360 account') }}
+            </a>
+        </div>
+    @endif
+
     <div class="mt-10 text-center space-y-3">
         <p class="text-sm text-gray-500">
             {{ __("Don't have an account?") }}

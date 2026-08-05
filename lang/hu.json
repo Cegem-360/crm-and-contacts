@@ -799,5 +799,17 @@
     "testimonial_2": "A rendelésekről és számlákról azonnali áttekintésem van. Tudom, mi van teljesítve, mi nincs, és mi a kintlévőség. Végre nem Excelben kell nyomozni.",
     "testimonial_2_name": "Kiss László",
     "testimonial_2_title": "Kereskedelmi igazgató, Nagykereskedés",
-    "view": "megtekintés"
+    "view": "megtekintés",
+    "Sign in with your Cégem 360 account": "Belépés Cégem 360 fiókkal",
+    "Sign-in could not be completed": "A belépés nem sikerült",
+    "Your sign-in could not be completed. Please try again, or sign in using your usual method.": "A belépés nem fejeződött be. Próbáld újra, vagy lépj be a megszokott módon.",
+    "Sign-in is temporarily unavailable": "A belépés átmenetileg nem érhető el",
+    "We could not reach the identity provider. Please try again in a few minutes.": "Nem értük el a központi azonosítót. Kérjük, próbáld újra néhány perc múlva.",
+    "We could not sign you in": "Nem tudtunk beléptetni",
+    "The identity provider could not complete your sign-in. Please try again.": "A központi azonosító nem tudta befejezni a belépést. Kérjük, próbáld újra.",
+    "Your account details could not be matched automatically. Please contact support for help.": "A fiókod adatait nem sikerült automatikusan összepárosítani. Kérjük, fordulj az ügyfélszolgálathoz.",
+    "No access to this module": "Nincs hozzáférésed ehhez a modulhoz",
+    "Your account signed in successfully, but your subscription does not cover this module.": "A belépés sikerült, de az előfizetésed nem tartalmazza ezt a modult.",
+    "Manage subscription": "Előfizetés kezelése",
+    "Try again": "Próbáld újra"
 }

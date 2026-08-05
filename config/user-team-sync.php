@@ -13,8 +13,6 @@ return [
     | 'publisher' - This app sends sync events to other apps (subscriber app)
     | 'receiver'  - This app receives sync events from the publisher
     | 'both'      - This app both sends and receives
-    | 'client'    - This app delegates authentication to the identity
-    |                provider instead of receiving pushed user/team data
     */
     'mode' => env('USER_TEAM_SYNC_MODE', 'receiver'),
 
@@ -85,7 +83,20 @@ return [
         'route_prefix' => 'api',
         'middleware' => [],
         'role_driver' => 'spatie',
-        'default_role' => 'subscriber',
+
+        /*
+        | Must name a role that actually exists in the roles table: both the
+        | receiver's UserSyncController and IdentityProvisioner::resolveRoleName()
+        | hand this value straight to assignRole()/syncRoles(). It used to be
+        | 'subscriber', which matches no row in this app in any casing — the
+        | receiver never hit it because its syncs only ever carry admin/manager,
+        | but in client mode it is the fallback for every unrecognised claim
+        | role, and it would have thrown RoleDoesNotExist.
+        |
+        | PLACEHOLDER — same open question as 'client.role_map' below: 'Support'
+        | is the narrowest existing role, not a confirmed decision.
+        */
+        'default_role' => 'Support',
         'default_active' => false,
         'inactive_redirect_url' => null, // in-app 403+logout instead of cross-domain redirect
 
@@ -111,6 +122,12 @@ return [
     | Used when mode is 'client': this app delegates authentication to the
     | identity provider and rebuilds its local user state from the token
     | claims on every login and every revalidation.
+    |
+    | Every key the package declares must be repeated here. `mergeConfigFrom()`
+    | is a shallow `array_merge`, so this 'client' array replaces the package's
+    | wholesale: a key omitted here simply does not exist, and the env var that
+    | was supposed to drive it is silently inert. `SalesSsoWiringTest` fails the
+    | moment a package upgrade adds a key this file has not adopted.
     */
     'client' => [
         /*
@@ -119,87 +136,62 @@ return [
         | callback rejects the login when this key is absent from the token's
         | 'apps' claim.
         */
-        'app_key' => env('IDENTITY_APP_KEY'),
+        'app_key' => env('IDENTITY_APP_KEY', 'ertekesites'),
 
         'identity_url' => env('IDENTITY_URL', 'https://cegem360.eu'),
         'client_id' => env('IDENTITY_CLIENT_ID'),
         'client_secret' => env('IDENTITY_CLIENT_SECRET'),
-        'redirect_uri' => env('IDENTITY_REDIRECT_URI'),
+        'redirect_uri' => env('IDENTITY_REDIRECT_URI', 'https://sales.cegem360.eu/auth/callback'),
         'scopes' => '',
-
         'http_timeout' => env('IDENTITY_HTTP_TIMEOUT', 10),
-
-        /*
-        | Kept short on purpose. The revalidation middleware runs on every
-        | authenticated page, so a provider whose TCP connect hangs would
-        | otherwise pin a PHP-FPM worker and the session lock for the full
-        | read timeout, on request after request.
-        */
         'http_connect_timeout' => env('IDENTITY_HTTP_CONNECT_TIMEOUT', 3),
-
-        /*
-        | Re-fetch the claims and re-run the provisioner when the session's
-        | last check is older than this. This is what makes a team rename, a
-        | new membership or a cancelled subscription reach the app without any
-        | push from the publisher.
-        */
         'revalidate_after_minutes' => env('IDENTITY_REVALIDATE_MINUTES', 15),
-
-        /*
-        | How long a session survives while the identity provider is
-        | unreachable. An outage is not the same thing as revoked access: an
-        | already-working user keeps working, only new logins are blocked.
-        */
-        'grace_hours' => env('IDENTITY_GRACE_HOURS', 24),
-
-        /*
-        | How long to wait before trying the identity provider again while it
-        | is unreachable. Without this every single request would retry, so a
-        | hanging provider would add the full HTTP timeout to every page load
-        | of every user for the whole grace window. The grace window itself
-        | still runs from the first failure, so a long outage expires.
-        */
         'retry_after_minutes' => env('IDENTITY_RETRY_MINUTES', 5),
-
-        /*
-        | Transitional, phase 3 only. Comma-separated e-mail addresses. When
-        | non-empty, only these users may sign in through SSO; everyone else
-        | keeps using the legacy login form and the legacy push. Empty means
-        | everyone goes through SSO.
-        */
+        'grace_hours' => env('IDENTITY_GRACE_HOURS', 24),
         'allowlist' => array_values(array_filter(array_map(
             trim(...),
             explode(',', (string) env('IDENTITY_SSO_ALLOWLIST', '')),
         ))),
-
-        /*
-        | Transitional, phase 3 only. Keeps the legacy receiver endpoints
-        | mounted while both worlds run side by side.
-        */
         'legacy_receiver' => env('IDENTITY_LEGACY_RECEIVER', true),
 
         /*
-        | Maps a role name from the token onto a local role name. The publisher
-        | sends lower-case values ('admin', 'manager', 'subscriber') while a
-        | receiver may name its roles differently ('Manager'). Leave empty to
-        | rely on the case-insensitive fallback in IdentityProvisioner.
+        | The publisher's UserRole enum is lower-case. Like crm — and unlike
+        | mes, Storage-cms and workflow — this app runs a real Spatie role
+        | layer: 'receiver.role_driver' is 'spatie', the User model uses
+        | HasRoles, there is no users.role column at all, and the roles table
+        | holds exactly Admin, Manager, Sales Representative and Support. A
+        | role is therefore a roles row whose name is capitalised. Production
+        | MySQL papers over the case difference with a case-insensitive
+        | collation; SQLite (which the tests run on) does not, so the mapping
+        | is explicit.
+        |
+        | 'admin' and 'manager' are unambiguous. 'subscriber' is NOT: this app
+        | has no counterpart to the publisher's basic-subscriber role, and a
+        | missing role is not something a collation can paper over —
+        | syncRoles() throws RoleDoesNotExist and the user cannot sign in at
+        | all. 'Support' is used below only because it is the narrowest of the
+        | four that exist (view customers, plus complaints, tasks and
+        | interactions).
+        |
+        | PLACEHOLDER — NEEDS THE OWNER'S CONFIRMATION. What a basic subscriber
+        | should be allowed to see in a sales CRM is a business decision, not a
+        | mechanical one. Do not switch this app to client mode until that
+        | mapping is confirmed.
         */
-        'role_map' => [],
+        'role_map' => [
+            'admin' => 'Admin',
+            'manager' => 'Manager',
+            'subscriber' => 'Support',
+        ],
 
-        /*
-        | Where to send a user who authenticated successfully but has no
-        | subscription covering this app.
-        */
         'subscribe_url' => env('IDENTITY_SUBSCRIBE_URL', 'https://cegem360.eu'),
 
         /*
-        | Where to send a user back to retry signing in after a failed or
-        | refused callback (a provider outage, a rejected code, a forged or
-        | stale state, or an account not yet on the allowlist). Defaults to
-        | this app's own login page, since a phased rollout keeps the legacy
-        | password form available as a fallback for exactly this case.
+        | Where the package's callback error pages send a user who should try
+        | signing in again. This app's Filament panel is mounted on /app, so
+        | its login form is /app/login, not the package's own /login default.
         */
-        'login_url' => env('IDENTITY_LOGIN_URL', '/login'),
+        'login_url' => env('IDENTITY_LOGIN_URL', '/app/login'),
     ],
 
     /*

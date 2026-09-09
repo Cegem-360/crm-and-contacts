@@ -13,6 +13,8 @@ return [
     | 'publisher' - This app sends sync events to other apps (subscriber app)
     | 'receiver'  - This app receives sync events from the publisher
     | 'both'      - This app both sends and receives
+    | 'client'    - This app delegates authentication to the identity
+    |                provider instead of receiving pushed user/team data
     */
     'mode' => env('USER_TEAM_SYNC_MODE', 'receiver'),
 
@@ -60,6 +62,16 @@ return [
 
         'auto_observe' => true,
         'sync_fields' => ['email', 'role'],
+
+        /*
+        |----------------------------------------------------------------------
+        | Team Sync Fields
+        |----------------------------------------------------------------------
+        | Team fields whose change is propagated to receivers. 'slug' matters
+        | most: receivers used to match teams by slug forever after creation, so
+        | a rename on the publisher silently broke the cross-app link.
+        */
+        'team_sync_fields' => ['name', 'slug'],
         'skip_ssl_for_test_domains' => true,
     ],
 
@@ -76,6 +88,118 @@ return [
         'default_role' => 'subscriber',
         'default_active' => false,
         'inactive_redirect_url' => null, // in-app 403+logout instead of cross-domain redirect
+
+        /*
+        |----------------------------------------------------------------------
+        | Bypass Route Patterns
+        |----------------------------------------------------------------------
+        | Route name patterns that the EnsureUserHasActiveSubscription
+        | middleware allows through regardless of subscription status.
+        | Defaults cover Filament panel logout and a generic 'logout' route
+        | so inactive users can always sign out.
+        */
+        'bypass_route_patterns' => [
+            'filament.*.auth.logout',
+            'logout',
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Client Configuration
+    |--------------------------------------------------------------------------
+    | Used when mode is 'client': this app delegates authentication to the
+    | identity provider and rebuilds its local user state from the token
+    | claims on every login and every revalidation.
+    */
+    'client' => [
+        /*
+        | This app's own key. Must equal sync_apps.name on the publisher and
+        | the slug of the plan category that grants access to this app. The
+        | callback rejects the login when this key is absent from the token's
+        | 'apps' claim.
+        */
+        'app_key' => env('IDENTITY_APP_KEY'),
+
+        'identity_url' => env('IDENTITY_URL', 'https://cegem360.eu'),
+        'client_id' => env('IDENTITY_CLIENT_ID'),
+        'client_secret' => env('IDENTITY_CLIENT_SECRET'),
+        'redirect_uri' => env('IDENTITY_REDIRECT_URI'),
+        'scopes' => '',
+
+        'http_timeout' => env('IDENTITY_HTTP_TIMEOUT', 10),
+
+        /*
+        | Kept short on purpose. The revalidation middleware runs on every
+        | authenticated page, so a provider whose TCP connect hangs would
+        | otherwise pin a PHP-FPM worker and the session lock for the full
+        | read timeout, on request after request.
+        */
+        'http_connect_timeout' => env('IDENTITY_HTTP_CONNECT_TIMEOUT', 3),
+
+        /*
+        | Re-fetch the claims and re-run the provisioner when the session's
+        | last check is older than this. This is what makes a team rename, a
+        | new membership or a cancelled subscription reach the app without any
+        | push from the publisher.
+        */
+        'revalidate_after_minutes' => env('IDENTITY_REVALIDATE_MINUTES', 15),
+
+        /*
+        | How long a session survives while the identity provider is
+        | unreachable. An outage is not the same thing as revoked access: an
+        | already-working user keeps working, only new logins are blocked.
+        */
+        'grace_hours' => env('IDENTITY_GRACE_HOURS', 24),
+
+        /*
+        | How long to wait before trying the identity provider again while it
+        | is unreachable. Without this every single request would retry, so a
+        | hanging provider would add the full HTTP timeout to every page load
+        | of every user for the whole grace window. The grace window itself
+        | still runs from the first failure, so a long outage expires.
+        */
+        'retry_after_minutes' => env('IDENTITY_RETRY_MINUTES', 5),
+
+        /*
+        | Transitional, phase 3 only. Comma-separated e-mail addresses. When
+        | non-empty, only these users may sign in through SSO; everyone else
+        | keeps using the legacy login form and the legacy push. Empty means
+        | everyone goes through SSO.
+        */
+        'allowlist' => array_values(array_filter(array_map(
+            trim(...),
+            explode(',', (string) env('IDENTITY_SSO_ALLOWLIST', '')),
+        ))),
+
+        /*
+        | Transitional, phase 3 only. Keeps the legacy receiver endpoints
+        | mounted while both worlds run side by side.
+        */
+        'legacy_receiver' => env('IDENTITY_LEGACY_RECEIVER', true),
+
+        /*
+        | Maps a role name from the token onto a local role name. The publisher
+        | sends lower-case values ('admin', 'manager', 'subscriber') while a
+        | receiver may name its roles differently ('Manager'). Leave empty to
+        | rely on the case-insensitive fallback in IdentityProvisioner.
+        */
+        'role_map' => [],
+
+        /*
+        | Where to send a user who authenticated successfully but has no
+        | subscription covering this app.
+        */
+        'subscribe_url' => env('IDENTITY_SUBSCRIBE_URL', 'https://cegem360.eu'),
+
+        /*
+        | Where to send a user back to retry signing in after a failed or
+        | refused callback (a provider outage, a rejected code, a forged or
+        | stale state, or an account not yet on the allowlist). Defaults to
+        | this app's own login page, since a phased rollout keeps the legacy
+        | password form available as a fallback for exactly this case.
+        */
+        'login_url' => env('IDENTITY_LOGIN_URL', '/login'),
     ],
 
     /*

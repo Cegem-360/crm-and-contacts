@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Filament\Imports;
 
+use App\Enums\CampaignResponseType;
 use App\Models\CampaignResponse;
 use Filament\Actions\Imports\ImportColumn;
 use Filament\Actions\Imports\Importer;
 use Filament\Actions\Imports\Models\Import;
 use Filament\Forms\Components\Checkbox;
 use Illuminate\Support\Number;
+use Illuminate\Validation\Rule;
 use Override;
 
 final class CampaignResponseImporter extends Importer
@@ -29,7 +31,8 @@ final class CampaignResponseImporter extends Importer
                 ->rules(['required']),
             ImportColumn::make('response_type')
                 ->requiredMapping()
-                ->rules(['required']),
+                ->examples(array_map(fn (CampaignResponseType $case): string => $case->value, CampaignResponseType::cases()))
+                ->rules(['required', Rule::enum(CampaignResponseType::class)]),
             ImportColumn::make('notes'),
             ImportColumn::make('responded_at')
                 ->rules(['datetime']),

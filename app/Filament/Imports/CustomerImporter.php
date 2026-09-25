@@ -13,6 +13,7 @@ use Filament\Actions\Imports\Models\Import;
 use Filament\Forms\Components\Checkbox;
 use Illuminate\Support\Number;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Override;
 
 final class CustomerImporter extends Importer
@@ -27,7 +28,8 @@ final class CustomerImporter extends Importer
                 ->requiredMapping()
                 ->rules(['required']),
             ImportColumn::make('type')
-                ->examples(CustomerType::cases()),
+                ->examples(array_map(fn (CustomerType $case): string => $case->value, CustomerType::cases()))
+                ->rules(['nullable', Rule::enum(CustomerType::class)]),
             ImportColumn::make('tax_number'),
             ImportColumn::make('eu_tax_number'),
             ImportColumn::make('registration_number'),

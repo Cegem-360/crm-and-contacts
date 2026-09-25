@@ -78,15 +78,19 @@ it('only resolves onto roles that exist once the app has been seeded', function 
 });
 
 it('seeds exactly the role vocabulary the map was written against', function (): void {
-    // Pins the other half of the guard above. If a later change adds a
-    // 'Subscriber' role, the mapping decision below stops being a placeholder
-    // and should be revisited deliberately rather than silently inherited.
+    // Pins the other half of the guard above. The 'Subscriber' role now exists
+    // because the legacy receiver push creates members with that role, and
+    // without a matching row the push failed with a 500. The SSO `role_map`
+    // still sends 'subscriber' to 'Support' on purpose: pointing it at
+    // 'Subscriber' would widen SSO users to the sales-rep permission set, and
+    // that is a decision to make deliberately, not one to inherit here.
     $this->artisan('db:seed', ['--class' => 'PermissionSeeder']);
 
     expect(SpatieRole::query()->pluck('name')->sort()->values()->all())->toBe([
         'Admin',
         'Manager',
         'Sales Representative',
+        'Subscriber',
         'Support',
     ]);
 });

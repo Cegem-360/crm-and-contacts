@@ -12,6 +12,7 @@ enum Role: string implements RoleEnum
     case Manager = 'Manager';
     case SalesRepresentative = 'Sales Representative';
     case Support = 'Support';
+    case Subscriber = 'Subscriber';
 
     /**
      * Get all role values.
@@ -95,6 +96,11 @@ enum Role: string implements RoleEnum
                 ...Permission::tasks(),
                 ...Permission::interactions(),
             ],
+            // Az elofizetoi rendszer a tagokat 'subscriber' szereppel szinkronizalja
+            // ide, igy ez a szerep valodi ugyfelfiokokat hordoz. Amig a szerep
+            // hianyzott, a tag-letrehozas 500-as hibaval elszallt a szinkronban,
+            // ezert az ertekesitoi keszletet tukrozi.
+            self::Subscriber => self::SalesRepresentative->permissions(),
         };
     }
 }
